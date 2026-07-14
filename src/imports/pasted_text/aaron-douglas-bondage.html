@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Into Bondage — Aaron Douglas, 1936</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --wall:#2f2c28;
+    --wall-2:#3a3630;
+    --gilt-hi:#d7b467;
+    --gilt-lo:#8a672c;
+    --mat:#ede3cf;
+    --mat-shadow:#c9bb9c;
+    --lavender:#7c6a8c;
+    --lavender-deep:#4f4260;
+    --gold:#c9a24b;
+    --umber:#2a2016;
+    --paper:#f4ede0;
+    --ink:#241d16;
+    --ink-soft:#584c3e;
+    --rule:#b79f6d;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse at 50% -10%, #46423a 0%, transparent 60%),
+      var(--wall);
+    background-color:var(--wall);
+    min-height:100vh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:48px 20px 80px;
+    font-family:'Lora',serif;
+    color:var(--paper);
+  }
+
+  .room{
+    width:100%;
+    max-width:980px;
+  }
+
+  .wall-caption{
+    text-align:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:#a89a82;
+    margin-bottom:6px;
+  }
+  .gallery-title{
+    text-align:center;
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:clamp(22px,4vw,34px);
+    color:var(--paper);
+    margin:0 0 4px;
+    letter-spacing:.01em;
+  }
+  .gallery-sub{
+    text-align:center;
+    font-size:14px;
+    color:#a89a82;
+    margin:0 0 44px;
+    font-style:italic;
+  }
+
+  .exhibit{
+    display:grid;
+    grid-template-columns:minmax(240px,420px) minmax(260px,340px);
+    gap:44px;
+    align-items:start;
+    justify-content:center;
+  }
+  @media (max-width:760px){
+    .exhibit{grid-template-columns:1fr; justify-items:center;}
+  }
+
+  /* ---------- FRAME ---------- */
+  .frame-wrap{
+    position:relative;
+    filter:drop-shadow(0 30px 40px rgba(0,0,0,.55));
+  }
+  .frame{
+    padding:22px;
+    background:
+      linear-gradient(135deg, var(--gilt-hi), var(--gilt-lo) 35%, var(--gilt-hi) 60%, var(--gilt-lo) 100%);
+    border-radius:3px;
+    box-shadow:
+      inset 0 0 0 2px rgba(0,0,0,.25),
+      inset 0 0 22px rgba(0,0,0,.35),
+      0 0 0 1px rgba(0,0,0,.4);
+  }
+  .frame-inner{
+    background:var(--mat);
+    padding:26px;
+    box-shadow:
+      inset 0 2px 10px rgba(0,0,0,.25),
+      inset 0 -2px 4px rgba(255,255,255,.15);
+  }
+  .frame-inner img{
+    display:block;
+    width:100%;
+    height:auto;
+    background:var(--umber);
+  }
+  .plaque{
+    margin-top:16px;
+    text-align:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:.06em;
+    color:var(--paper);
+    opacity:.85;
+  }
+  .plaque b{color:var(--gold); font-weight:600;}
+
+  .recreation-note{
+    margin-top:14px;
+    font-size:12px;
+    line-height:1.6;
+    color:#a89a82;
+    font-family:'Lora',serif;
+    font-style:italic;
+    text-align:center;
+    padding:0 6px;
+  }
+  .recreation-note a{color:var(--gold); text-decoration:none; border-bottom:1px dotted var(--gold);}
+  .recreation-note a:hover{color:#e2c576;}
+
+  /* ---------- DIDACTIC PANEL ---------- */
+  .panel-mount{
+    width:100%;
+    perspective:1800px;
+  }
+  .panel{
+    position:relative;
+    width:100%;
+    min-height:270px;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .panel-face{
+    background:var(--paper);
+    border:1px solid var(--rule);
+    padding:22px 24px 24px;
+    box-shadow:0 18px 30px rgba(0,0,0,.35);
+    transition:box-shadow .3s ease;
+    position:relative;
+  }
+  .panel:hover .panel-face{ box-shadow:0 22px 38px rgba(0,0,0,.45); }
+
+  .panel-eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--lavender-deep);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+  }
+  .panel-eyebrow span.tag{
+    background:var(--lavender-deep);
+    color:var(--paper);
+    padding:3px 7px;
+    letter-spacing:.1em;
+  }
+
+  .panel-title{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-style:italic;
+    font-size:22px;
+    color:var(--ink);
+    margin:0 0 2px;
+    line-height:1.15;
+  }
+  .panel-artist{
+    font-family:'Fraunces',serif;
+    font-size:15px;
+    color:var(--ink-soft);
+    margin:0 0 14px;
+  }
+  .panel-meta{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    row-gap:5px;
+    column-gap:10px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    padding:12px 0;
+    margin-bottom:14px;
+  }
+  .panel-meta dt{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--gilt-lo);
+    align-self:start;
+    padding-top:1px;
+  }
+  .panel-meta dd{margin:0;}
+
+  .panel-desc{
+    font-size:13.5px;
+    line-height:1.65;
+    color:var(--ink);
+    margin:0 0 16px;
+  }
+
+  .panel-cta{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--lavender-deep);
+    border-top:1px dashed var(--rule);
+    padding-top:12px;
+  }
+  .panel-cta .chevron{
+    transition:transform .35s ease;
+    display:inline-block;
+  }
+  .panel.open .panel-cta .chevron{ transform:rotate(180deg); }
+
+  /* expanding content */
+  .panel-more{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .5s cubic-bezier(.2,.8,.2,1);
+  }
+  .panel.open .panel-more{ max-height:1400px; }
+
+  .more-inner{ padding-top:16px; }
+
+  .more-inner h4{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    background:var(--umber);
+    display:inline-block;
+    padding:4px 8px;
+    margin:0 0 8px;
+  }
+  .more-inner .block{ margin-bottom:18px; }
+  .more-inner .block:last-child{ margin-bottom:4px; }
+  .more-inner p{
+    font-size:13px;
+    line-height:1.7;
+    color:var(--ink);
+    margin:0;
+  }
+  .more-inner p + p{ margin-top:8px; }
+
+  .accession{
+    margin-top:18px;
+    padding-top:12px;
+    border-top:1px solid var(--rule);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    letter-spacing:.04em;
+    color:#8c7d63;
+    line-height:1.6;
+  }
+  .accession a{ color:var(--lavender-deep); }
+
+  .hinge-shadow{
+    position:absolute;
+    left:0; right:0; top:100%;
+    height:16px;
+    background:linear-gradient(to bottom, rgba(0,0,0,.25), transparent);
+    pointer-events:none;
+  }
+
+  footer.credit{
+    max-width:980px;
+    margin:44px auto 0;
+    text-align:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    color:#7c7062;
+    line-height:1.8;
+  }
+</style>
+</head>
+<body>
+<div class="room">
+  <div class="wall-caption">Gallery II — The Harlem Renaissance, 1918–1937</div>
+  <h1 class="gallery-title">Into Bondage</h1>
+  <p class="gallery-sub">an oil painting by Aaron Douglas, reunited with its wall text</p>
+
+  <div class="exhibit">
+    <!-- FRAMED ARTWORK -->
+    <div>
+      <div class="frame-wrap">
+        <div class="frame">
+          <div class="frame-inner">
+            <img src="https://www.artchive.com/wp-content/uploads/2023/12/let-my-people-go-aaron-douglas-1935-1939.jpg" alt="Into Bondage by Aaron Douglas">
+          </div>
+        </div>
+      </div>
+      <div class="plaque"><b>Into Bondage</b> · Aaron Douglas · 1936</div>
+      <p class="recreation-note">This is an artifact-native recreation of the composition — the procession, the concentric sunset rings, the guiding star — built from museum descriptions, not a scan or photo of the original painting. Into Bondage still holds copyright (© Heirs of Aaron Douglas / Artists Rights Society), so the authenticated 1936 oil painting can only be viewed at its actual home, the <a href="https://www.nga.gov/artworks/166444-bondage" target="_blank" rel="noopener">National Gallery of Art</a>.</p>
+    </div>
+
+    <!-- DIDACTIC PANEL -->
+    <div class="panel-mount">
+      <div class="panel" id="panel" role="button" tabindex="0" aria-expanded="false">
+        <div class="panel-face">
+          <div class="panel-eyebrow"><span>Wall text · panel 2 of 4</span><span class="tag">Oil on canvas</span></div>
+          <h2 class="panel-title">Into Bondage</h2>
+          <p class="panel-artist">Aaron Douglas, American, 1899–1979</p>
+
+          <dl class="panel-meta">
+            <dt>Made</dt><dd>1936</dd>
+            <dt>Debuted</dt><dd>Dallas, Texas — Juneteenth (June 19), 1936, in the Hall of Negro Life at the Texas Centennial Exposition</dd>
+            <dt>Medium</dt><dd>Oil on canvas, 153.4 × 153.7 cm — one panel of a four-panel mural cycle</dd>
+            <dt>Subject</dt><dd>Shackled captives are marched down to slave ships waiting offshore; a central figure modeled on West African masks, and a woman lifting her chained arms, both gaze toward a guiding star</dd>
+          </dl>
+
+          <p class="panel-desc">Concentric rings from a low, setting sun overlay the procession — Douglas's signature device for rendering historical force as pure geometry. Time is compressed rather than told in sequence: the captives are still walking the shore, yet the ships have already sailed, and a man in the center already stands as if on an auction block. The star above them is the same North Star that, generations later, guided people escaping slavery on the Underground Railroad — folded here into the story's opening chapter.</p>
+
+          <div class="panel-cta"><span class="chevron">▾</span> Tap for the artist &amp; the moment behind the work</div>
+
+          <div class="panel-more">
+            <div class="more-inner">
+              <div class="block">
+                <h4>The Artist</h4>
+                <p>Aaron Douglas was born in 1899 in Topeka, Kansas, and studied art at the University of Nebraska before moving to New York. Once in Harlem in 1925, at the urging of philosopher Alain Locke and sociologist Charles S. Johnson, he became — almost overnight — the visual artist of the Harlem Renaissance, the one every major Black publication wanted on its cover.</p>
+                <p>He illustrated for <em>The Crisis</em> (the NAACP magazine edited by W. E. B. Du Bois), <em>Opportunity</em> (National Urban League), and <em>Vanity Fair</em>; contributed to Alain Locke's landmark 1925 anthology <em>The New Negro</em>; and co-founded <em>Fire!!</em>, a short-lived 1926 magazine for younger Black artists. By 1934 he was painting large-scale murals, beginning with <em>Aspects of Negro Life</em> for the 135th Street (now Countee Cullen) branch of the New York Public Library. <em>Into Bondage</em> came from a second four-panel commission two years later, for the Hall of Negro Life at the 1936 Texas Centennial Exposition — of which only this painting and its companion piece, <em>Aspiration</em>, still survive. Douglas went on to found and chair the art department at Fisk University, teaching there for decades and training generations of Black artists, until his death in 1979.</p>
+              </div>
+              <div class="block">
+                <h4>Legislation &amp; Law</h4>
+                <p>No federal civil rights law protected Black Americans in 1936. The NAACP-backed Costigan-Wagner anti-lynching bill died in the Senate in 1935 after a Southern filibuster, and poll taxes, literacy tests, and Jim Crow statutes still governed Texas along with the rest of the South. The Hall of Negro Life itself existed only because the Texas legislature initially refused to fund any Black participation in the centennial at all — Dallas's Black community had to petition federal relief agencies directly to get a building built.</p>
+              </div>
+              <div class="block">
+                <h4>Cultural Events</h4>
+                <p>The commission arrived deep in the Great Depression, when federal arts patronage through the WPA and PWA (which had funded Douglas's 1934 mural cycle) was one of the few reliable sources of work for Black artists. The Hall of Negro Life opened deliberately on Juneteenth — the Texas holiday marking the 1865 day Union soldiers finally read the Emancipation Proclamation to enslaved people still working plantations there, two and a half years after it was signed. Reporters at the time noted that many white fairgoers refused to believe a Black artist had painted the murals; hall administrators eventually posted a sign naming Douglas outright to settle the disbelief.</p>
+              </div>
+              <div class="block">
+                <h4>Public Sentiment</h4>
+                <p>The Hall of Negro Life was, at once, a genuine — if segregated — showcase of Black achievement in health, education, industry, and art, and a site where visitors' astonishment at Douglas's skill exposed exactly the prejudice the exhibit was built to counter. That contradiction outlived the fair itself: the building was demolished in 1937 over the Black community's objections, destroying two of the four mural panels entirely. <em>Into Bondage</em> is one of only two survivors — proof, now permanent, of a history almost erased twice over.</p>
+              </div>
+
+              <div class="accession">
+                Current holding: National Gallery of Art, Washington D.C., Corcoran Collection, accession 2014.79.17 · Surviving companion panel: <em>Aspiration</em> (1936), Fine Arts Museums of San Francisco (de Young) · © Heirs of Aaron Douglas / Artists Rights Society (ARS), New York — not reproduced here.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hinge-shadow"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="credit">Archive of Refusal &amp; Hope — a study wall · sources: National Gallery of Art, Corcoran Gallery of Art archives, The Washington Post</footer>
+</div>
+
+<script>
+  const panel = document.getElementById('panel');
+  function toggle(){
+    const open = panel.classList.toggle('open');
+    panel.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  panel.addEventListener('click', toggle);
+  panel.addEventListener('keydown', (e)=>{
+    if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); }
+  });
+</script>
+</body>
+</html>

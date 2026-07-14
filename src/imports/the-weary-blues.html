@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Weary Blues — Langston Hughes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Special+Elite&display=swap');
+
+:root{
+  --paper: #ecdfc0;
+  --paper-2: #e2d1a8;
+  --paper-edge: #cdb578;
+  --ink: #2c2013;
+  --ink-soft: #4a3a24;
+  --leather: #1c2430;
+  --leather-2: #26303f;
+  --leather-hi: #37455a;
+  --gold: #c9a05c;
+  --gold-soft: #a9834c;
+  --ribbon: #2f4a6b;
+  --ribbon-dark: #233a55;
+  --ribbon-hi: #3f6288;
+}
+
+*{ box-sizing: border-box; }
+
+html,body{
+  margin:0; padding:0;
+  background: radial-gradient(ellipse at top, #2a2118 0%, #14100a 70%);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.stage{
+  min-height: 100vh;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  padding: 40px 16px;
+  position: relative;
+  gap: 22px;
+}
+
+.book-wrap{
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  perspective: 2400px;
+}
+
+.book{
+  position: relative;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.05), transparent 40%),
+    linear-gradient(160deg, var(--leather-hi) 0%, var(--leather-2) 35%, var(--leather) 100%);
+  border-radius: 6px 10px 10px 6px;
+  box-shadow:
+    0 30px 60px -20px rgba(0,0,0,0.7),
+    0 2px 0 rgba(255,255,255,0.06) inset,
+    -6px 0 12px rgba(0,0,0,0.4) inset;
+  padding: 14px 14px 22px 20px;
+}
+
+.book::before{
+  content:"";
+  position:absolute;
+  left: 0; top:0; bottom:0;
+  width: 14px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.55), transparent);
+  border-radius: 6px 0 0 6px;
+}
+
+.pages-frame{
+  position: relative;
+  background: var(--paper-2);
+  border-radius: 2px 4px 4px 2px;
+  box-shadow:
+    inset 0 0 0 1px rgba(120,90,40,0.15),
+    0 1px 0 var(--paper-edge),
+    0 2px 0 var(--paper-edge),
+    0 3px 0 var(--paper-edge),
+    0 10px 18px rgba(0,0,0,0.35);
+  min-height: 560px;
+}
+
+.pages-frame::after{
+  content:"";
+  position: absolute;
+  right: -6px; top: 4px; bottom: 4px;
+  width: 6px;
+  background: repeating-linear-gradient(
+    to bottom, var(--paper-2) 0 2px, var(--paper) 2px 4px
+  );
+  border-radius: 0 3px 3px 0;
+  opacity: 0.9;
+  z-index: 1;
+}
+
+.pages-stack{
+  position: relative;
+  min-height: 560px;
+}
+
+.leaf{
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 0.85s cubic-bezier(.45,.1,.15,1);
+  transform: rotateY(0deg);
+}
+
+.leaf.flipped{ transform: rotateY(-180deg); }
+
+.leaf .face{
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 2px 4px 4px 2px;
+}
+
+.leaf .face.front{
+  background: var(--paper);
+  background-image:
+    radial-gradient(ellipse at 20% 10%, rgba(255,255,255,0.35), transparent 45%),
+    radial-gradient(ellipse at 90% 90%, rgba(120,90,40,0.12), transparent 50%);
+  padding: 42px 36px 30px;
+  display:flex;
+  flex-direction: column;
+}
+
+.leaf .face.back{
+  transform: rotateY(180deg);
+  background: var(--paper-2);
+  background-image:
+    radial-gradient(ellipse at 80% 90%, rgba(255,255,255,0.25), transparent 50%);
+}
+
+/* ---------- COVER LEAF ---------- */
+.cover-face{
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.06), transparent 40%),
+    linear-gradient(160deg, var(--leather-hi) 0%, var(--leather-2) 35%, var(--leather) 100%) !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding: 30px !important;
+}
+
+.cover-inner{ max-width: 380px; }
+
+.cover-eyebrow{
+  font-family:'Special Elite', monospace;
+  letter-spacing: 0.35em;
+  font-size: 10px;
+  color: var(--gold-soft);
+  text-transform: uppercase;
+  margin: 0 0 16px;
+  opacity: 0.85;
+}
+
+.cover-title h1{
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(30px, 7vw, 46px);
+  letter-spacing: 0.03em;
+  margin: 0;
+  color: var(--gold);
+  text-shadow: 0 1px 0 rgba(255,220,150,0.25), 0 2px 8px rgba(0,0,0,0.6);
+  line-height: 1.1;
+}
+
+.cover-rule{
+  width: 80px;
+  height: 2px;
+  margin: 20px auto;
+  background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+  opacity: 0.8;
+}
+
+.cover-author{
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 19px;
+  color: #e6d3a3;
+  letter-spacing: 0.03em;
+  margin: 0 0 8px;
+}
+
+.cover-year{
+  font-family: 'Special Elite', monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--gold-soft);
+  opacity: 0.8;
+}
+
+.cover-tap{
+  margin-top: 34px;
+  font-family:'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--gold-soft);
+  opacity: 0.65;
+  text-transform: uppercase;
+}
+
+/* ---------- CONTENT PAGES ---------- */
+.page-head{
+  text-align:center;
+  margin-bottom: 22px;
+  flex: none;
+}
+
+.page-head .label{
+  font-family:'Special Elite', monospace;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.page-head h2{
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 25px;
+  margin: 6px 0 4px;
+  color: var(--ink);
+}
+
+.page-head .by{
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.page-body{
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ink);
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 4px;
+}
+
+.page-body p{ margin: 0 0 1.1em; }
+.page-body p:first-of-type::first-letter{
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 2.6em;
+  float: left;
+  line-height: 0.8;
+  padding-right: 8px;
+  padding-top: 3px;
+  color: var(--ribbon);
+}
+
+.fact-line{
+  font-family:'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--ribbon-dark);
+  text-transform: uppercase;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(124,31,42,0.2);
+}
+
+.page-number{
+  text-align:center;
+  font-family:'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--ink-soft);
+  opacity: 0.55;
+  margin-top: 14px;
+  flex: none;
+}
+
+/* ---------- CLOSING PAGE ---------- */
+.closing-badge{
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  margin: 0 auto 18px;
+  background: radial-gradient(circle at 35% 30%, #e3c37a, var(--gold-soft) 60%, #7d5c2c 100%);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.3);
+  display:flex; align-items:center; justify-content:center;
+}
+.closing-badge svg{ width: 26px; height: 26px; opacity: 0.9; }
+
+.source-link{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  margin: 18px auto 6px;
+  padding: 12px 22px;
+  background: var(--ribbon);
+  color: #f4e9c9;
+  text-decoration: none;
+  font-family:'Special Elite', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.source-link:hover{ transform: translateY(-2px); box-shadow: 0 10px 18px rgba(0,0,0,0.35); }
+
+.source-domain{
+  display:block;
+  text-align:center;
+  font-family:'Special Elite', monospace;
+  font-size: 10px;
+  color: var(--ink-soft);
+  opacity: 0.6;
+  margin-top: 8px;
+}
+
+.closing-note{
+  text-align:center;
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin-top: 20px;
+}
+
+/* ---------- NAV CONTROLS ---------- */
+.book-nav{
+  display:flex;
+  align-items:center;
+  gap: 18px;
+}
+
+.nav-btn{
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,160,92,0.4);
+  background: rgba(255,255,255,0.04);
+  color: var(--gold);
+  cursor: pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition: background 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+}
+.nav-btn:hover:not(:disabled){ background: rgba(255,255,255,0.1); transform: scale(1.06); }
+.nav-btn:disabled{ opacity: 0.25; cursor: default; }
+.nav-btn svg{ width: 18px; height: 18px; }
+
+.nav-dots{
+  display:flex;
+  gap: 8px;
+}
+.nav-dot{
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(201,160,92,0.3);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.nav-dot.active{ background: var(--gold); transform: scale(1.3); }
+
+.edge-tap{
+  position:absolute;
+  top:0; bottom:0;
+  width: 15%;
+  z-index: 5;
+  cursor: pointer;
+}
+.edge-tap.right{ right:0; }
+.edge-tap.left{ left:0; }
+
+@media (max-width: 640px){
+  .pages-frame, .pages-stack{ min-height: 500px; }
+  .leaf .face.front{ padding: 32px 22px 22px; }
+  .page-body{ font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="book-wrap">
+    <div class="book">
+      <div class="pages-frame">
+        <div class="pages-stack" id="pagesStack">
+
+          <!-- LEAF 0: COVER -->
+          <div class="leaf" data-index="0">
+            <div class="face front cover-face">
+              <div class="cover-inner">
+                <p class="cover-eyebrow">A Poem</p>
+                <div class="cover-title"><h1>The Weary Blues</h1></div>
+                <div class="cover-rule"></div>
+                <p class="cover-author">Langston Hughes</p>
+                <p class="cover-year">MCMXXV &middot; 1925</p>
+                <p class="cover-tap">tap to open ›</p>
+              </div>
+            </div>
+            <div class="face back"></div>
+            <div class="edge-tap right" data-flip="0"></div>
+          </div>
+
+          <!-- LEAF 1: ABOUT THE POEM -->
+          <div class="leaf" data-index="1">
+            <div class="face front">
+              <div class="page-head">
+                <p class="label">from Opportunity magazine, 1925</p>
+                <h2>About This Poem</h2>
+                <p class="by">The Weary Blues &middot; Langston Hughes</p>
+              </div>
+              <div class="page-body">
+                <p>The poem is set in a Harlem bar on Lenox Avenue, where a first-person speaker listens through the night to a piano player working through a slow, sorrowful tune. Hughes lets the reader hear the musician's own sung lines rise up inside the poem, so that the blues form itself becomes part of the poem's structure rather than just its subject.</p>
+                <p>It's often credited as one of the first poems to translate the repeating, call-and-response pattern of twelve-bar blues directly into English verse &mdash; a technique that helped establish blues poetry as its own literary tradition, and one Hughes returned to throughout his career.</p>
+              </div>
+              <p class="page-number">&mdash; 1 &mdash;</p>
+            </div>
+            <div class="face back"></div>
+            <div class="edge-tap right" data-flip="1"></div>
+            <div class="edge-tap left" data-flip="0"></div>
+          </div>
+
+          <!-- LEAF 2: HISTORICAL CONTEXT -->
+          <div class="leaf" data-index="2">
+            <div class="face front">
+              <div class="page-head">
+                <p class="label">Behind the Poem</p>
+                <h2>Langston Hughes &amp; the Harlem Renaissance</h2>
+                <p class="by">&nbsp;</p>
+              </div>
+              <div class="page-body">
+                <p>Langston Hughes wrote this poem in 1925, during the years he lived in Washington, D.C. and then Harlem, immersing himself in the city's jazz clubs and nightlife.</p>
+                <p>It was first published in Opportunity, the magazine of the National Urban League, where it won first prize in the magazine's inaugural poetry contest that May &mdash; a contest dinner that also introduced Hughes to the writer and patron Carl Van Vechten, who helped arrange a publishing deal with Alfred A. Knopf.</p>
+                <p>The poem gave its title to Hughes's first book, published the following year, which alongside Alain Locke's anthology The New Negro is considered one of the defining literary debuts of the Harlem Renaissance &mdash; the flowering of Black art, music, and literature centered in 1920s Harlem.</p>
+                <p>Hughes would go on to become one of the most influential American poets of the twentieth century, prized for grounding his work in the everyday rhythms, voices, and music of Black life rather than imitating European poetic tradition.</p>
+              </div>
+              <p class="page-number">&mdash; 2 &mdash;</p>
+            </div>
+            <div class="face back"></div>
+            <div class="edge-tap right" data-flip="2"></div>
+            <div class="edge-tap left" data-flip="1"></div>
+          </div>
+
+          <!-- LEAF 3: CLOSING / SOURCE LINK -->
+          <div class="leaf" data-index="3">
+            <div class="face front" style="justify-content:center; text-align:center;">
+              <div class="closing-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#3a2416" stroke-width="1.6">
+                  <path d="M12 3v14M12 17l-4-3M12 17l4-3M6 8c0-2 2-3 6-3s6 1 6 3-2 3-6 3-6-1-6-3z"/>
+                </svg>
+              </div>
+              <div class="page-head" style="margin-bottom:8px;">
+                <h2>Read the Full Poem</h2>
+                <p class="by">The Weary Blues &middot; Langston Hughes</p>
+              </div>
+              <p class="closing-note">This book holds the story behind the poem.<br>The poem itself lives at its original source.</p>
+              <a class="source-link" href="https://www.poetryfoundation.org/poems/47347/the-weary-blues" target="_blank" rel="noopener">Read on Poetry Foundation &rarr;</a>
+              <span class="source-domain">poetryfoundation.org</span>
+              <p class="page-number" style="margin-top:26px;">&mdash; end &mdash;</p>
+            </div>
+            <div class="face back"></div>
+            <div class="edge-tap left" data-flip="2"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="book-nav">
+      <button class="nav-btn" id="prevBtn" aria-label="Previous page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="nav-dots" id="navDots"></div>
+      <button class="nav-btn" id="nextBtn" aria-label="Next page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var leaves = Array.prototype.slice.call(document.querySelectorAll('.leaf'));
+  var total = leaves.length;
+  var current = 0; // number of leaves currently flipped
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var dotsWrap = document.getElementById('navDots');
+
+  for (var d = 0; d < total; d++){
+    var dot = document.createElement('div');
+    dot.className = 'nav-dot';
+    dotsWrap.appendChild(dot);
+  }
+  var dots = dotsWrap.querySelectorAll('.nav-dot');
+
+  function render(){
+    leaves.forEach(function(leaf, i){
+      if (i < current){
+        leaf.classList.add('flipped');
+        leaf.style.zIndex = i;
+      } else {
+        leaf.classList.remove('flipped');
+        leaf.style.zIndex = total - i;
+      }
+    });
+    dots.forEach(function(dot, i){
+      dot.classList.toggle('active', i === current);
+    });
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total;
+  }
+
+  function flipForward(){
+    if (current < total){ current++; render(); }
+  }
+  function flipBack(){
+    if (current > 0){ current--; render(); }
+  }
+
+  nextBtn.addEventListener('click', flipForward);
+  prevBtn.addEventListener('click', flipBack);
+
+  document.querySelectorAll('.edge-tap').forEach(function(zone){
+    zone.addEventListener('click', function(){
+      var idx = parseInt(zone.getAttribute('data-flip'), 10);
+      if (zone.classList.contains('right')) flipForward();
+      else flipBack();
+    });
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight') flipForward();
+    if (e.key === 'ArrowLeft') flipBack();
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>

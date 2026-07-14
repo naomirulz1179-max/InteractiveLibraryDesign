@@ -1,948 +1,730 @@
-import { useState, useEffect } from "react";
-import { X, ChevronDown } from "lucide-react";
+import { useState } from "react";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-
-interface Book {
-  id: string;
-  title: string;
-  author: string;
-  year: number;
-  spineColor: string;
-  textColor: string;
-  description: string;
-  excerpt: string;
-  tags: string[];
-  width: number;
-  height: number;
-}
-
-interface ArtPiece {
-  id: string;
-  title: string;
-  artist: string;
-  year: number;
-  medium: string;
-  dimensions: string;
-  description: string;
-  context: string;
-  frameStyle: "gold" | "ebony" | "silver";
-  ratio: number;
-}
-
-// ─── Book Data ────────────────────────────────────────────────────────────────
-
-const BOOKS: Book[] = [
-  {
-    id: "ariel",
-    title: "Ariel",
-    author: "Sylvia Plath",
-    year: 1965,
-    spineColor: "#7C1D1D",
-    textColor: "#F0DEB8",
-    description:
-      "Published posthumously in 1965, Ariel is Plath's most electrifying collection. Written in the final months before her death, these forty-one poems burn with psychological precision and mythological intensity that had never been seen before in American poetry.",
-    excerpt: "Out of the ash\nI rise with my red hair\nAnd I eat men like air.",
-    tags: ["Confessional", "Feminist", "American Modernism"],
-    width: 26,
-    height: 218,
-  },
-  {
-    id: "leaves",
-    title: "Leaves of Grass",
-    author: "Walt Whitman",
-    year: 1855,
-    spineColor: "#3D5A2A",
-    textColor: "#F0DEB8",
-    description:
-      "Whitman's life's work, revised across nine editions spanning four decades. This foundational text of American poetry celebrates the body, democracy, and the boundless self with a cataloguing energy unlike anything before it.",
-    excerpt: "I am large, I contain multitudes.",
-    tags: ["Transcendentalism", "Free Verse", "American"],
-    width: 42,
-    height: 222,
-  },
-  {
-    id: "waste-land",
-    title: "The Waste Land",
-    author: "T.S. Eliot",
-    year: 1922,
-    spineColor: "#2A2A2A",
-    textColor: "#C8B88A",
-    description:
-      "Eliot's masterwork fragments European culture into a mosaic of grief, desire, and spiritual collapse. Published the same year as Ulysses, it defined literary Modernism and rewrote what a long poem could do.",
-    excerpt:
-      "April is the cruellest month, breeding\nLilacs out of the dead land, mixing\nMemory and desire.",
-    tags: ["Modernism", "Fragmented", "Elegy"],
-    width: 20,
-    height: 208,
-  },
-  {
-    id: "howl",
-    title: "Howl and Other Poems",
-    author: "Allen Ginsberg",
-    year: 1956,
-    spineColor: "#1A1A2E",
-    textColor: "#E0C88A",
-    description:
-      "Ginsberg's howl against conformity detonated through San Francisco's Six Gallery reading in 1955. Charged with obscenity and cleared in a landmark trial, it gave the Beat generation its scripture.",
-    excerpt:
-      "I saw the best minds of my generation destroyed by madness,\nstarving hysterical naked.",
-    tags: ["Beat", "Protest", "Queer"],
-    width: 18,
-    height: 198,
-  },
-  {
-    id: "milk-honey",
-    title: "Milk and Honey",
-    author: "Rupi Kaur",
-    year: 2014,
-    spineColor: "#C8B49A",
-    textColor: "#2C1B0E",
-    description:
-      "Kaur's debut moves through trauma, survival, and healing in four chapters. Written in lowercase without punctuation, its directness made it the best-selling poetry collection of the 2010s and brought verse to an entirely new generation.",
-    excerpt:
-      "you have to stop searching for why at some point\nyou have to leave it alone",
-    tags: ["Contemporary", "Diaspora", "Healing"],
-    width: 22,
-    height: 205,
-  },
-  {
-    id: "tender-buttons",
-    title: "Tender Buttons",
-    author: "Gertrude Stein",
-    year: 1914,
-    spineColor: "#8B2E52",
-    textColor: "#F0DEB8",
-    description:
-      "Stein's prose poem triptych — Objects, Food, Rooms — dismantles language itself. Its radical refusal of conventional meaning anticipated Dada, Surrealism, and Language Poetry. A book that rewards re-reading indefinitely.",
-    excerpt: "A rose is a rose is a rose.",
-    tags: ["Avant-garde", "Cubist", "Experimental"],
-    width: 24,
-    height: 202,
-  },
-  {
-    id: "autobiography-red",
-    title: "Autobiography of Red",
-    author: "Anne Carson",
-    year: 1998,
-    spineColor: "#B84A1A",
-    textColor: "#F0DEB8",
-    description:
-      "Carson's novel-in-verse reimagines the myth of Geryon, the red-winged monster slain by Herakles, as a queer coming-of-age story set in contemporary South America. A book that refuses genre entirely.",
-    excerpt: "He was a child who could not speak\nexcept in colors.",
-    tags: ["Novel-in-verse", "Queer", "Myth"],
-    width: 28,
-    height: 220,
-  },
-  {
-    id: "citizen",
-    title: "Citizen",
-    author: "Claudia Rankine",
-    year: 2014,
-    spineColor: "#E8E0D0",
-    textColor: "#1C1208",
-    description:
-      "Rankine's genre-defying work — lyric essay, prose poem, conceptual art — bears witness to racial microaggressions in American daily life. Integrating photography and image, it extends the prose poem into documentary.",
-    excerpt:
-      "Because white men can't\npolice their imagination\nblack men are dying.",
-    tags: ["Lyric Essay", "Race", "Documentary"],
-    width: 26,
-    height: 212,
-  },
-  {
-    id: "bright-dead",
-    title: "Bright Dead Things",
-    author: "Ada Limón",
-    year: 2015,
-    spineColor: "#C8841A",
-    textColor: "#1A1208",
-    description:
-      "Limón's fourth collection navigates grief, belonging, and the strangeness of returning home. Shortlisted for the National Book Award, it established her as an essential voice of contemporary American poetry.",
-    excerpt:
-      "I want to be\nagainst the current\nand in the current at the same time.",
-    tags: ["Contemporary", "Grief", "Place"],
-    width: 22,
-    height: 210,
-  },
-  {
-    id: "sexton",
-    title: "The Complete Poems",
-    author: "Anne Sexton",
-    year: 1981,
-    spineColor: "#3D5A47",
-    textColor: "#F0DEB8",
-    description:
-      "Collecting the full arc of Sexton's work, this volume charts the most sustained engagement with mental illness, domesticity, and female experience in American Confessional poetry. Essential and devastating.",
-    excerpt: "Put your ear down close to your soul\nand listen hard.",
-    tags: ["Confessional", "Feminist", "Collected"],
-    width: 38,
-    height: 228,
-  },
-  {
-    id: "practical-water",
-    title: "Practical Water",
-    author: "Brenda Hillman",
-    year: 2009,
-    spineColor: "#2A5C6B",
-    textColor: "#F0DEB8",
-    description:
-      "The third installment of Hillman's elemental tetralogy. Meditating on water in all its states, the poems dissolve the boundary between ecological grief and spiritual practice in ways no other American poet has attempted.",
-    excerpt: "Water comes\nfrom the future\nand the past at once.",
-    tags: ["Eco-poetry", "Experimental", "Elemental"],
-    width: 24,
-    height: 207,
-  },
-  {
-    id: "lucky-wreck",
-    title: "Lucky Wreck",
-    author: "Ada Limón",
-    year: 2006,
-    spineColor: "#C45A3A",
-    textColor: "#F0DEB8",
-    description:
-      "Limón's debut collection established her lyric mode: intimate, earthy, grounded in the body and the natural world. Its emotional directness and formal ease announced the arrival of an essential contemporary voice.",
-    excerpt:
-      "I want to be\na lucky wreck — all shine\nand broken glass.",
-    tags: ["Debut", "Contemporary", "Body"],
-    width: 20,
-    height: 200,
-  },
-];
-
-const SHELVES = [BOOKS.slice(0, 5), BOOKS.slice(5, 10), BOOKS.slice(10)];
-
-// ─── Art Data ─────────────────────────────────────────────────────────────────
-
-const ART_PIECES: ArtPiece[] = [
-  {
-    id: "blue-garden",
-    title: "Evening Garden (Study No. 3)",
-    artist: "M. Voclain",
-    year: 2019,
-    medium: "Watercolor and ink on paper",
-    dimensions: "45 × 60 cm",
-    description:
-      "An evening garden captured at the exact moment between dusk and true dark, when the blues deepen and the whites begin to phosphoresce. The artist returned to this composition three times before arriving at this final stillness.",
-    context:
-      "Voclain painted this series during a residency in the Cévennes, France. The garden belonged to an unnamed neighbor who grew evening primrose and white nicotiana for the scent alone. The artist has said she was not painting the garden but the quality of waiting that a garden at dusk enforces.",
-    frameStyle: "gold",
-    ratio: 1.5,
-  },
-  {
-    id: "still-life",
-    title: "Still Life with Correspondence",
-    artist: "R. Okafor",
-    year: 2021,
-    medium: "Oil on linen",
-    dimensions: "50 × 50 cm",
-    description:
-      "Letters, a worn book, and a ceramic cup occupy a table with the quiet authority of long familiarity. The artist has spoken of painting objects that have been touched repeatedly, until they absorb something of the person who touched them.",
-    context:
-      "Okafor painted this after finding a bundle of letters in a secondhand shop — purchased, never read, and resold again. She describes the work as a portrait of unknowable intimacy: objects that witnessed something, and forgot it, and remained.",
-    frameStyle: "ebony",
-    ratio: 1.0,
-  },
-  {
-    id: "tide-chart",
-    title: "Tide Chart II",
-    artist: "S. Leung",
-    year: 2020,
-    medium: "Acrylic and graphite on canvas",
-    dimensions: "80 × 55 cm",
-    description:
-      "Leung transcribes actual tidal data from Horseshoe Bay, British Columbia into abstract bands of blue-grey acrylic. The graphite lines mark precisely where each tide peaked, transforming scientific record into elegy.",
-    context:
-      "The work belongs to a series begun after Leung's father, a marine biologist, lost his research vessel in a storm off the coast. She has described the series as a way of finding form for grief she could not otherwise speak — the kind of grief that requires precision.",
-    frameStyle: "silver",
-    ratio: 0.69,
-  },
-  {
-    id: "reader",
-    title: "The Reader (after Vuillard)",
-    artist: "C. Mbeki",
-    year: 2018,
-    medium: "Pastel on toned paper",
-    dimensions: "35 × 48 cm",
-    description:
-      "A figure absorbed in reading, nearly dissolved into the patterned interior around them. Mbeki cites Vuillard's habit of refusing to distinguish people from their wallpaper as the generative pressure behind this work.",
-    context:
-      "Mbeki made this pastel in a single sitting, watching her grandmother read in the afternoon light. The book the figure holds is deliberately obscured. The artist insists this is not an oversight — the title of the book would close the painting off.",
-    frameStyle: "gold",
-    ratio: 0.73,
-  },
-  {
-    id: "archipelago",
-    title: "Archipelago",
-    artist: "T. Beaumont",
-    year: 2022,
-    medium: "Sumi ink on washi paper",
-    dimensions: "100 × 70 cm",
-    description:
-      "Beaumont loads large brushes with undiluted sumi ink and drops them from varying heights, then develops the resultant forms into islands, bodies, and distances. Each mark is singular and irreversible.",
-    context:
-      "Made in a single two-hour session without revision or overpainting. The artist has said: 'I wanted to find out what I thought before I had time to disagree with myself.' The title came after the work was finished.",
-    frameStyle: "ebony",
-    ratio: 1.43,
-  },
-  {
-    id: "portrait",
-    title: "Portrait of a Poet (Unfinished)",
-    artist: "L. Hernández",
-    year: 2017,
-    medium: "Oil on gessoed board",
-    dimensions: "40 × 55 cm",
-    description:
-      "The sitter's features are fully resolved while the background remains raw gessoed board. Hernández has argued that this incompleteness is the finished state — that a person's context is always separate from who they are.",
-    context:
-      "The poet who sat for this work asked to remain unnamed. Hernández agreed, on the condition that she could keep the painting. The sitter has reportedly never seen the finished work.",
-    frameStyle: "gold",
-    ratio: 0.73,
-  },
-];
-
-// ─── Abstract Art SVGs ────────────────────────────────────────────────────────
-
-function AbstractArt({ id, className }: { id: string; className?: string }) {
-  const p = `art-${id}`;
-
-  switch (id) {
-    case "blue-garden":
-      return (
-        <svg viewBox="0 0 300 200" className={className} xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id={`${p}-sky`} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#101E38" />
-              <stop offset="65%" stopColor="#1E3A6E" />
-              <stop offset="100%" stopColor="#2D5080" />
-            </linearGradient>
-          </defs>
-          <rect width="300" height="200" fill={`url(#${p}-sky)`} />
-          <rect x="0" y="168" width="300" height="32" fill="#0A1408" />
-          <ellipse cx="50" cy="162" rx="22" ry="40" fill="#122010" />
-          <ellipse cx="80" cy="166" rx="14" ry="28" fill="#0E1A0A" />
-          <circle cx="47" cy="130" r="9" fill="#D8ECE4" opacity="0.85" />
-          <circle cx="55" cy="124" r="5" fill="#B0D0C8" opacity="0.7" />
-          <ellipse cx="150" cy="160" rx="28" ry="32" fill="#0E1C10" />
-          <circle cx="145" cy="130" r="12" fill="#C0DDE8" opacity="0.8" />
-          <circle cx="159" cy="123" r="7" fill="#E0F0F8" opacity="0.65" />
-          <ellipse cx="240" cy="162" rx="20" ry="26" fill="#101808" />
-          <circle cx="238" cy="138" r="9" fill="#D0E8DC" opacity="0.9" />
-          <ellipse cx="274" cy="166" rx="15" ry="18" fill="#0A1408" />
-          <circle cx="20" cy="32" r="1" fill="#fff" opacity="0.7" />
-          <circle cx="80" cy="18" r="1.3" fill="#fff" opacity="0.9" />
-          <circle cx="180" cy="26" r="0.9" fill="#fff" opacity="0.6" />
-          <circle cx="250" cy="12" r="1.5" fill="#fff" opacity="0.85" />
-          <circle cx="120" cy="46" r="0.8" fill="#fff" opacity="0.5" />
-          <circle cx="210" cy="36" r="1.1" fill="#E8D0A0" opacity="0.7" />
-          <circle cx="290" cy="22" r="0.9" fill="#fff" opacity="0.55" />
-        </svg>
-      );
-
-    case "still-life":
-      return (
-        <svg viewBox="0 0 240 240" className={className} xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id={`${p}-bg`} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#C8A870" />
-              <stop offset="100%" stopColor="#A88050" />
-            </linearGradient>
-          </defs>
-          <rect width="240" height="240" fill={`url(#${p}-bg)`} />
-          <rect x="0" y="178" width="240" height="62" fill="#7A5028" />
-          <rect x="38" y="106" width="76" height="80" rx="3" fill="#2A1808" />
-          <rect x="41" y="109" width="70" height="74" fill="#3A2010" />
-          <line x1="77" y1="109" x2="77" y2="183" stroke="#1A1008" strokeWidth="2.5" />
-          <rect x="90" y="124" width="88" height="66" rx="1" fill="#F0E8D0" transform="rotate(-4, 134, 157)" />
-          <line x1="98" y1="140" x2="167" y2="137" stroke="#C0A880" strokeWidth="1" opacity="0.5" />
-          <line x1="98" y1="150" x2="165" y2="147" stroke="#C0A880" strokeWidth="1" opacity="0.5" />
-          <line x1="98" y1="160" x2="163" y2="157" stroke="#C0A880" strokeWidth="1" opacity="0.5" />
-          <ellipse cx="198" cy="165" rx="20" ry="10" fill="#6A3820" />
-          <rect x="178" y="144" width="40" height="30" rx="3" fill="#7A4828" />
-          <ellipse cx="198" cy="144" rx="20" ry="8" fill="#8A5838" />
-          <ellipse cx="198" cy="144" rx="12" ry="5" fill="#4A2818" />
-          <ellipse cx="120" cy="180" rx="88" ry="5" fill="#5A3018" opacity="0.35" />
-        </svg>
-      );
-
-    case "tide-chart":
-      return (
-        <svg viewBox="0 0 195 280" className={className} xmlns="http://www.w3.org/2000/svg">
-          <rect width="195" height="280" fill="#EBF0F2" />
-          <line x1="30" y1="18" x2="30" y2="262" stroke="#8AACB8" strokeWidth="1" />
-          <line x1="30" y1="262" x2="183" y2="262" stroke="#8AACB8" strokeWidth="1" />
-          {([
-            [55, 0], [78, 1], [92, 2], [65, 3], [42, 4],
-            [108, 5], [85, 6], [60, 7], [72, 8], [48, 9],
-            [95, 10], [68, 11],
-          ] as [number, number][]).map(([w, i]) => (
-            <g key={i}>
-              <rect
-                x="30"
-                y={22 + i * 20}
-                width={w}
-                height="14"
-                fill={i % 3 === 0 ? "#4A7A9B" : i % 3 === 1 ? "#3A6A8B" : "#5A8AAB"}
-                opacity="0.72"
-              />
-              <line
-                x1="30"
-                y1={29 + i * 20}
-                x2="183"
-                y2={29 + i * 20}
-                stroke="#A0BEC8"
-                strokeWidth="0.4"
-                strokeDasharray="3,5"
-              />
-            </g>
-          ))}
-        </svg>
-      );
-
-    case "reader":
-      return (
-        <svg viewBox="0 0 200 274" className={className} xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id={`${p}-wall`} width="24" height="24" patternUnits="userSpaceOnUse">
-              <rect width="24" height="24" fill="#C8A88A" />
-              <circle cx="12" cy="12" r="3.5" fill="#B89878" opacity="0.55" />
-              <path d="M0,12 Q6,6 12,12 Q18,18 24,12" stroke="#B89878" strokeWidth="0.5" fill="none" opacity="0.4" />
-            </pattern>
-          </defs>
-          <rect width="200" height="274" fill={`url(#${p}-wall)`} />
-          <rect x="0" y="0" width="90" height="200" fill="#F8E8D0" opacity="0.2" />
-          <rect x="55" y="198" width="90" height="12" rx="2" fill="#6A3A18" />
-          <rect x="60" y="210" width="80" height="58" rx="2" fill="#7A4828" />
-          <ellipse cx="100" cy="192" rx="32" ry="44" fill="#2A1C10" />
-          <ellipse cx="100" cy="143" rx="20" ry="23" fill="#C0806A" />
-          <ellipse cx="100" cy="133" rx="22" ry="15" fill="#1A1008" />
-          <rect x="76" y="184" width="48" height="32" rx="1" fill="#181828" transform="rotate(-8, 100, 200)" />
-        </svg>
-      );
-
-    case "archipelago":
-      return (
-        <svg viewBox="0 0 280 196" className={className} xmlns="http://www.w3.org/2000/svg">
-          <rect width="280" height="196" fill="#F5F0E8" />
-          <ellipse cx="58" cy="98" rx="36" ry="24" fill="#0E0C0A" opacity="0.88" />
-          <ellipse cx="56" cy="96" rx="26" ry="16" fill="#060402" />
-          <ellipse cx="162" cy="72" rx="48" ry="30" fill="#0E0C0A" opacity="0.92" transform="rotate(-10, 162, 72)" />
-          <ellipse cx="160" cy="70" rx="38" ry="22" fill="#060402" transform="rotate(-10, 160, 70)" />
-          <ellipse cx="232" cy="130" rx="28" ry="18" fill="#0E0C0A" opacity="0.82" />
-          <ellipse cx="107" cy="150" rx="20" ry="13" fill="#0E0C0A" opacity="0.72" />
-          <ellipse cx="219" cy="48" rx="13" ry="9" fill="#0E0C0A" opacity="0.62" />
-          <path d="M 82 104 Q 112 118 130 102" stroke="#1A1610" strokeWidth="2" fill="none" opacity="0.38" />
-          <path d="M 200 88 Q 220 112 230 128" stroke="#1A1610" strokeWidth="1.5" fill="none" opacity="0.3" />
-          <circle cx="14" cy="56" r="6" fill="#0E0C0A" opacity="0.52" />
-          <circle cx="266" cy="156" r="5" fill="#0E0C0A" opacity="0.42" />
-          <circle cx="10" cy="142" r="3" fill="#0E0C0A" opacity="0.35" />
-        </svg>
-      );
-
-    case "portrait":
-      return (
-        <svg viewBox="0 0 200 274" className={className} xmlns="http://www.w3.org/2000/svg">
-          <rect width="200" height="274" fill="#F0EDE8" />
-          <rect width="200" height="274" fill="none" stroke="#E4E0D8" strokeWidth="50" opacity="0.5" />
-          <path d="M 36 202 Q 100 190 164 202" fill="#1A1008" />
-          <ellipse cx="100" cy="106" rx="56" ry="66" fill="#D4976A" />
-          <rect x="84" y="164" width="32" height="30" fill="#C0836A" />
-          <ellipse cx="44" cy="108" rx="10" ry="16" fill="#C08060" />
-          <ellipse cx="156" cy="108" rx="10" ry="16" fill="#C08060" />
-          <path d="M 44 58 Q 100 22 156 58 Q 164 92 160 112 Q 105 124 40 112 Q 36 92 44 58" fill="#1A1008" />
-          <ellipse cx="76" cy="100" rx="14" ry="10" fill="#E8C0A0" />
-          <ellipse cx="124" cy="100" rx="14" ry="10" fill="#E8C0A0" />
-          <ellipse cx="76" cy="100" rx="8" ry="6" fill="#2A1818" />
-          <ellipse cx="124" cy="100" rx="8" ry="6" fill="#2A1818" />
-          <circle cx="74" cy="98" r="2.5" fill="#fff" opacity="0.6" />
-          <circle cx="122" cy="98" r="2.5" fill="#fff" opacity="0.6" />
-          <path d="M 100 108 Q 92 130 84 136 Q 100 142 116 136 Q 108 130 100 108" fill="#C07858" />
-          <path d="M 80 150 Q 100 158 120 150" stroke="#8A4A30" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-        </svg>
-      );
-
-    default:
-      return (
-        <svg viewBox="0 0 200 200" className={className} xmlns="http://www.w3.org/2000/svg">
-          <rect width="200" height="200" fill="#DDD" />
-        </svg>
-      );
-  }
-}
-
-// ─── Frame Config ─────────────────────────────────────────────────────────────
-
-const FRAME_COLORS = {
-  gold: { outer: "#C8A020", inner: "#7A6010", mat: "#F5EFE0" },
-  ebony: { outer: "#1A1208", inner: "#0A0804", mat: "#E8E0D0" },
-  silver: { outer: "#909090", inner: "#686868", mat: "#F0F0EC" },
+// ─── Type colours & labels (exact from source) ───────────────────────────────
+const TC: Record<string, string> = {
+  legislation: "#2f6b3c", amendment: "#1f4e8c", court: "#5a2e8c",
+  protest: "#c47a1e", riot: "#a8231e", organization: "#8c6d1f", milestone: "#2f7c7c",
+};
+const TL: Record<string, string> = {
+  legislation: "Legislation", amendment: "Amendment", court: "Court Case",
+  protest: "Protest/March", riot: "Riot/Uprising", organization: "Organization Founded",
+  milestone: "Milestone",
 };
 
-// ─── FramedArt ────────────────────────────────────────────────────────────────
+interface TEvent { year: string; type: string; title: string; desc: string; }
+interface BookPages { form: string; aboutPoem: string[]; historyTitle: string; historyParas: string[]; sourceUrl: string; sourceDomain: string; }
+interface BookData { title: string; author: string; year: string; bio: string; context: string; pages?: BookPages; }
+interface ArtData { title: string; artist: string; year: string; style: string; bio: string; context: string; }
+interface Era {
+  name: string; years: string; wall: string; color1: string; color2: string;
+  blurb: string; books: BookData[]; art: ArtData;
+  timeline: TEvent[]; panelEvents: TEvent[];
+}
 
-function FramedArt({ piece, onClick }: { piece: ArtPiece; onClick: () => void }) {
-  const frame = FRAME_COLORS[piece.frameStyle];
-  const baseW = 178;
-  const artH = Math.round(baseW / piece.ratio);
+// ─── Era data (exact from source) ────────────────────────────────────────────
+const eras: Era[] = [
+  {
+    name: "Antebellum Era", years: "1619 – 1865",
+    wall: "linear-gradient(160deg, #4a3524, #2e2013)",
+    color1: "#5a3a29", color2: "#2f1e12",
+    blurb: "Verse written under chattel slavery, some composed by enslaved poets themselves, circulating as evidence of Black intellect and as tools for the abolitionist cause.",
+    books: [
+      { title: "On Liberty and Slavery", author: "George Moses Horton", year: "1829",
+        bio: "George Moses Horton was enslaved in North Carolina and taught himself to read; he sold poems to University of North Carolina students to earn money, becoming one of the first Black Southern poets to be published.",
+        context: "Written as the American Colonization Society and abolitionist societies clashed over slavery's future, and shortly before Nat Turner's 1831 rebellion hardened Southern slave codes and restricted Black literacy and assembly.",
+        pages: { form: "A Poem · from The Hope of Liberty, 1829", aboutPoem: ["Horton addresses \"Liberty\" almost as a person — a figure he pleads with, describing the weight of his own bondage and begging for her arrival. Written from inside slavery itself, the poem borrows the vocabulary of the American Revolution, words like tyrant, oppression, and vassal, that would have been fifty years old and instantly recognizable to its readers.", "That borrowed language does quiet, pointed work: it holds the nation's founding promises of liberty up against its treatment of enslaved people, and lets the contradiction speak for itself."], historyTitle: "George Moses Horton, Enslaved Poet", historyParas: ["George Moses Horton was born into slavery around 1798 on a tobacco plantation in North Carolina. He taught himself to read using scraps of paper and a hymnal, and by his teenage years was composing poems entirely in his head, reciting them aloud rather than writing them down, since he had not yet learned to write.", "He was permitted by his enslaver to travel to the nearby University of North Carolina at Chapel Hill, where he sold his poems, mostly love verses, to students at the weekly market. His talent caught the attention of Caroline Lee Hentz, a novelist and professor's wife, who taught him more advanced writing and helped transcribe and publish his work.", "With her help, Horton published The Hope of Liberty in 1829, believed to be the first book published by an African American author in the American South. He hoped its sales would earn enough to buy his freedom; despite public appeals, including from North Carolina's governor, that hope was never realized through the book.", "Horton remained enslaved for nearly four more decades, continuing to write and publish two further collections, until he was freed at the end of the Civil War in 1865."], sourceUrl: "https://www.poetryfoundation.org/poems/52307/on-liberty-and-slavery", sourceDomain: "poetryfoundation.org" } },
+      { title: "The Slave Mother", author: "Frances E. W. Harper", year: "1854",
+        bio: "Frances E. W. Harper was a free-born Black poet, abolitionist, and suffragist from Baltimore who became one of the most widely read Black poets of the 19th century.",
+        context: "Published a year after the Fugitive Slave Act of 1850 intensified the separation of enslaved families through recapture, and amid rising tensions that would culminate in the Dred Scott decision of 1857 and the Civil War.",
+        pages: { form: "A Poem · from Poems on Miscellaneous Subjects, 1854", aboutPoem: ["This short lyric depicts a mother's anguish at the moment of forced separation from her child, an all-too-common event under slavery, where families could be broken apart at auction with no warning and no recourse.", "Harper builds the poem through repeated images of physical and emotional pain, then closes by naming the woman simply as a mother, without any qualifying word for her race or legal status — a deliberate choice that asks the reader to recognize her grief as universal, not distant or abstract."], historyTitle: "Frances Ellen Watkins Harper", historyParas: ["Frances Ellen Watkins Harper was born free in Baltimore, Maryland in 1825, orphaned as a young child, and raised by an uncle who ran a school for free Black children. She became one of the first African American women to be widely published in the United States.", "This poem appeared in her 1854 collection Poems on Miscellaneous Subjects, prefaced by the prominent white abolitionist William Lloyd Garrison, and it sold well enough that Harper released an expanded edition a few years later.", "Alongside her writing, Harper worked as a public speaker on the abolitionist circuit and supported the Underground Railroad. After the Civil War she remained a lifelong activist, campaigning for civil rights, women's suffrage, and temperance, and she later wrote several novels, including Iola Leroy, one of the first novels published by a Black woman in the United States."], sourceUrl: "https://www.poetryfoundation.org/poems/51977/the-slave-mother-56d23017ceaad", sourceDomain: "poetryfoundation.org" } },
+    ],
+    art: { title: "Land of the Lotus Eaters", artist: "Robert S. Duncanson", year: "1861",
+      style: "linear-gradient(160deg, #3d5a3a 0%, #6b8c4a 35%, #d9c67a 60%, #7a9bb5 100%)",
+      bio: "Robert S. Duncanson was one of the first Black American artists to achieve international recognition, working in the Hudson River School landscape tradition.",
+      context: "Painted in 1861 as the Civil War began; Duncanson, based in Cincinnati near the Ohio River border with slave states, used sweeping landscape painting partly to sidestep the racial barriers that blocked Black portraitists from White patrons." },
+    timeline: [
+      { year: "1619", type: "milestone", title: "First Enslaved Africans Arrive in Virginia", desc: "A ship carrying enslaved Africans arrived at Point Comfort, Virginia, beginning over two centuries of chattel slavery in what became the United States." },
+      { year: "1793", type: "legislation", title: "Fugitive Slave Act of 1793", desc: "Allowed enslavers to reclaim escaped enslaved people across state lines, including from free states." },
+      { year: "1831", type: "riot", title: "Nat Turner's Rebellion", desc: "An armed uprising of enslaved people in Virginia killed dozens of white residents, prompting sweeping crackdowns on Black literacy and assembly across the South." },
+      { year: "1850", type: "legislation", title: "Fugitive Slave Act of 1850", desc: "Strengthened federal enforcement of returning escaped enslaved people, compelling Northern citizens to assist in their capture." },
+      { year: "1857", type: "court", title: "Dred Scott v. Sandford", desc: "The Supreme Court ruled that Black Americans, enslaved or free, could not be U.S. citizens and had no standing to sue in federal court." },
+      { year: "1863", type: "legislation", title: "Emancipation Proclamation", desc: "President Lincoln declared enslaved people in Confederate states to be free, reframing the war as a fight against slavery." },
+    ],
+    panelEvents: [
+      { year: "1820", type: "legislation", title: "Missouri Compromise", desc: "Admitted Missouri as a slave state and Maine as a free state, banning slavery north of latitude 36°30′ in the remaining Louisiana Territory." },
+      { year: "1839", type: "court", title: "The Amistad Case", desc: "Africans who seized control of the slave ship La Amistad won their freedom before the U.S. Supreme Court, a rare early legal victory against the slave trade." },
+      { year: "1852", type: "milestone", title: "Publication of Uncle Tom's Cabin", desc: "Harriet Beecher Stowe's novel intensified national debate over slavery, selling widely across the North and provoking backlash in the South." },
+      { year: "1859", type: "protest", title: "John Brown's Raid on Harpers Ferry", desc: "Abolitionist John Brown led an armed raid on a federal armory, hoping to spark a wider slave rebellion; his execution deepened the North-South divide." },
+    ],
+  },
+  {
+    name: "Reconstruction Era", years: "1865 – 1896",
+    wall: "linear-gradient(160deg, #55401f, #332512)",
+    color1: "#6b4a23", color2: "#3a2810",
+    blurb: "Verse from the brief window of Black citizenship and political power after emancipation, through its violent reversal and the rise of Jim Crow.",
+    books: [
+      { title: "Learning to Read", author: "Frances E. W. Harper", year: "1872",
+        bio: "Harper continued writing after emancipation, becoming a leading voice on Black literacy, education, and civic participation during Reconstruction.",
+        context: "Published as the Freedmen's Bureau ran thousands of schools for formerly enslaved people and the 15th Amendment (1870) granted Black men the vote — gains that would be rolled back after the Compromise of 1877 ended Reconstruction.",
+        pages: { form: "A Poem · from Sketches of Southern Life, 1872", aboutPoem: ["Written in first-person dialect as \"Aunt Chloe,\" a recurring character Harper created for a formerly enslaved narrator, the poem recounts the resourceful, often hidden ways Black people found to teach themselves and each other to read despite laws and customs designed to keep them illiterate.", "It then follows Chloe into freedom after the Civil War, where, even in old age, she sets out to finally learn to read for herself — treating literacy not just as a skill but as a form of independence and dignity that had long been deliberately withheld."], historyTitle: "Aunt Chloe & Reconstruction", historyParas: ["Frances Ellen Watkins Harper wrote \"Learning to Read\" as part of Sketches of Southern Life, a collection built around the voice of Aunt Chloe, a formerly enslaved woman reflecting on slavery, emancipation, and the early years of Reconstruction.", "Throughout the antebellum South, teaching enslaved people to read was illegal in most states, a policy enforced precisely because literacy was understood, by enslavers and the enslaved alike, as a path toward independent thought and resistance.", "Harper herself was a committed advocate for freedmen's education after the Civil War, traveling extensively through the South to speak and organize on behalf of newly emancipated communities, work that directly informed the character and voice of Aunt Chloe."], sourceUrl: "https://www.poetryfoundation.org/poems/52448/learning-to-read-56d230ed0fdc0", sourceDomain: "poetryfoundation.org" } },
+      { title: "We Wear the Mask", author: "Paul Laurence Dunbar", year: "1895",
+        bio: "Paul Laurence Dunbar was the first Black American poet to gain national literary fame, writing in both standard English and dialect verse.",
+        context: "Published as Jim Crow laws hardened across the South following Reconstruction's collapse, one year before Plessy v. Ferguson (1896) constitutionalized 'separate but equal' segregation.",
+        pages: { form: "A Rondeau · from Lyrics of Lowly Life, 1896", aboutPoem: ["The poem is a rondeau, a tightly patterned French form built on a repeating refrain, and Dunbar uses that repetition to circle back, again and again, to a single extended metaphor: the smiling mask that hides pain from a world uninterested in seeing past it.", "Written in the collective \"we,\" it describes the exhausting labor of performing cheerfulness while carrying private suffering, briefly letting the mask slip with a cry near the poem's center before it is deliberately put back in place by its final line."], historyTitle: "Paul Laurence Dunbar", historyParas: ["Paul Laurence Dunbar was born in Dayton, Ohio in 1872 to parents who had both been enslaved before the Civil War. He became the first African American poet to achieve wide national literary fame, championed early on by the influential critic William Dean Howells.", "Much of Dunbar's fame during his lifetime rested on poems written in Black dialect, which white audiences of the era often preferred, while Dunbar himself felt constrained by that expectation and also wrote extensively in standard English, as he does here.", "This poem appeared in his 1896 collection Lyrics of Lowly Life, and it's frequently cited by scholars as his finest and most enduring work — a poem that can be read as a private meditation on grief, and just as easily as a wider statement about the performance of composure demanded of Black Americans in the post-Reconstruction era.", "Dunbar died in 1906 at only thirty-three, after years of declining health, but his body of work made him one of the most widely read American poets of his generation."], sourceUrl: "https://www.poetryfoundation.org/poems/44203/we-wear-the-mask", sourceDomain: "poetryfoundation.org" } },
+    ],
+    art: { title: "Under the Oaks", artist: "Edward Mitchell Bannister", year: "1876",
+      style: "linear-gradient(160deg, #4a5c33 0%, #7a8f4a 40%, #b5a15f 70%, #5c4a2e 100%)",
+      bio: "Edward Mitchell Bannister was a self-taught Rhode Island landscape painter and a founder of the Providence Art Club.",
+      context: "This painting won a first-place medal at the 1876 Centennial Exposition in Philadelphia; when Bannister arrived to claim it, judges initially tried to withdraw the prize on learning he was Black, before fellow artists forced them to honor it." },
+    timeline: [
+      { year: "1865", type: "amendment", title: "13th Amendment Ratified", desc: "Abolished slavery and involuntary servitude throughout the United States, except as punishment for a crime." },
+      { year: "1865-66", type: "legislation", title: "Black Codes Enacted", desc: "Southern states passed restrictive laws limiting the rights and freedoms of Black Americans, re-imposing many controls of slavery." },
+      { year: "1868", type: "amendment", title: "14th Amendment Ratified", desc: "Granted citizenship to all persons born or naturalized in the U.S. and guaranteed equal protection under the law." },
+      { year: "1870", type: "amendment", title: "15th Amendment Ratified", desc: "Prohibited denying the right to vote based on race, color, or previous condition of servitude." },
+      { year: "1877", type: "milestone", title: "Compromise of 1877", desc: "Federal troops withdrawn from the South, ending Reconstruction and enabling the rise of Jim Crow segregation." },
+      { year: "1896", type: "court", title: "Plessy v. Ferguson", desc: "Supreme Court upheld racial segregation under the \"separate but equal\" doctrine, legitimizing Jim Crow laws nationwide." },
+    ],
+    panelEvents: [
+      { year: "1866", type: "riot", title: "Memphis Massacre", desc: "White mobs, including police, attacked Black residents of Memphis over three days, killing dozens and burning homes, schools, and churches." },
+      { year: "1870", type: "milestone", title: "Hiram Revels Seated in the Senate", desc: "Revels became the first Black American to serve in the U.S. Senate, representing Mississippi." },
+      { year: "1873", type: "riot", title: "Colfax Massacre", desc: "A white militia killed scores of Black men in Louisiana following a disputed election, one of the deadliest instances of Reconstruction-era violence." },
+    ],
+  },
+  {
+    name: "Harlem Renaissance", years: "1918 – 1937",
+    wall: "linear-gradient(160deg, #6b2f2f, #3a1717)",
+    color1: "#7a2f2f", color2: "#3f1414",
+    blurb: "A flowering of Black poetry, music, and visual art centered in Harlem, driven by the Great Migration and a bold new assertion of Black cultural identity.",
+    books: [
+      { title: "If We Must Die", author: "Claude McKay", year: "1919",
+        bio: "Claude McKay was a Jamaican-born poet and novelist whose work helped launch the Harlem Renaissance and gave voice to militant self-defense against racial violence.",
+        context: "Written during the Red Summer of 1919, a wave of white supremacist mob violence against Black communities in over three dozen U.S. cities, following Black veterans' return from World War I demanding full citizenship.",
+        pages: { form: "A Sonnet · from The Liberator, July 1919", aboutPoem: ["This is a fourteen-line sonnet, written in the traditional English form McKay favored throughout his career, even as its subject was anything but traditional. It takes the shape of a rallying address to \"kinsmen,\" urging collective courage in the face of mob violence rather than passive submission to it.", "The poem never names a specific city, victim, or riot. That refusal of detail is part of its power: stripped of a single setting, the sonnet's imagery of the hunted turning to face the hunter has been read and re-read for over a century as a general call to dignity under attack, far outliving the summer that produced it."], historyTitle: "Claude McKay & the Red Summer", historyParas: ["Claude McKay was born in Jamaica in 1889 and moved to the United States in 1912, eventually settling in New York City and working a string of jobs, including as a railway dining-car waiter, while he wrote.", "He composed this sonnet during the summer of 1919, a period later named \"Red Summer\" by the writer James Weldon Johnson, in which white mobs carried out coordinated attacks on Black communities in more than two dozen American cities, in the aftermath of the First World War.", "The poem first appeared in the July 1919 issue of The Liberator, a socialist magazine edited by Max Eastman, and was reprinted within months in other Black-owned publications because of how widely it resonated. It was later collected in McKay's 1922 volume Harlem Shadows, a book many historians consider one of the opening works of the Harlem Renaissance.", "The poem's reach did not stop there: it has since been read into the U.S. Congressional Record and quoted by public figures far removed from its original context, a testament to how a poem written for one terrible season became a language for many others."], sourceUrl: "https://www.poetryfoundation.org/poems/44694/if-we-must-die", sourceDomain: "poetryfoundation.org" } },
+      { title: "The Weary Blues", author: "Langston Hughes", year: "1926",
+        bio: "Langston Hughes was a central figure of the Harlem Renaissance whose poetry fused jazz and blues rhythms with everyday Black life and speech.",
+        context: "Published as the Great Migration reshaped Northern cities and Harlem became a hub of Black artistic and intellectual life, with the NAACP and Urban League backing new Black literary magazines and prizes.",
+        pages: { form: "A Poem · from Opportunity magazine, 1925", aboutPoem: ["The poem is set in a Harlem bar on Lenox Avenue, where a first-person speaker listens through the night to a piano player working through a slow, sorrowful tune. Hughes lets the reader hear the musician's own sung lines rise up inside the poem, so that the blues form itself becomes part of the poem's structure rather than just its subject.", "It's often credited as one of the first poems to translate the repeating, call-and-response pattern of twelve-bar blues directly into English verse — a technique that helped establish blues poetry as its own literary tradition, and one Hughes returned to throughout his career."], historyTitle: "Langston Hughes & the Harlem Renaissance", historyParas: ["Langston Hughes wrote this poem in 1925, during the years he lived in Washington, D.C. and then Harlem, immersing himself in the city's jazz clubs and nightlife.", "It was first published in Opportunity, the magazine of the National Urban League, where it won first prize in the magazine's inaugural poetry contest that May — a contest dinner that also introduced Hughes to the writer and patron Carl Van Vechten, who helped arrange a publishing deal with Alfred A. Knopf.", "The poem gave its title to Hughes's first book, published the following year, which alongside Alain Locke's anthology The New Negro is considered one of the defining literary debuts of the Harlem Renaissance — the flowering of Black art, music, and literature centered in 1920s Harlem.", "Hughes would go on to become one of the most influential American poets of the twentieth century, prized for grounding his work in the everyday rhythms, voices, and music of Black life rather than imitating European poetic tradition."], sourceUrl: "https://www.poetryfoundation.org/poems/47347/the-weary-blues", sourceDomain: "poetryfoundation.org" } },
+    ],
+    art: { title: "Aspects of Negro Life", artist: "Aaron Douglas", year: "1934",
+      style: "linear-gradient(160deg, #2e2a4a 0%, #5a4a8c 30%, #b56a3a 60%, #2e1c14 100%)",
+      bio: "Aaron Douglas was known as the 'father of Black American art,' developing a signature style of silhouetted figures and geometric color that defined the visual language of the Harlem Renaissance.",
+      context: "Painted as a WPA-funded mural for the New York Public Library's Harlem branch during the Great Depression, tracing Black history from Africa through slavery to the urban North." },
+    timeline: [
+      { year: "1909", type: "organization", title: "NAACP Founded", desc: "The National Association for the Advancement of Colored People formed to fight for civil rights through legal action and advocacy." },
+      { year: "1910s-30s", type: "milestone", title: "The Great Migration", desc: "Millions of Black Americans moved from the rural South to cities in the North, Midwest, and West seeking work and escape from segregation." },
+      { year: "1919", type: "riot", title: "Red Summer", desc: "A wave of white-led racial violence and massacres swept dozens of American cities during the summer and fall." },
+      { year: "1921", type: "riot", title: "Tulsa Race Massacre", desc: "A white mob destroyed the prosperous Greenwood District (\"Black Wall Street\") in Tulsa, Oklahoma, killing an estimated hundreds of residents." },
+      { year: "1931", type: "court", title: "Scottsboro Boys Case", desc: "Nine Black teenagers were falsely accused of assault in Alabama; the case became a landmark fight against racial injustice in the courts." },
+    ],
+    panelEvents: [
+      { year: "1917", type: "riot", title: "East St. Louis Riots", desc: "White mobs attacked Black residents amid labor tensions and wartime migration, killing dozens and displacing thousands from their homes." },
+      { year: "1923", type: "riot", title: "Rosewood Massacre", desc: "A white mob destroyed the predominantly Black town of Rosewood, Florida, killing residents and erasing the community entirely." },
+      { year: "1926", type: "organization", title: "Negro History Week Founded", desc: "Historian Carter G. Woodson established an annual observance to promote the study of Black history, later expanded into Black History Month." },
+    ],
+  },
+  {
+    name: "Civil Rights & Black Power", years: "1954 – 1975",
+    wall: "linear-gradient(160deg, #1f4a3a, #10251c)",
+    color1: "#1f4a3a", color2: "#0f2318",
+    blurb: "Verse written amid mass mobilization for legal equality, and later, a more militant call for Black self-determination and cultural pride.",
+    books: [
+      { title: "Ballad of Birmingham", author: "Dudley Randall", year: "1965",
+        bio: "Dudley Randall was a poet and founder of Broadside Press, which published many major Black poets of the civil rights era.",
+        context: "Written in response to the 1963 bombing of the 16th Street Baptist Church in Birmingham, which killed four Black girls, an event that galvanized support for the Civil Rights Act of 1964.",
+        pages: { form: "A Ballad · Broadside Press, 1965", aboutPoem: ["Randall builds the poem as a ballad — simple rhymed quatrains, the same form long used to carry folk stories aloud from one generation to the next — shaped as a dialogue between a mother and her young daughter, who asks to leave her play and join a civil rights march downtown.", "He wrote it in direct response to the September 1963 bombing of the Sixteenth Street Baptist Church in Birmingham, Alabama, which killed four young Black girls. Without naming the church or the bombing directly until the poem's final turn, Randall lets the plain, steady rhythm of the ballad form carry a devastating irony: a decision made to protect a child instead leads her into danger."], historyTitle: "Dudley Randall & the Birmingham Bombing", historyParas: ["On September 15, 1963, a bomb planted by white supremacists exploded at the Sixteenth Street Baptist Church in Birmingham, Alabama, killing four girls — Addie Mae Collins, Denise McNair, Carole Robertson, and Cynthia Wesley — as they prepared for Sunday service. The bombing came amid dozens of unsolved racially motivated bombings in the city, which had earned the grim nickname \"Bombingham.\"", "Dudley Randall, a poet and librarian in Detroit, published this poem as a broadside — a single large printed sheet, historically used to circulate news, ballads, and protest verse quickly and cheaply — in 1965. It was the very first title released by Broadside Press, the publishing house Randall founded that same year.", "Broadside Press went on to become one of the most influential publishers of Black poetry in the country, giving early platforms to many poets associated with the Black Arts Movement. Randall later collected this poem in his own anthology, The Black Poets, and it remains one of the most widely taught poems about the civil rights era."], sourceUrl: "https://www.poetryfoundation.org/poems/46562/ballad-of-birmingham", sourceDomain: "poetryfoundation.org" } },
+      { title: "Black Art", author: "Amiri Baraka", year: "1966",
+        bio: "Amiri Baraka (formerly LeRoi Jones) was a poet and playwright who founded the Black Arts Movement, calling for art that directly served Black political liberation.",
+        context: "Published the year after the Watts uprising of 1965 and amid the rise of the Black Power movement and the founding of the Black Panther Party in 1966.",
+        pages: { form: "A Manifesto in Verse · Liberator magazine, January 1966", aboutPoem: ["Written in urgent free verse with no fixed meter or rhyme, the poem argues that art should act as a direct instrument of Black political power rather than something polite or decorative. Baraka repeatedly imagines poems as physical weapons, capable of confronting oppression the way a fist or a gun might, and closes by calling for a poetry, and a world, entirely made and spoken by Black people.", "Its confrontational language and imagery made it controversial from the start, and it has been debated by critics and scholars ever since — but its influence on a generation of writers who followed is not in dispute."], historyTitle: "Amiri Baraka & the Black Arts Movement", historyParas: ["Amiri Baraka, writing at the time under his birth name LeRoi Jones, composed this poem in 1965, in the weeks after the assassination of Malcolm X, a loss that pushed Baraka toward a more radical political and artistic path. He soon moved to Harlem and founded the Black Arts Repertory Theatre/School.", "The poem was first performed publicly on the jazz drummer Sonny Murray's 1965 album Sonny's Time Now, before appearing in print in the January 1966 issue of Liberator magazine. It quickly became the de facto manifesto of the Black Arts Movement, the artistic wing of the broader Black Power movement, inspiring a generation of poets including Nikki Giovanni and Sonia Sanchez.", "Baraka remained a prominent, often polarizing figure in American letters for decades afterward, serving briefly as New Jersey's poet laureate before the position was eliminated by the state legislature in 2003 amid controversy over a later poem. He died in 2014, widely recognized as the central architect of the Black Arts Movement."], sourceUrl: "https://poemanalysis.com/amiri-baraka/black-art/", sourceDomain: "poemanalysis.com" } },
+    ],
+    art: { title: "American People Series #20: Die", artist: "Faith Ringgold", year: "1967",
+      style: "linear-gradient(160deg, #8c1c1c 0%, #4a1414 40%, #d9c67a 65%, #1a1a1a 100%)",
+      bio: "Faith Ringgold is a painter and quilt artist whose work confronts race and gender in American life; she later became known for her narrative story quilts.",
+      context: "Painted during the 1967 uprisings in Newark and Detroit, sparked by police violence and economic inequality; Ringgold depicted graphic interracial violence to force viewers to confront the era's racial unrest directly." },
+    timeline: [
+      { year: "1954", type: "court", title: "Brown v. Board of Education", desc: "Supreme Court unanimously ruled that racial segregation in public schools was unconstitutional, overturning Plessy v. Ferguson." },
+      { year: "1955-56", type: "protest", title: "Montgomery Bus Boycott", desc: "A 381-day boycott sparked by Rosa Parks' arrest led to the desegregation of Montgomery's public buses." },
+      { year: "1963", type: "protest", title: "March on Washington", desc: "Over 250,000 people gathered in Washington, D.C., where Dr. Martin Luther King Jr. delivered his \"I Have a Dream\" speech." },
+      { year: "1964", type: "legislation", title: "Civil Rights Act of 1964", desc: "Outlawed discrimination based on race, color, religion, sex, or national origin in employment and public accommodations." },
+      { year: "1965", type: "legislation", title: "Voting Rights Act of 1965", desc: "Prohibited racial discrimination in voting, banning literacy tests and providing federal oversight of elections in discriminatory jurisdictions." },
+      { year: "1966", type: "organization", title: "Black Panther Party Founded", desc: "Formed in Oakland to address police brutality and promote Black self-determination through community programs and activism." },
+      { year: "1968", type: "milestone", title: "Assassination of Dr. King", desc: "Martin Luther King Jr. was assassinated in Memphis, Tennessee, sparking uprisings in over 100 cities." },
+    ],
+    panelEvents: [
+      { year: "1961", type: "protest", title: "Freedom Rides", desc: "Activists rode interstate buses into the segregated South to test enforcement of desegregation rulings, facing mob violence and arrests." },
+      { year: "1963", type: "riot", title: "16th Street Baptist Church Bombing", desc: "A Ku Klux Klan bombing in Birmingham killed four Black girls, becoming a galvanizing tragedy for the movement." },
+      { year: "1967", type: "court", title: "Loving v. Virginia", desc: "The Supreme Court struck down state laws banning interracial marriage as unconstitutional." },
+      { year: "1968", type: "milestone", title: "Kerner Commission Report", desc: "A federal commission concluded that white racism, not Black militancy, was the primary cause of the era's urban uprisings." },
+    ],
+  },
+  {
+    name: "Post–Civil Rights Era", years: "1976 – 2012",
+    wall: "linear-gradient(160deg, #3a2f5c, #1e1830)",
+    color1: "#3a2f5c", color2: "#1c1730",
+    blurb: "Verse reckoning with slavery's long memory and Black life after legal segregation ended, even as structural inequality persisted.",
+    books: [
+      { title: "Won't You Celebrate with Me", author: "Lucille Clifton", year: "1993",
+        bio: "Lucille Clifton was a poet and educator whose spare, powerful verse centered Black womanhood, survival, and self-invention.",
+        context: "Published during a period of rising mass incarceration under early-1990s crime policy, as Black feminist and womanist thought shaped a new generation of poets." },
+      { title: "Still I Rise", author: "Maya Angelou", year: "1978",
+        bio: "Maya Angelou was a poet, memoirist, and civil rights activist who worked with both Martin Luther King Jr. and Malcolm X before becoming one of America's most celebrated writers.",
+        context: "Published as affirmative action policies faced early legal challenges, foreshadowing the 1978 Supreme Court case Regents of the University of California v. Bakke." },
+    ],
+    art: { title: "Untitled", artist: "Jean-Michel Basquiat", year: "1982",
+      style: "linear-gradient(160deg, #d9c67a 0%, #2a2a2a 35%, #8c1c1c 65%, #1a1a1a 100%)",
+      bio: "Jean-Michel Basquiat rose from New York's downtown street art scene to become one of the era's most celebrated painters, fusing text, symbols, and raw figuration.",
+      context: "Painted at the height of Basquiat's career, as Black artists gained new visibility in a gallery system that had long excluded them, while cities like New York faced disinvestment and rising inequality in Black neighborhoods." },
+    timeline: [
+      { year: "1978", type: "court", title: "Regents of UC v. Bakke", desc: "Supreme Court upheld affirmative action in principle but ruled rigid racial quotas in admissions unconstitutional." },
+      { year: "1980s", type: "legislation", title: "War on Drugs Escalates", desc: "Federal and state policy expanded mandatory minimum sentencing, contributing to a sharp rise in Black incarceration rates." },
+      { year: "1992", type: "riot", title: "Los Angeles Uprising", desc: "Widespread unrest followed the acquittal of officers filmed beating Rodney King, exposing tensions over police violence." },
+      { year: "1995", type: "protest", title: "Million Man March", desc: "Hundreds of thousands of Black men gathered in Washington, D.C. to promote unity, family values, and civic responsibility." },
+      { year: "2008", type: "milestone", title: "Election of Barack Obama", desc: "Barack Obama was elected the first Black President of the United States." },
+    ],
+    panelEvents: [
+      { year: "1986", type: "legislation", title: "Anti-Drug Abuse Act", desc: "Established a 100-to-1 sentencing disparity between crack and powder cocaine offenses, driving disproportionate incarceration of Black defendants." },
+      { year: "1991", type: "milestone", title: "Rodney King Beating", desc: "The videotaped beating of Rodney King by Los Angeles police officers became a national symbol of police brutality against Black Americans." },
+      { year: "1994", type: "legislation", title: "1994 Crime Bill", desc: "The Violent Crime Control and Law Enforcement Act expanded policing and prison funding, accelerating mass incarceration trends." },
+    ],
+  },
+  {
+    name: "Black Lives Matter Era", years: "2013 – Present",
+    wall: "linear-gradient(160deg, #8c1c1c, #451111)",
+    color1: "#8c1c1c", color2: "#420f0f",
+    blurb: "Verse and art responding to a new wave of activism against police violence and mass incarceration, amplified by social media and youth organizing.",
+    books: [
+      { title: "Citizen: An American Lyric", author: "Claudia Rankine", year: "2014",
+        bio: "Claudia Rankine is a poet whose genre-blending work combines lyric poetry, essay, and image to examine everyday and systemic racism.",
+        context: "Published the same year as the police killing of Michael Brown in Ferguson, Missouri, and the resulting protests; the Black Lives Matter movement, founded in 2013 after George Zimmerman's acquittal in the killing of Trayvon Martin, was gaining national force." },
+      { title: "The Tradition", author: "Jericho Brown", year: "2019",
+        bio: "Jericho Brown is a poet whose work explores Black identity, masculinity, and violence, and who invented the 'duplex' poetic form.",
+        context: "Published amid continued national reckoning over police killings and the expansion of Black Lives Matter chapters nationwide, ahead of the 2020 protests following George Floyd's murder." },
+    ],
+    art: { title: "Analogous Colors", artist: "Titus Kaphar", year: "2020",
+      style: "linear-gradient(160deg, #1a1a1a 0%, #8c1c1c 30%, #d9c67a 55%, #1a1a1a 100%)",
+      bio: "Titus Kaphar is a painter and sculptor known for reworking historical portraiture to surface erased or overlooked Black figures.",
+      context: "Created for a June 2020 TIME magazine cover depicting a Black mother holding the outline of an absent child, painted in direct response to George Floyd's murder and the nationwide Black Lives Matter protests that followed." },
+    timeline: [
+      { year: "2013", type: "organization", title: "Black Lives Matter Founded", desc: "Movement founded after the acquittal of George Zimmerman in the shooting death of Trayvon Martin, growing into a national organizing force." },
+      { year: "2014", type: "protest", title: "Ferguson Protests", desc: "The killing of Michael Brown by police sparked sustained protests and a national reckoning over policing and race." },
+      { year: "2020", type: "protest", title: "George Floyd Protests", desc: "The killing of George Floyd by Minneapolis police sparked what are considered among the largest protest movements in U.S. history." },
+      { year: "2021", type: "legislation", title: "Juneteenth National Holiday", desc: "Juneteenth, marking the end of slavery in the U.S., was established as a federal holiday." },
+      { year: "2022", type: "milestone", title: "Ketanji Brown Jackson Confirmed", desc: "Became the first Black woman to serve as a U.S. Supreme Court Justice." },
+    ],
+    panelEvents: [
+      { year: "2012", type: "milestone", title: "Killing of Trayvon Martin", desc: "An unarmed Black teenager was fatally shot in Florida by a neighborhood watch volunteer, an event that helped catalyze the Black Lives Matter movement." },
+      { year: "2016", type: "protest", title: "Colin Kaepernick's Kneeling Protest", desc: "NFL quarterback Colin Kaepernick began kneeling during the national anthem to protest police brutality and racial injustice." },
+      { year: "2021", type: "court", title: "Conviction of Derek Chauvin", desc: "The former Minneapolis police officer was convicted of murder in the killing of George Floyd, a rare instance of accountability for police violence." },
+    ],
+  },
+];
 
+// ─── Zone layout (exact from source) ─────────────────────────────────────────
+const ZONES = [
+  { left: "0%",  top: "0%",  width: "26%", height: "42%", bars: 3, slim: false },
+  { left: "48%", top: "0%",  width: "26%", height: "42%", bars: 4, slim: false },
+  { left: "0%",  top: "58%", width: "26%", height: "42%", bars: 3, slim: false },
+  { left: "48%", top: "58%", width: "26%", height: "42%", bars: 4, slim: false },
+  { left: "88%", top: "2%",  width: "10%", height: "34%", bars: 1, slim: true },
+  { left: "88%", top: "64%", width: "10%", height: "34%", bars: 1, slim: true },
+];
+
+// ─── Injected CSS (exact from source) ────────────────────────────────────────
+const CSS = `
+  .exhibit-root { font-family: Georgia, 'Times New Roman', serif; background: #100d09; color: #e8dfc9; min-height: 100vh; padding: 30px 16px 60px; }
+  .exhibit-title { text-align: center; font-size: 2rem; letter-spacing: 2px; color: #d4af6a; margin-bottom: 4px; text-transform: uppercase; }
+  .exhibit-subtitle { text-align: center; color: #a89a7c; font-style: italic; font-size: 0.92rem; margin-bottom: 8px; }
+  .exhibit-instructions { text-align: center; color: #756a52; font-size: 0.76rem; margin-bottom: 28px; }
+  .floorplan-wrap { max-width: 1100px; margin: 0 auto; }
+  .floorplan { position: relative; width: 100%; aspect-ratio: 1180 / 620; background: #adc48f; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); overflow: hidden; }
+  .zone { position: absolute; background: #4d6d4a; border-radius: 6px; cursor: pointer; display: flex; flex-direction: column; align-items: center; padding: 6% 4% 4%; transition: transform 0.15s ease, filter 0.15s ease; box-shadow: inset 0 0 0 2px rgba(0,0,0,0.15); }
+  .zone:hover { filter: brightness(1.15); transform: scale(1.015); z-index: 5; }
+  .zone-label { font-size: 0.72rem; letter-spacing: 0.6px; color: #f0e9d0; text-align: center; margin-bottom: 2px; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+  .zone-years { font-size: 0.6rem; color: rgba(255,255,255,0.65); margin-bottom: 8%; }
+  .shelf-bars { display: flex; gap: 6%; flex: 1; width: 100%; justify-content: center; }
+  .shelf-bar { width: 100%; max-width: 34px; background: linear-gradient(90deg, #7a4f28, #9c6b3a 40%, #7a4f28); border: 1.5px solid #4a2f14; border-radius: 2px; }
+  .zone.slim { padding: 10% 12% 6%; }
+  .zone.slim .shelf-bars { max-width: 40px; margin: 0 auto; }
+  .lounge { position: absolute; left: 74%; top: -6%; width: 40%; height: 112%; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #c97a3f, #a85a2a 70%, #8c4a20); cursor: pointer; box-shadow: inset 0 0 40px rgba(0,0,0,0.3); z-index: 1; }
+  .lounge:hover { filter: brightness(1.1); }
+  .lounge-label { position: absolute; top: 8%; left: 50%; transform: translateX(-50%); font-size: 0.75rem; letter-spacing: 1px; color: #fff2de; text-shadow: 0 1px 3px rgba(0,0,0,0.5); text-align: center; white-space: nowrap; }
+  .table-round { position: absolute; width: 44px; height: 44px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #7a5636, #4d3620); box-shadow: 0 4px 8px rgba(0,0,0,0.4); }
+  .chair { position: absolute; width: 14px; height: 18px; background: #6b5a45; border: 1px solid #3a2e1c; border-radius: 2px; }
+  .entrance-mat { position: absolute; left: 32%; top: 0%; width: 9%; height: 6%; background: #cdadd1; border-radius: 0 0 6px 6px; z-index: 2; }
+  .reading-room { position: absolute; left: 37%; top: 44%; width: 18%; height: 12%; background: #6b6458; border-radius: 4px; cursor: pointer; display: grid; grid-template-columns: repeat(2, 1fr); gap: 6%; padding: 8%; box-shadow: inset 0 0 0 2px rgba(0,0,0,0.2); }
+  .reading-room:hover { filter: brightness(1.15); }
+  .rr-table { background: #4a4438; border: 1px solid #2c2820; border-radius: 2px; }
+  .reading-room-label { position: absolute; left: 37%; top: 38%; width: 18%; text-align: center; font-size: 0.62rem; color: rgba(255,255,255,0.7); letter-spacing: 0.5px; }
+
+  .full-overlay { position: fixed; inset: 0; background: rgba(6,5,3,0.94); z-index: 200; overflow-y: auto; padding: 30px 16px 60px; animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes popIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; background: #d4af6a; color: #241c0f; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; margin: 0 auto 20px; display: flex; width: fit-content; font-family: Georgia, serif; letter-spacing: 0.4px; }
+  .back-btn:hover { background: #e2c184; }
+  .room { max-width: 960px; margin: 0 auto 50px auto; border-radius: 6px; overflow: hidden; box-shadow: 0 14px 40px rgba(0,0,0,0.55); }
+  .wall { padding: 30px 34px 20px; position: relative; }
+  .wall::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 14px; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.35)); pointer-events: none; }
+  .room-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+  .era-name { font-size: 1.25rem; color: #f3e6c4; letter-spacing: 1px; }
+  .era-years-label { font-size: 0.8rem; color: rgba(255,255,255,0.65); }
+  .era-blurb { color: rgba(255,255,255,0.78); font-size: 0.85rem; line-height: 1.5; max-width: 640px; margin-bottom: 20px; }
+  .wall-content { display: flex; gap: 26px; align-items: flex-start; margin-bottom: 22px; flex-wrap: wrap; }
+  .frame-wrap { cursor: pointer; text-align: center; }
+  .frame { width: 150px; height: 190px; padding: 10px; background: linear-gradient(135deg, #c9a24a, #7a5b23 40%, #c9a24a 60%, #6b4d1c); border-radius: 2px; box-shadow: 0 10px 22px rgba(0,0,0,0.5), inset 0 0 0 2px rgba(0,0,0,0.3); transition: transform 0.2s ease; }
+  .frame-wrap:hover .frame { transform: translateY(-6px) scale(1.02); }
+  .frame-inner { width: 100%; height: 100%; box-shadow: inset 0 0 0 2px rgba(0,0,0,0.4), inset 0 2px 10px rgba(0,0,0,0.45); position: relative; overflow: hidden; }
+  .art-caption { margin-top: 8px; font-size: 0.68rem; color: rgba(255,255,255,0.75); max-width: 150px; line-height: 1.3; }
+  .art-caption b { display: block; color: #e8dfc9; font-size: 0.72rem; }
+  .didactic-panel { flex: 1 1 260px; max-width: 360px; background: #f7f1e1; color: #2c2416; border-radius: 3px; padding: 16px 20px; box-shadow: 0 10px 22px rgba(0,0,0,0.4); border-left: 4px solid #9a6b2f; cursor: pointer; }
+  .didactic-panel .dp-title { font-size: 0.95rem; font-weight: bold; color: #6b2e1f; margin-bottom: 2px; }
+  .didactic-panel .dp-sub { font-style: italic; color: #6e6248; font-size: 0.8rem; margin-bottom: 4px; }
+  .didactic-panel .dp-label { font-size: 0.6rem; letter-spacing: 1.2px; text-transform: uppercase; color: #9a6b2f; border-bottom: 1px solid #d8c9a3; padding-bottom: 4px; margin: 12px 0 10px; }
+  .dp-evdesc { font-size: 0.74rem; line-height: 1.4; color: #3a2a1c; }
+  .bookcase { background: linear-gradient(180deg, #5a3d22, #3f2a17); padding: 16px 16px 0; border-radius: 4px 4px 0 0; box-shadow: inset 0 0 0 3px rgba(0,0,0,0.25), 0 6px 18px rgba(0,0,0,0.4); }
+  .books-row { display: flex; gap: 12px; align-items: flex-end; padding: 14px 10px 0; flex-wrap: wrap; }
+  .shelf-board { height: 22px; margin: 0 -16px; background: repeating-linear-gradient(90deg, #7a5230 0px, #6e492b 3px, #7a5230 6px), linear-gradient(180deg, #8a5f36, #4e3419); box-shadow: inset 0 3px 4px rgba(255,255,255,0.08), inset 0 -6px 10px rgba(0,0,0,0.5), 0 6px 8px rgba(0,0,0,0.45); border-bottom: 2px solid #2c1c0d; }
+  .book-spine { width: 46px; height: 178px; border-radius: 2px 5px 5px 2px; cursor: pointer; display: flex; align-items: flex-start; justify-content: center; padding-top: 12px; position: relative; box-shadow: 2px 3px 6px rgba(0,0,0,0.5), inset -4px 0 8px rgba(0,0,0,0.35), inset 3px 0 3px rgba(255,255,255,0.15); transition: transform 0.18s ease; overflow: hidden; }
+  .book-spine:hover { transform: translateY(-8px); }
+  .book-spine::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(180deg, transparent 0px, transparent 24px, rgba(0,0,0,0.3) 24px, rgba(0,0,0,0.3) 27px, transparent 27px, transparent 30px); pointer-events: none; }
+  .book-spine::after { content: ''; position: absolute; top: 0; bottom: 0; left: 4px; width: 3px; background: rgba(255,255,255,0.18); pointer-events: none; }
+  .spine-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.62rem; font-weight: bold; letter-spacing: 0.4px; color: #f2e6c2; text-shadow: 0 1px 1px rgba(0,0,0,0.5); z-index: 2; }
+  .bookend { flex: 0 0 auto; width: 38px; height: 178px; cursor: pointer; border-radius: 3px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; position: relative; background: linear-gradient(160deg, #2c2418 0%, #17130c 100%); box-shadow: 2px 3px 6px rgba(0,0,0,0.55), inset -4px 0 8px rgba(0,0,0,0.4), inset 3px 0 3px rgba(255,255,255,0.08); border: 2px solid rgba(0,0,0,0.45); transition: transform 0.18s ease, filter 0.18s ease; }
+  .bookend:hover { transform: translateY(-8px); filter: brightness(1.25); }
+  .bookend-label { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.56rem; letter-spacing: 0.6px; text-transform: uppercase; color: #d4af6a; white-space: nowrap; }
+  .overlay { position: fixed; inset: 0; background: rgba(8,6,4,0.9); display: flex; align-items: center; justify-content: center; z-index: 300; padding: 20px; animation: fadeIn 0.2s ease; }
+  .cover-card { width: 290px; position: relative; animation: popIn 0.22s ease; }
+  .cover-face { height: 410px; border-radius: 3px; padding: 24px 22px; color: #fff; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 25px 55px rgba(0,0,0,0.6), inset 0 0 40px rgba(0,0,0,0.25); }
+  .cover-face::before { content: ''; position: absolute; inset: 12px; border: 1px solid rgba(255,255,255,0.4); pointer-events: none; }
+  .cover-face::after { content: ''; position: absolute; top: 0; bottom: 0; right: 0; width: 14px; background: repeating-linear-gradient(180deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 2px, rgba(255,255,255,0.06) 2px, rgba(255,255,255,0.06) 4px); }
+  .cover-era-tag { font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.85; }
+  .cover-title { font-size: 1.35rem; line-height: 1.3; font-weight: bold; margin: 12px 0 6px; text-shadow: 0 2px 6px rgba(0,0,0,0.35); }
+  .cover-author { font-size: 0.95rem; font-style: italic; opacity: 0.95; }
+  .cover-year { font-size: 0.78rem; opacity: 0.8; margin-top: 4px; }
+  .cover-hint { font-size: 0.66rem; opacity: 0.75; }
+  .bookmark-tab { position: absolute; top: 0; right: 22px; width: 32px; height: 58px; background: #b5301f; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%); cursor: pointer; box-shadow: -2px 3px 6px rgba(0,0,0,0.35); display: flex; align-items: flex-start; justify-content: center; padding-top: 8px; transition: transform 0.15s ease, background 0.15s ease; z-index: 5; }
+  .bookmark-tab:hover { transform: translateY(4px); background: #d1432e; }
+  .close-x { position: absolute; top: -14px; left: -14px; width: 32px; height: 32px; border-radius: 50%; border: none; font-size: 1rem; cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.4); background: #e8dfc9; color: #24201a; }
+  .info-close { position: absolute; top: -14px; left: -14px; width: 32px; height: 32px; border-radius: 50%; border: none; font-size: 1rem; cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.4); background: #6b2e1f; color: #f7f1e1; }
+  .info-card { width: min(560px, 90vw); max-height: 80vh; overflow-y: auto; background: #f7f1e1; color: #2c2416; border-radius: 6px; padding: 30px 32px; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.6); animation: popIn 0.22s ease; }
+  .info-card h2 { font-size: 1.25rem; color: #6b2e1f; margin-bottom: 2px; }
+  .info-author-line { font-style: italic; color: #6e6248; margin-bottom: 16px; font-size: 0.9rem; }
+  .info-section { margin-bottom: 16px; }
+  .info-section h3 { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: #9a6b2f; border-bottom: 1px solid #d8c9a3; padding-bottom: 4px; margin-bottom: 8px; }
+  .info-section p { font-size: 0.88rem; line-height: 1.6; }
+  .art-card { width: min(420px, 92vw); position: relative; animation: popIn 0.22s ease; }
+  .art-frame-big { padding: 16px; background: linear-gradient(135deg, #c9a24a, #7a5b23 40%, #c9a24a 60%, #6b4d1c); border-radius: 3px; box-shadow: 0 25px 55px rgba(0,0,0,0.6); }
+  .art-canvas-big { height: 320px; box-shadow: inset 0 0 0 2px rgba(0,0,0,0.4), inset 0 2px 14px rgba(0,0,0,0.45); position: relative; overflow: hidden; }
+  .art-plaque { margin-top: 14px; background: #2c2416; color: #f0e6cc; padding: 12px 16px; border-radius: 3px; text-align: center; }
+  .art-plaque .t { font-size: 0.95rem; font-weight: bold; }
+  .art-plaque .s { font-size: 0.76rem; opacity: 0.8; margin-top: 2px; }
+  .art-plaque button { margin-top: 10px; background: #9a6b2f; color: #fff; border: none; padding: 7px 14px; border-radius: 3px; font-size: 0.72rem; letter-spacing: 0.5px; cursor: pointer; text-transform: uppercase; font-family: Georgia, serif; }
+  .art-plaque button:hover { background: #b5813d; }
+  .gallery-grid-wrap { max-width: 900px; margin: 0 auto; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 22px; padding: 10px; }
+  .gallery-tile { cursor: pointer; text-align: center; }
+  .gallery-tile .frame { width: 100%; height: 170px; margin: 0 auto; }
+  .gallery-tile .art-caption { max-width: none; }
+  .timeline-card { width: min(640px, 92vw); max-height: 82vh; overflow-y: auto; background: #f7f1e1; color: #2c2416; border-radius: 6px; padding: 30px 32px; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.6); animation: popIn 0.22s ease; }
+  .timeline-card h2 { font-size: 1.25rem; color: #6b2e1f; margin-bottom: 2px; }
+  .timeline-era-line { font-style: italic; color: #6e6248; margin-bottom: 18px; font-size: 0.9rem; }
+  .tl-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 22px; font-size: 0.66rem; color: #6e6248; }
+  .tl-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .tl-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .tl-track { position: relative; padding-left: 4px; }
+  .tl-track::before { content: ''; position: absolute; left: 21px; top: 4px; bottom: 22px; width: 2px; background: #d8c9a3; }
+  .tl-event { display: flex; gap: 14px; margin-bottom: 20px; position: relative; }
+  .tl-event:last-child { margin-bottom: 0; }
+  .tl-icon { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1; box-shadow: 0 3px 8px rgba(0,0,0,0.25); border: 2px solid #f7f1e1; }
+  .tl-icon svg { width: 20px; height: 20px; }
+  .tl-body { padding-top: 2px; }
+  .tl-year { font-weight: bold; color: #a8461e; font-size: 0.82rem; letter-spacing: 0.5px; }
+  .tl-type { display: inline-block; font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.5px; padding: 2px 8px; border-radius: 8px; margin-left: 6px; color: #fff; position: relative; top: -1px; }
+  .tl-title { font-weight: bold; margin: 3px 0; font-size: 0.98rem; }
+  .tl-desc { font-size: 0.85rem; line-height: 1.45; color: #3a2a1c; }
+  .about-card { max-width: 480px; margin: 0 auto; text-align: center; }
+`;
+
+// ─── SVG Icons ────────────────────────────────────────────────────────────────
+
+function TypeIconSVG({ type }: { type: string }) {
+  const paths: Record<string, React.ReactNode> = {
+    legislation: <><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></>,
+    amendment: <><path d="M12 3v18M6 8l6-5 6 5M4 21h16"/></>,
+    court: <><path d="M12 2l2 5h-4z"/><circle cx="12" cy="12" r="1"/><path d="M4 8h16M6 8l-3 6h6zM18 8l-3 6h6z"/><path d="M12 8v12M8 20h8"/></>,
+    protest: <><path d="M8 3v6M8 3h6l-2 3 2 3H8"/><path d="M8 21v-8"/><circle cx="16" cy="15" r="3"/><path d="M16 18v3M14 21h4"/></>,
+    riot: <><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></>,
+    organization: <><circle cx="12" cy="8" r="3"/><circle cx="5" cy="16" r="2.5"/><circle cx="19" cy="16" r="2.5"/><path d="M12 11v2M9 15l-2.5 1M15 15l2.5 1"/></>,
+    milestone: <><path d="M5 21V4M5 4h11l-3 4 3 4H5"/></>,
+  };
   return (
-    <div
-      className="flex flex-col items-center gap-3 cursor-pointer group"
-      onClick={onClick}
-    >
-      <div
-        className="transition-all duration-300 group-hover:scale-[1.025] group-hover:brightness-105"
-        style={{
-          borderColor: frame.outer,
-          borderWidth: 10,
-          borderStyle: "solid",
-          boxShadow: `inset 0 0 0 4px ${frame.inner}, 6px 14px 36px rgba(0,0,0,0.38), 2px 4px 10px rgba(0,0,0,0.22)`,
-          padding: 10,
-          background: frame.mat,
-        }}
-      >
-        <div style={{ width: baseW, height: artH }}>
-          <AbstractArt id={piece.id} className="w-full h-full block" />
-        </div>
-      </div>
-      <div className="text-center space-y-0.5" style={{ maxWidth: baseW + 24 }}>
-        <p
-          className="text-muted-foreground uppercase tracking-widest"
-          style={{ fontFamily: "'DM Mono', monospace", fontSize: 9 }}
-        >
-          {piece.artist} · {piece.year}
-        </p>
-        <p
-          className="text-sm leading-tight italic"
-          style={{ fontFamily: "'Lora', serif" }}
-        >
-          {piece.title}
-        </p>
-      </div>
-    </div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+      {paths[type] || paths.milestone}
+    </svg>
   );
 }
 
-// ─── BookSpine ────────────────────────────────────────────────────────────────
-
-function BookSpine({ book, onClick }: { book: Book; onClick: () => void }) {
+function BookendSVG() {
   return (
-    <div
-      onClick={onClick}
-      title={`${book.title} — ${book.author}`}
-      className="relative cursor-pointer flex-shrink-0 transition-all duration-200 hover:-translate-y-3 hover:brightness-110"
-      style={{
-        width: book.width,
-        height: book.height,
-        backgroundColor: book.spineColor,
-        boxShadow: "inset -2px 0 4px rgba(0,0,0,0.2), inset 2px 0 3px rgba(255,255,255,0.08)",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 3,
-          background: "rgba(255,255,255,0.12)",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "10px 2px",
-        }}
-      >
-        <span
-          style={{
-            writingMode: "vertical-rl",
-            textOrientation: "mixed",
-            transform: "rotate(180deg)",
-            color: book.textColor,
-            fontSize: 9,
-            fontFamily: "'Lora', serif",
-            lineHeight: 1.15,
-            textAlign: "center",
-            overflow: "hidden",
-            whiteSpace: "normal",
-            wordBreak: "break-word",
-            maxHeight: book.height - 20,
-          }}
-        >
-          {book.title}
+    <svg viewBox="0 0 24 24" fill="none" stroke="#d4af6a" strokeWidth="1.8">
+      <path d="M4 19V5a1 1 0 011-1h6a1 1 0 011 1v14M4 19h8M4 19H2M12 19h2M18 5a2 2 0 012 2v10a2 2 0 01-2 2h-2V5h2z"/>
+    </svg>
+  );
+}
+
+function TlLegend() {
+  return (
+    <div className="tl-legend">
+      {Object.keys(TL).map(k => (
+        <span key={k}>
+          <span className="tl-dot" style={{ background: TC[k] }} />
+          {TL[k]}
         </span>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: 3,
-          background: "rgba(0,0,0,0.25)",
-        }}
-      />
+      ))}
     </div>
   );
 }
 
-// ─── Shelf ────────────────────────────────────────────────────────────────────
-
-function Shelf({ books, onBookClick }: { books: Book[]; onBookClick: (b: Book) => void }) {
+function TlTrack({ events }: { events: TEvent[] }) {
   return (
-    <div>
-      <div
-        className="flex items-end gap-[2px] overflow-x-auto"
-        style={{
-          background: "linear-gradient(to bottom, #1C1008, #140C04)",
-          minHeight: 260,
-          paddingTop: 24,
-          paddingLeft: 24,
-          paddingRight: 24,
-          paddingBottom: 0,
-          scrollbarWidth: "none",
-        }}
-      >
-        {books.map((book) => (
-          <BookSpine key={book.id} book={book} onClick={() => onBookClick(book)} />
-        ))}
-      </div>
-      <div
-        style={{
-          height: 18,
-          background: "linear-gradient(to bottom, #6A3C18 0%, #4A2810 55%, #3A2010 100%)",
-          boxShadow: "0 6px 18px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.08)",
-        }}
-      />
+    <div className="tl-track">
+      {events.map((ev, i) => (
+        <div className="tl-event" key={i}>
+          <div className="tl-icon" style={{ background: TC[ev.type] }}>
+            <TypeIconSVG type={ev.type} />
+          </div>
+          <div className="tl-body">
+            <div className="tl-year">
+              {ev.year}
+              <span className="tl-type" style={{ background: TC[ev.type] }}>{ev.type}</span>
+            </div>
+            <div className="tl-title">{ev.title}</div>
+            <div className="tl-desc">{ev.desc}</div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
 
-// ─── Modal Panels ─────────────────────────────────────────────────────────────
+// ─── Floor Plan ───────────────────────────────────────────────────────────────
 
-function BookPanel({
-  book,
-  expanded,
-  onExpand,
-  onClose,
-}: {
-  book: Book;
-  expanded: boolean;
-  onExpand: () => void;
-  onClose: () => void;
+function FloorPlan({ onEnterEra, onOpenGallery, onOpenAbout }: {
+  onEnterEra: (i: number) => void;
+  onOpenGallery: () => void;
+  onOpenAbout: () => void;
 }) {
   return (
-    <>
-      <div className="flex items-center justify-between px-8 pt-7 pb-0">
-        <span
-          className="text-muted-foreground uppercase tracking-widest"
-          style={{ fontFamily: "'DM Mono', monospace", fontSize: 9 }}
-        >
-          Poetry · {book.year}
-        </span>
-        <button
-          onClick={onClose}
-          className="p-1.5 hover:bg-foreground/5 transition-colors"
-          aria-label="Close"
-        >
-          <X size={13} />
-        </button>
-      </div>
-
-      <div className="flex justify-center px-8 py-6">
-        <div className="flex" style={{ width: 130 }}>
+    <div className="floorplan-wrap">
+      <div className="floorplan">
+        {ZONES.map((z, i) => (
           <div
-            style={{
-              width: 14,
-              flexShrink: 0,
-              background: "linear-gradient(to right, rgba(0,0,0,0.35), rgba(0,0,0,0))",
-            }}
-          />
-          <div
-            className="flex-1 flex flex-col items-center justify-center py-10 px-4"
-            style={{
-              backgroundColor: book.spineColor,
-              minHeight: 170,
-              boxShadow: "4px 10px 28px rgba(0,0,0,0.32)",
-            }}
+            key={i}
+            className={`zone${z.slim ? " slim" : ""}`}
+            style={{ left: z.left, top: z.top, width: z.width, height: z.height }}
+            onClick={() => onEnterEra(i)}
           >
-            <p
-              className="text-center uppercase tracking-widest mb-3 opacity-65"
-              style={{ color: book.textColor, fontFamily: "'DM Mono', monospace", fontSize: 7 }}
-            >
-              {book.author}
-            </p>
-            <p
-              className="text-center leading-tight"
-              style={{ color: book.textColor, fontFamily: "'Playfair Display', serif", fontSize: 13, fontWeight: 600 }}
-            >
-              {book.title}
-            </p>
-            <div className="mt-4 w-8 h-px opacity-35" style={{ background: book.textColor }} />
-            <p
-              className="text-center mt-2 opacity-45"
-              style={{ color: book.textColor, fontFamily: "'DM Mono', monospace", fontSize: 7 }}
-            >
-              {book.year}
-            </p>
+            <div className="zone-label">{eras[i].name}</div>
+            <div className="zone-years">{eras[i].years}</div>
+            <div className="shelf-bars">
+              {Array.from({ length: z.bars }).map((_, j) => (
+                <div key={j} className="shelf-bar" />
+              ))}
+            </div>
           </div>
-        </div>
-      </div>
-
-      <div className="px-8 pb-2">
-        <h2
-          className="text-2xl leading-tight mb-1"
-          style={{ fontFamily: "'Playfair Display', serif" }}
-        >
-          {book.title}
-        </h2>
-        <p
-          className="text-muted-foreground"
-          style={{ fontFamily: "'DM Mono', monospace", fontSize: 11 }}
-        >
-          {book.author}
-        </p>
-      </div>
-
-      <div className="px-8 py-3 flex flex-wrap gap-1.5">
-        {book.tags.map((tag) => (
-          <span
-            key={tag}
-            className="border border-border text-muted-foreground uppercase tracking-wider px-2 py-0.5"
-            style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, letterSpacing: "0.1em" }}
-          >
-            {tag}
-          </span>
         ))}
-      </div>
-
-      <div className="mx-8 border-t border-border" />
-
-      <div className="px-8 py-5">
-        <p
-          className="text-sm leading-relaxed"
-          style={{ fontFamily: "'Lora', serif", color: "rgba(26,17,8,0.8)" }}
-        >
-          {book.description}
-        </p>
-      </div>
-
-      <div className="mx-8 border-t border-border" />
-
-      <button
-        onClick={onExpand}
-        className="w-full flex items-center justify-between px-8 py-4 hover:bg-foreground/[0.03] transition-colors text-left"
-      >
-        <span
-          className="uppercase tracking-widest"
-          style={{ fontFamily: "'DM Mono', monospace", fontSize: 9 }}
-        >
-          An excerpt
-        </span>
-        <ChevronDown
-          size={13}
-          className="transition-transform duration-200 text-muted-foreground"
-          style={{ transform: expanded ? "rotate(180deg)" : "rotate(0deg)" }}
-        />
-      </button>
-
-      {expanded && (
-        <div className="px-8 pb-8 pt-1">
-          <blockquote
-            className="border-l-2 pl-5"
-            style={{ borderColor: "#8B3220" }}
-          >
-            <p
-              className="text-sm leading-relaxed italic whitespace-pre-line"
-              style={{ fontFamily: "'Lora', serif", color: "rgba(26,17,8,0.78)" }}
-            >
-              {book.excerpt}
-            </p>
-          </blockquote>
+        <div className="entrance-mat" />
+        <div className="reading-room-label">Reading Room</div>
+        <div className="reading-room" onClick={onOpenAbout}>
+          {Array.from({ length: 8 }).map((_, i) => <div key={i} className="rr-table" />)}
         </div>
-      )}
-    </>
+        <div className="lounge" onClick={onOpenGallery}>
+          <div className="lounge-label">Gallery Lounge<br />(click to browse art)</div>
+          <div className="table-round" style={{ left: "14%", top: "8%" }} />
+          <div className="chair" style={{ left: "10%", top: "2%" }} />
+          <div className="table-round" style={{ left: "36%", top: "32%" }} />
+          <div className="chair" style={{ left: "32%", top: "26%" }} />
+          <div className="chair" style={{ left: "52%", top: "38%" }} />
+          <div className="table-round" style={{ left: "20%", top: "62%" }} />
+          <div className="chair" style={{ left: "16%", top: "56%" }} />
+          <div className="chair" style={{ left: "36%", top: "68%" }} />
+        </div>
+      </div>
+    </div>
   );
 }
 
-function ArtPanel({
-  art,
-  expanded,
-  onExpand,
-  onClose,
-}: {
-  art: ArtPiece;
-  expanded: boolean;
-  onExpand: () => void;
-  onClose: () => void;
+// ─── Era Overlay ──────────────────────────────────────────────────────────────
+
+function EraOverlay({ eraIdx, onBack, onOpenBook, onOpenArt, onOpenTimeline, onOpenDidacticTimeline }: {
+  eraIdx: number;
+  onBack: () => void;
+  onOpenBook: (b: BookData, eraIdx: number) => void;
+  onOpenArt: (a: ArtData) => void;
+  onOpenTimeline: (i: number) => void;
+  onOpenDidacticTimeline: (i: number) => void;
 }) {
-  const frame = FRAME_COLORS[art.frameStyle];
-
+  const era = eras[eraIdx];
   return (
-    <>
-      <div className="flex items-center justify-between px-8 pt-7 pb-0">
-        <span
-          className="text-muted-foreground uppercase tracking-widest"
-          style={{ fontFamily: "'DM Mono', monospace", fontSize: 9 }}
-        >
-          Visual Art · {art.year}
-        </span>
-        <button
-          onClick={onClose}
-          className="p-1.5 hover:bg-foreground/5 transition-colors"
-          aria-label="Close"
-        >
-          <X size={13} />
-        </button>
-      </div>
-
-      <div className="flex justify-center px-8 py-6">
-        <div
-          style={{
-            borderColor: frame.outer,
-            borderWidth: 9,
-            borderStyle: "solid",
-            boxShadow: `inset 0 0 0 4px ${frame.inner}, 5px 10px 24px rgba(0,0,0,0.3)`,
-            padding: 10,
-            background: frame.mat,
-          }}
-        >
-          <div style={{ width: 270 }}>
-            <AbstractArt id={art.id} className="w-full block" />
+    <div className="full-overlay">
+      <button className="back-btn" onClick={onBack}>← Floor Plan</button>
+      <div className="room">
+        <div className="wall" style={{ background: era.wall }}>
+          <div className="room-header">
+            <div className="era-name">{era.name}</div>
+            <div className="era-years-label">{era.years}</div>
+          </div>
+          <div className="era-blurb">{era.blurb}</div>
+          <div className="wall-content">
+            <div className="frame-wrap" onClick={() => onOpenArt(era.art)}>
+              <div className="frame">
+                <div className="frame-inner" style={{ background: era.art.style }} />
+              </div>
+              <div className="art-caption">
+                <b>{era.art.title}</b>
+                {era.art.artist}, {era.art.year}
+              </div>
+            </div>
+            <div className="didactic-panel" onClick={() => onOpenDidacticTimeline(eraIdx)}>
+              <div className="dp-title">{era.art.artist}</div>
+              <div className="dp-sub">About the Artist · {era.art.year}</div>
+              <div className="dp-label">Biography</div>
+              <div className="dp-evdesc" style={{ marginBottom: 12 }}>{era.art.bio}</div>
+              <div className="dp-label" style={{ marginTop: 6 }}>Related Events</div>
+              <div style={{ fontSize: "0.82rem", color: "#3a2a1c", marginTop: 8 }}>
+                Click this panel to view landmark events connected to the artist and artwork.
+              </div>
+            </div>
+          </div>
+          <div className="bookcase">
+            <div className="books-row">
+              <div className="bookend" onClick={() => onOpenTimeline(eraIdx)} title="View era timeline">
+                <BookendSVG />
+                <div className="bookend-label">Timeline</div>
+              </div>
+              {era.books.map((b, bi) => (
+                <div
+                  key={bi}
+                  className="book-spine"
+                  style={{ background: `linear-gradient(90deg, rgba(0,0,0,0.35), transparent 18%, transparent 82%, rgba(0,0,0,0.35)), linear-gradient(160deg, ${era.color1}, ${era.color2})` }}
+                  onClick={() => onOpenBook(b, eraIdx)}
+                >
+                  <div className="spine-text">{b.title}</div>
+                </div>
+              ))}
+              <div className="bookend" onClick={() => onOpenTimeline(eraIdx)} title="View era timeline">
+                <BookendSVG />
+                <div className="bookend-label">Timeline</div>
+              </div>
+            </div>
+            <div className="shelf-board" />
           </div>
         </div>
       </div>
-
-      <div className="px-8 pb-2">
-        <h2
-          className="text-2xl leading-tight mb-1"
-          style={{ fontFamily: "'Playfair Display', serif" }}
-        >
-          {art.title}
-        </h2>
-        <p
-          className="text-muted-foreground"
-          style={{ fontFamily: "'DM Mono', monospace", fontSize: 11 }}
-        >
-          {art.artist}
-        </p>
-      </div>
-
-      <div className="px-8 py-3 grid grid-cols-2 gap-4">
-        {[
-          { label: "Medium", value: art.medium },
-          { label: "Dimensions", value: art.dimensions },
-        ].map(({ label, value }) => (
-          <div key={label}>
-            <p
-              className="text-muted-foreground uppercase tracking-widest mb-0.5"
-              style={{ fontFamily: "'DM Mono', monospace", fontSize: 8 }}
-            >
-              {label}
-            </p>
-            <p className="text-sm" style={{ fontFamily: "'Lora', serif" }}>
-              {value}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      <div className="mx-8 border-t border-border" />
-
-      <div className="px-8 py-5">
-        <p
-          className="text-sm leading-relaxed"
-          style={{ fontFamily: "'Lora', serif", color: "rgba(26,17,8,0.8)" }}
-        >
-          {art.description}
-        </p>
-      </div>
-
-      <div className="mx-8 border-t border-border" />
-
-      <button
-        onClick={onExpand}
-        className="w-full flex items-center justify-between px-8 py-4 hover:bg-foreground/[0.03] transition-colors text-left"
-      >
-        <span
-          className="uppercase tracking-widest"
-          style={{ fontFamily: "'DM Mono', monospace", fontSize: 9 }}
-        >
-          Behind the work
-        </span>
-        <ChevronDown
-          size={13}
-          className="transition-transform duration-200 text-muted-foreground"
-          style={{ transform: expanded ? "rotate(180deg)" : "rotate(0deg)" }}
-        />
-      </button>
-
-      {expanded && (
-        <div className="px-8 pb-8 pt-1">
-          <p
-            className="text-sm leading-relaxed italic"
-            style={{ fontFamily: "'Lora', serif", color: "rgba(26,17,8,0.72)" }}
-          >
-            {art.context}
-          </p>
-        </div>
-      )}
-    </>
+    </div>
   );
 }
 
-// ─── Modal ────────────────────────────────────────────────────────────────────
+// ─── Gallery Overlay ──────────────────────────────────────────────────────────
 
-type SelectedItem =
-  | { type: "book"; data: Book }
-  | { type: "art"; data: ArtPiece }
-  | null;
+function GalleryOverlay({ onBack, onPickArt }: {
+  onBack: () => void;
+  onPickArt: (eraIdx: number) => void;
+}) {
+  return (
+    <div className="full-overlay">
+      <button className="back-btn" onClick={onBack}>← Floor Plan</button>
+      <div className="gallery-grid-wrap">
+        <div className="room-header" style={{ justifyContent: "center", marginBottom: 6 }}>
+          <div className="era-name">Gallery Lounge</div>
+        </div>
+        <div className="era-blurb" style={{ textAlign: "center", margin: "0 auto 20px", maxWidth: 600 }}>
+          Featured artworks from every era of the exhibit. Click any piece for its story.
+        </div>
+        <div className="gallery-grid">
+          {eras.map((era, i) => (
+            <div key={i} className="gallery-tile" onClick={() => onPickArt(i)}>
+              <div className="frame">
+                <div className="frame-inner" style={{ background: era.art.style }} />
+              </div>
+              <div className="art-caption">
+                <b>{era.art.title}</b>
+                {era.art.artist}, {era.art.year}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
-function Modal({ item, onClose }: { item: NonNullable<SelectedItem>; onClose: () => void }) {
-  const [expanded, setExpanded] = useState(false);
+// ─── Modals ───────────────────────────────────────────────────────────────────
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+function BookCoverModal({ book, eraIdx, onClose, onOpenInfo }: {
+  book: BookData; eraIdx: number;
+  onClose: () => void; onOpenInfo: () => void;
+}) {
+  const era = eras[eraIdx];
+  return (
+    <div className="overlay" onClick={onClose}>
+      <div className="cover-card" onClick={e => e.stopPropagation()}>
+        <button className="close-x" onClick={onClose}>×</button>
+        <div className="cover-face" style={{ background: `linear-gradient(160deg, ${era.color1}, ${era.color2})` }}>
+          <div className="bookmark-tab" onClick={e => { e.stopPropagation(); onOpenInfo(); }} title="Click for historical context">
+            <svg viewBox="0 0 24 24" fill="#fff" width="13" height="13">
+              <path d="M12 2L14.5 8.5L21.5 9L16 13.5L18 20.5L12 16.5L6 20.5L8 13.5L2.5 9L9.5 8.5Z"/>
+            </svg>
+          </div>
+          <div className="cover-era-tag">{era.name}</div>
+          <div>
+            <div className="cover-title">{book.title}</div>
+            <div className="cover-author">{book.author}</div>
+            <div className="cover-year">{book.year}</div>
+          </div>
+          <div className="cover-hint">Click the bookmark ↑ for historical context</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BookInfoModal({ book, eraIdx, onClose }: {
+  book: BookData; eraIdx: number; onClose: () => void;
+}) {
+  const era = eras[eraIdx];
+  const [pg, setPg] = useState(0);
+
+  if (book.pages) {
+    const { form, aboutPoem, historyTitle, historyParas, sourceUrl, sourceDomain } = book.pages;
+    const pages = [
+      { label: form, heading: "About This Poem", paras: aboutPoem },
+      { label: "Behind the Poem", heading: historyTitle, paras: historyParas },
+    ];
+    const isSource = pg === 2;
+    return (
+      <div className="overlay" onClick={onClose}>
+        <div className="info-card" onClick={e => e.stopPropagation()} style={{ width: "min(580px, 92vw)" }}>
+          <button className="info-close" onClick={onClose}>×</button>
+          {!isSource ? (
+            <>
+              <h2>{book.title}</h2>
+              <div className="info-author-line">{book.author} · {book.year} · {era.name}</div>
+              <div style={{ fontSize: "0.63rem", letterSpacing: "1.3px", textTransform: "uppercase", color: "#9a6b2f", marginBottom: 10 }}>{pages[pg].label}</div>
+              <div className="info-section">
+                <h3>{pages[pg].heading}</h3>
+                {pages[pg].paras.map((p, i) => <p key={i}>{p}</p>)}
+              </div>
+            </>
+          ) : (
+            <div style={{ textAlign: "center", padding: "24px 0 8px" }}>
+              <div style={{ width: 48, height: 48, borderRadius: "50%", background: "radial-gradient(circle at 35% 30%, #e3c37a, #a9834c 60%, #7d5c2c 100%)", margin: "0 auto 16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="#3a2416" strokeWidth="1.6" width="24" height="24"><path d="M12 3v14M12 17l-4-3M12 17l4-3M6 8c0-2 2-3 6-3s6 1 6 3-2 3-6 3-6-1-6-3z"/></svg>
+              </div>
+              <h2 style={{ marginBottom: 4 }}>{book.title}</h2>
+              <div className="info-author-line">{book.author} · {book.year}</div>
+              <p style={{ fontStyle: "italic", color: "#6e6248", fontSize: "0.85rem", margin: "14px 0 18px" }}>This exhibit holds the story behind the poem.<br />The poem itself lives at its original source.</p>
+              <a href={sourceUrl} target="_blank" rel="noopener" style={{ display: "inline-block", padding: "10px 22px", background: "#6b2e1f", color: "#f4e9c9", borderRadius: 3, textDecoration: "none", fontFamily: "Georgia, serif", fontSize: "0.8rem", letterSpacing: "0.5px", boxShadow: "0 4px 10px rgba(0,0,0,0.2)" }}>Read on {sourceDomain} →</a>
+            </div>
+          )}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 22, paddingTop: 12, borderTop: "1px solid #d8c9a3" }}>
+            <button disabled={pg === 0} onClick={() => setPg(p => p - 1)} style={{ background: pg === 0 ? "transparent" : "#9a6b2f", color: pg === 0 ? "#c8b898" : "#fff", border: pg === 0 ? "1px solid #d8c9a3" : "none", padding: "7px 14px", borderRadius: 3, cursor: pg === 0 ? "default" : "pointer", fontSize: "0.78rem", fontFamily: "Georgia, serif" }}>← Previous</button>
+            <span style={{ fontSize: "0.68rem", color: "#9a6b2f", letterSpacing: "0.5px" }}>{pg + 1} / 3</span>
+            <button disabled={pg === 2} onClick={() => setPg(p => p + 1)} style={{ background: pg === 2 ? "transparent" : "#9a6b2f", color: pg === 2 ? "#c8b898" : "#fff", border: pg === 2 ? "1px solid #d8c9a3" : "none", padding: "7px 14px", borderRadius: 3, cursor: pg === 2 ? "default" : "pointer", fontSize: "0.78rem", fontFamily: "Georgia, serif" }}>Next →</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8">
-      <div
-        className="absolute inset-0 bg-black/72 backdrop-blur-[2px]"
-        onClick={onClose}
-      />
-      <div
-        className="relative z-10 w-full max-w-md max-h-[90vh] overflow-y-auto overflow-x-hidden"
-        style={{
-          background: "#FDFAF4",
-          boxShadow: "0 24px 80px rgba(0,0,0,0.5)",
-          scrollbarWidth: "none",
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {item.type === "book" ? (
-          <BookPanel
-            book={item.data}
-            expanded={expanded}
-            onExpand={() => setExpanded((v) => !v)}
-            onClose={onClose}
-          />
-        ) : (
-          <ArtPanel
-            art={item.data}
-            expanded={expanded}
-            onExpand={() => setExpanded((v) => !v)}
-            onClose={onClose}
-          />
-        )}
+    <div className="overlay" onClick={onClose}>
+      <div className="info-card" onClick={e => e.stopPropagation()}>
+        <button className="info-close" onClick={onClose}>×</button>
+        <h2>{book.title}</h2>
+        <div className="info-author-line">{book.author} · {book.year} · {era.name}</div>
+        <div className="info-section"><h3>About the Poet</h3><p>{book.bio}</p></div>
+        <div className="info-section"><h3>Sociopolitical Context</h3><p>{book.context}</p></div>
+      </div>
+    </div>
+  );
+}
+
+function ArtModal({ art, eraName, onClose, onOpenInfo }: {
+  art: ArtData; eraName: string; onClose: () => void; onOpenInfo: () => void;
+}) {
+  return (
+    <div className="overlay" onClick={onClose}>
+      <div className="art-card" onClick={e => e.stopPropagation()}>
+        <button className="close-x" onClick={onClose}>×</button>
+        <div className="art-frame-big">
+          <div className="art-canvas-big" style={{ background: art.style }} />
+          <div className="art-plaque">
+            <div className="t">{art.title}</div>
+            <div className="s">{art.artist} · {art.year}</div>
+            <button onClick={e => { e.stopPropagation(); onOpenInfo(); }}>View Historical Context</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ArtInfoModal({ art, eraName, onClose }: {
+  art: ArtData; eraName: string; onClose: () => void;
+}) {
+  return (
+    <div className="overlay" onClick={onClose}>
+      <div className="info-card" onClick={e => e.stopPropagation()}>
+        <button className="info-close" onClick={onClose}>×</button>
+        <h2>{art.title}</h2>
+        <div className="info-author-line">{art.artist} · {art.year} · {eraName}</div>
+        <div className="info-section"><h3>About the Artist</h3><p>{art.bio}</p></div>
+        <div className="info-section"><h3>Sociopolitical Context</h3><p>{art.context}</p></div>
+      </div>
+    </div>
+  );
+}
+
+function TimelineModal({ eraIdx, onClose }: { eraIdx: number; onClose: () => void; }) {
+  const era = eras[eraIdx];
+  return (
+    <div className="overlay" onClick={onClose}>
+      <div className="timeline-card" onClick={e => e.stopPropagation()}>
+        <button className="info-close" onClick={onClose}>×</button>
+        <h2>{era.name} — Timeline</h2>
+        <div className="timeline-era-line">{era.years}</div>
+        <TlLegend />
+        <TlTrack events={era.timeline} />
+      </div>
+    </div>
+  );
+}
+
+function PanelTimelineModal({ events, name, years, onClose }: {
+  events: TEvent[]; name: string; years: string; onClose: () => void;
+}) {
+  return (
+    <div className="overlay" onClick={onClose}>
+      <div className="timeline-card" onClick={e => e.stopPropagation()}>
+        <button className="info-close" onClick={onClose}>×</button>
+        <h2>{name} — Related Events</h2>
+        <div className="timeline-era-line">{years}</div>
+        <TlLegend />
+        <TlTrack events={events} />
+      </div>
+    </div>
+  );
+}
+
+function AboutModal({ onClose }: { onClose: () => void; }) {
+  return (
+    <div className="overlay" onClick={onClose}>
+      <div className="info-card about-card" onClick={e => e.stopPropagation()}>
+        <button className="info-close" onClick={onClose}>×</button>
+        <h2>Welcome to the Exhibit</h2>
+        <div className="info-section">
+          <p>This museum walks through six eras of Black American poetry and art. Click any bookcase on the floor plan to step inside and browse its poems and artwork. Click a book for its cover, then the bookmark ribbon for historical context. Click the bookends on either side of a shelf for a timeline of major events from that era. A didactic panel beside each artwork adds further landmark events from that era. Visit the Gallery Lounge to browse all the featured artworks at once.</p>
+        </div>
       </div>
     </div>
   );
@@ -950,144 +732,98 @@ function Modal({ item, onClose }: { item: NonNullable<SelectedItem>; onClose: ()
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 
-export default function App() {
-  const [section, setSection] = useState<"library" | "gallery">("library");
-  const [selected, setSelected] = useState<SelectedItem>(null);
+type View = "floor" | "era" | "gallery";
 
-  useEffect(() => {
-    document.body.style.overflow = selected ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [selected]);
+export default function App() {
+  const [view, setView] = useState<View>("floor");
+  const [currentEra, setCurrentEra] = useState<number | null>(null);
+  const [selectedBook, setSelectedBook] = useState<{ book: BookData; eraIdx: number } | null>(null);
+  const [showBookInfo, setShowBookInfo] = useState(false);
+  const [selectedArt, setSelectedArt] = useState<{ art: ArtData; eraName: string } | null>(null);
+  const [showArtInfo, setShowArtInfo] = useState(false);
+  const [galleryPickEra, setGalleryPickEra] = useState<number | null>(null);
+  const [galleryPickInfo, setGalleryPickInfo] = useState(false);
+  const [timelineEra, setTimelineEra] = useState<number | null>(null);
+  const [panelTimeline, setPanelTimeline] = useState<{ events: TEvent[]; name: string; years: string } | null>(null);
+  const [showAbout, setShowAbout] = useState(false);
+
+  const enterEra = (i: number) => { setCurrentEra(i); setView("era"); setSelectedBook(null); setSelectedArt(null); setTimelineEra(null); };
+  const backToFloor = () => { setView("floor"); setCurrentEra(null); setSelectedBook(null); setSelectedArt(null); setTimelineEra(null); };
+  const openGallery = () => { setView("gallery"); setGalleryPickEra(null); setGalleryPickInfo(false); };
 
   return (
-    <div
-      className="min-h-screen bg-background"
-      style={{ fontFamily: "'Lora', serif" }}
-    >
-      {/* Header */}
-      <header className="border-b border-border bg-background/95 sticky top-0 z-40">
-        <div className="max-w-5xl mx-auto px-6 py-5 flex flex-col items-center gap-4">
-          <div className="text-center">
-            <p
-              className="text-muted-foreground uppercase tracking-widest mb-1"
-              style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, letterSpacing: "0.22em" }}
-            >
-              Personal Archive · Est. 2024
-            </p>
-            <h1
-              className="text-3xl md:text-4xl leading-none"
-              style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400 }}
-            >
-              The Collection
-            </h1>
-          </div>
+    <div className="exhibit-root">
+      <style>{CSS}</style>
 
-          <nav className="flex border border-border">
-            {(
-              [
-                { key: "library", label: "Poetry Shelf" },
-                { key: "gallery", label: "Art Collection" },
-              ] as const
-            ).map(({ key, label }, i) => (
-              <button
-                key={key}
-                onClick={() => setSection(key)}
-                className="px-6 py-2 uppercase tracking-widest transition-colors duration-200"
-                style={{
-                  fontFamily: "'DM Mono', monospace",
-                  fontSize: 10,
-                  letterSpacing: "0.14em",
-                  background: section === key ? "#2D1B0E" : "transparent",
-                  color: section === key ? "#F5EFE0" : "#7A6852",
-                  borderRight: i === 0 ? "1px solid rgba(26,17,8,0.12)" : undefined,
-                }}
-              >
-                {label}
-              </button>
-            ))}
-          </nav>
-        </div>
-      </header>
+      <div className="exhibit-title">Black American Poetry &amp; Art</div>
+      <div className="exhibit-subtitle">A Museum Floor Plan Across Six Eras of Verse, Image, and Struggle</div>
+      <div className="exhibit-instructions">Click a bookcase to enter that era · click a bookend for the era timeline · click the round lounge to browse artworks</div>
 
-      {/* Library */}
-      {section === "library" && (
-        <main className="max-w-5xl mx-auto px-4 md:px-8 py-10">
-          <div
-            style={{
-              background: "linear-gradient(to bottom, #3A2010 0%, #2A1808 100%)",
-              padding: "0 6px",
-              boxShadow:
-                "inset 0 0 50px rgba(0,0,0,0.45), 0 10px 40px rgba(0,0,0,0.28)",
-            }}
-          >
-            <div
-              style={{
-                height: 14,
-                background: "linear-gradient(to bottom, #7A4A28, #5A3018)",
-                boxShadow: "0 3px 8px rgba(0,0,0,0.35)",
-                marginBottom: 2,
-              }}
-            />
-            {SHELVES.map((shelf, i) => (
-              <div key={i} style={{ marginBottom: 2 }}>
-                <Shelf
-                  books={shelf}
-                  onBookClick={(b) => setSelected({ type: "book", data: b })}
-                />
-              </div>
-            ))}
-            <div
-              style={{
-                height: 18,
-                background: "linear-gradient(to bottom, #7A4A28, #5A3018)",
-                boxShadow: "0 5px 14px rgba(0,0,0,0.45)",
-              }}
-            />
-          </div>
+      <FloorPlan onEnterEra={enterEra} onOpenGallery={openGallery} onOpenAbout={() => setShowAbout(true)} />
 
-          <p
-            className="text-center mt-6 text-muted-foreground"
-            style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: "0.14em" }}
-          >
-            Click any spine to open
-          </p>
-        </main>
+      {/* Era overlay */}
+      {view === "era" && currentEra !== null && (
+        <EraOverlay
+          eraIdx={currentEra}
+          onBack={backToFloor}
+          onOpenBook={(b, ei) => { setSelectedBook({ book: b, eraIdx: ei }); setShowBookInfo(false); }}
+          onOpenArt={a => { setSelectedArt({ art: a, eraName: eras[currentEra].name }); setShowArtInfo(false); }}
+          onOpenTimeline={i => { setTimelineEra(i); setPanelTimeline(null); }}
+          onOpenDidacticTimeline={i => { setPanelTimeline({ events: eras[i].panelEvents, name: eras[i].name, years: eras[i].years }); setTimelineEra(null); }}
+        />
       )}
 
-      {/* Gallery */}
-      {section === "gallery" && (
-        <main
-          className="py-14 px-4 md:px-8"
-          style={{
-            background: "linear-gradient(160deg, #E2D8C8 0%, #D4C9B5 60%, #C8BBAA 100%)",
-            minHeight: "calc(100vh - 110px)",
-          }}
-        >
-          <div className="max-w-5xl mx-auto">
-            <p
-              className="text-center text-muted-foreground mb-12"
-              style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase" }}
-            >
-              Private collection · works acquired 2017–2022
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-16 justify-items-center items-start">
-              {ART_PIECES.map((piece) => (
-                <FramedArt
-                  key={piece.id}
-                  piece={piece}
-                  onClick={() => setSelected({ type: "art", data: piece })}
-                />
-              ))}
-            </div>
-          </div>
-        </main>
+      {/* Gallery overlay */}
+      {view === "gallery" && (
+        <GalleryOverlay
+          onBack={backToFloor}
+          onPickArt={i => { setGalleryPickEra(i); setGalleryPickInfo(false); }}
+        />
       )}
 
-      {selected && (
-        <Modal item={selected} onClose={() => setSelected(null)} />
+      {/* Book modals */}
+      {selectedBook && !showBookInfo && (
+        <BookCoverModal book={selectedBook.book} eraIdx={selectedBook.eraIdx} onClose={() => setSelectedBook(null)} onOpenInfo={() => setShowBookInfo(true)} />
       )}
+      {selectedBook && showBookInfo && (
+        <BookInfoModal book={selectedBook.book} eraIdx={selectedBook.eraIdx} onClose={() => { setShowBookInfo(false); setSelectedBook(null); }} />
+      )}
+
+      {/* Art modals (era view) */}
+      {selectedArt && !showArtInfo && (
+        <ArtModal art={selectedArt.art} eraName={selectedArt.eraName} onClose={() => setSelectedArt(null)} onOpenInfo={() => setShowArtInfo(true)} />
+      )}
+      {selectedArt && showArtInfo && (
+        <ArtInfoModal art={selectedArt.art} eraName={selectedArt.eraName} onClose={() => { setShowArtInfo(false); setSelectedArt(null); }} />
+      )}
+
+      {/* Gallery pick modals */}
+      {galleryPickEra !== null && !galleryPickInfo && (
+        <ArtModal
+          art={eras[galleryPickEra].art}
+          eraName={eras[galleryPickEra].name}
+          onClose={() => setGalleryPickEra(null)}
+          onOpenInfo={() => setGalleryPickInfo(true)}
+        />
+      )}
+      {galleryPickEra !== null && galleryPickInfo && (
+        <ArtInfoModal
+          art={eras[galleryPickEra].art}
+          eraName={eras[galleryPickEra].name}
+          onClose={() => { setGalleryPickInfo(false); setGalleryPickEra(null); }}
+        />
+      )}
+
+      {/* Timeline modals */}
+      {panelTimeline && (
+        <PanelTimelineModal events={panelTimeline.events} name={panelTimeline.name} years={panelTimeline.years} onClose={() => setPanelTimeline(null)} />
+      )}
+      {timelineEra !== null && !panelTimeline && (
+        <TimelineModal eraIdx={timelineEra} onClose={() => setTimelineEra(null)} />
+      )}
+
+      {/* About modal */}
+      {showAbout && <AboutModal onClose={() => setShowAbout(false)} />}
     </div>
   );
 }
