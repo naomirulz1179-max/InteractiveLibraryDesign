@@ -280,27 +280,95 @@ const CSS = `
   .exhibit-subtitle { text-align: center; color: #a89a7c; font-style: italic; font-size: 0.92rem; margin-bottom: 8px; }
   .exhibit-instructions { text-align: center; color: #756a52; font-size: 0.76rem; margin-bottom: 28px; }
   .floorplan-wrap { max-width: 1100px; margin: 0 auto; }
-  .floorplan { position: relative; width: 100%; aspect-ratio: 1180 / 620; background: #adc48f; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); overflow: hidden; }
-  .zone { position: absolute; background: #4d6d4a; border-radius: 6px; cursor: pointer; display: flex; flex-direction: column; align-items: center; padding: 6% 4% 4%; transition: transform 0.15s ease, filter 0.15s ease; box-shadow: inset 0 0 0 2px rgba(0,0,0,0.15); }
-  .zone:hover { filter: brightness(1.15); transform: scale(1.015); z-index: 5; }
-  .zone-label { font-size: 0.72rem; letter-spacing: 0.6px; color: #f0e9d0; text-align: center; margin-bottom: 2px; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
-  .zone-years { font-size: 0.6rem; color: rgba(255,255,255,0.65); margin-bottom: 8%; }
-  .shelf-bars { display: flex; gap: 6%; flex: 1; width: 100%; justify-content: center; }
-  .shelf-bar { width: 100%; max-width: 34px; background: linear-gradient(90deg, #7a4f28, #9c6b3a 40%, #7a4f28); border: 1.5px solid #4a2f14; border-radius: 2px; }
-  .zone.slim { padding: 10% 12% 6%; }
-  .zone.slim .shelf-bars { max-width: 40px; margin: 0 auto; }
-  .lounge { position: absolute; left: 74%; top: -6%; width: 40%; height: 112%; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #c97a3f, #a85a2a 70%, #8c4a20); cursor: pointer; box-shadow: inset 0 0 40px rgba(0,0,0,0.3); z-index: 1; }
-  .lounge:hover { filter: brightness(1.1); }
-  .lounge-label { position: absolute; top: 8%; left: 50%; transform: translateX(-50%); font-size: 0.75rem; letter-spacing: 1px; color: #fff2de; text-shadow: 0 1px 3px rgba(0,0,0,0.5); text-align: center; white-space: nowrap; }
-  .table-round { position: absolute; width: 44px; height: 44px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #7a5636, #4d3620); box-shadow: 0 4px 8px rgba(0,0,0,0.4); }
-  .chair { position: absolute; width: 14px; height: 18px; background: #6b5a45; border: 1px solid #3a2e1c; border-radius: 2px; }
-  .entrance-mat { position: absolute; left: 32%; top: 0%; width: 9%; height: 6%; background: #cdadd1; border-radius: 0 0 6px 6px; z-index: 2; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: filter 0.15s; }
-  .entrance-mat:hover { filter: brightness(1.12); }
-  .entrance-mat-label { font-size: 0.52rem; letter-spacing: 0.6px; font-weight: 700; color: #3a1a4a; text-transform: uppercase; }
-  .reading-room { position: absolute; left: 37%; top: 44%; width: 18%; height: 12%; background: #6b6458; border-radius: 4px; cursor: pointer; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4%; padding: 6%; box-shadow: inset 0 0 0 2px rgba(0,0,0,0.2); }
-  .reading-room:hover { filter: brightness(1.15); }
-  .rr-spine { border-radius: 1px; height: 100%; }
-  .reading-room-label { position: absolute; left: 37%; top: 38%; width: 18%; text-align: center; font-size: 0.62rem; color: rgba(255,255,255,0.7); letter-spacing: 0.5px; }
+  .floorplan {
+    position: relative; width: 100%; aspect-ratio: 1180 / 620;
+    background: #d6c9b0;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+    border: 3px solid #7a6a50;
+    border-radius: 4px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 0 60px rgba(0,0,0,0.08);
+    overflow: hidden;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+  }
+  /* ── Compass rose ── */
+  .fp-compass { position: absolute; right: 1.5%; bottom: 2%; width: 30px; height: 30px; opacity: 0.35; pointer-events: none; }
+  /* ── Room walls (shared) ── */
+  .fp-room {
+    position: absolute;
+    background: #e8dfc8;
+    border: 2.5px solid #5a4a35;
+    box-shadow: inset 0 0 0 6px #cfc0a3, 2px 2px 6px rgba(0,0,0,0.25);
+  }
+  /* ── Bookcase zone ── */
+  .zone {
+    position: absolute; cursor: pointer;
+    background: #e8dfc8;
+    border: 2.5px solid #5a4a35;
+    box-shadow: inset 0 0 0 6px #cfc0a3, 2px 2px 6px rgba(0,0,0,0.25);
+    overflow: hidden;
+    transition: filter 0.15s ease;
+  }
+  .zone:hover { filter: brightness(1.06); z-index: 5; }
+  .zone-header { position: absolute; top: 0; left: 0; right: 0; background: rgba(90,74,53,0.92); padding: 3px 6px; z-index: 3; }
+  .zone-label { font-size: 0.58rem; letter-spacing: 0.8px; color: #f0e5c8; text-transform: uppercase; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .zone-years { font-size: 0.48rem; color: rgba(240,229,200,0.7); }
+  /* bookcase unit inside a zone */
+  .bc-unit { position: absolute; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column; gap: 0; }
+  .bc-shelf { display: flex; align-items: flex-end; padding: 0 4px; gap: 1.5px; background: #3a2510; height: 26px; border-top: 3px solid #6b4a28; }
+  .bc-shelf-top { background: #5a3a1a; height: 4px; }
+  .bc-book { flex: 1; border-radius: 1px 2px 2px 1px; min-width: 5px; max-width: 14px; position: relative; }
+  .bc-book::after { content: ''; position: absolute; top: 0; left: 2px; width: 1px; bottom: 0; background: rgba(255,255,255,0.12); }
+  .bc-wall-top { position: absolute; top: 22px; left: 4px; right: 4px; bottom: 0; background: #f0e8d0; border: 1.5px solid #cfc0a3; border-top: none; }
+  /* slim zone variant */
+  .zone.slim .bc-unit { left: 0; right: 0; }
+  /* ── Gallery wing ── */
+  .lounge {
+    position: absolute; left: 74%; top: 5%; width: 24%; height: 90%;
+    background: #ede4cf;
+    border: 2.5px solid #5a4a35;
+    box-shadow: inset 0 0 0 6px #d8cdb0, 2px 2px 6px rgba(0,0,0,0.25);
+    cursor: pointer; overflow: hidden;
+    transition: filter 0.15s ease;
+    z-index: 1;
+  }
+  .lounge:hover { filter: brightness(1.06); }
+  .lounge-label { position: absolute; top: 3%; left: 50%; transform: translateX(-50%); font-size: 0.6rem; letter-spacing: 0.8px; color: #3a2a14; font-weight: 700; text-transform: uppercase; white-space: nowrap; text-align: center; z-index: 5; }
+  /* artwork frames hung on gallery walls */
+  .gal-frame { position: absolute; background: #b8902a; border: 3px solid #7a5a1a; box-shadow: 0 3px 8px rgba(0,0,0,0.45), inset 0 0 0 2px rgba(0,0,0,0.3); }
+  .gal-frame-inner { width: 100%; height: 100%; background: #c8b89a; box-shadow: inset 0 0 6px rgba(0,0,0,0.35); }
+  /* bench */
+  .gal-bench { position: absolute; background: #7a5a35; border-radius: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+  /* ── Reading room ── */
+  .reading-room {
+    position: absolute; left: 37%; top: 38%; width: 18%; height: 18%;
+    background: #ede8d8;
+    border: 2.5px solid #5a4a35;
+    box-shadow: inset 0 0 0 6px #d8cdb0, 2px 2px 6px rgba(0,0,0,0.25);
+    cursor: pointer; overflow: hidden;
+    transition: filter 0.15s ease;
+  }
+  .reading-room:hover { filter: brightness(1.06); }
+  .reading-room-label { position: absolute; left: 37%; top: 33%; width: 18%; text-align: center; font-size: 0.56rem; color: #3a2a14; letter-spacing: 0.8px; font-weight: 700; text-transform: uppercase; z-index: 3; }
+  /* oval table from above */
+  .rr-table { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 55%; height: 45%; background: radial-gradient(circle at 35% 30%, #8a6640, #5a3c20); border-radius: 50%; box-shadow: 0 3px 8px rgba(0,0,0,0.4), inset 0 0 4px rgba(255,255,255,0.08); }
+  /* chair (overhead view) */
+  .rr-chair { position: absolute; width: 18%; height: 16%; background: #a07848; border-radius: 2px; box-shadow: 0 1px 4px rgba(0,0,0,0.35); }
+  /* ── Entrance mat ── */
+  .entrance-mat { position: absolute; left: 32%; top: 0%; width: 9%; height: 6%; background: #9b6db5; border-radius: 0 0 8px 8px; z-index: 2; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: filter 0.15s; box-shadow: 0 4px 10px rgba(0,0,0,0.4); border: 2px solid #7a4a96; border-top: none; }
+  .entrance-mat:hover { filter: brightness(1.15); }
+  .entrance-mat-label { font-size: 0.52rem; letter-spacing: 0.8px; font-weight: 700; color: #f8f0ff; text-transform: uppercase; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+  /* ── Corridor between zones ── */
+  .fp-corridor-h { position: absolute; background: #c8b89a; border-top: 1.5px solid #9a8a6a; border-bottom: 1.5px solid #9a8a6a; }
+  .fp-corridor-v { position: absolute; background: #c8b89a; border-left: 1.5px solid #9a8a6a; border-right: 1.5px solid #9a8a6a; }
+  /* room labels on floor */
+  .fp-room-tag { position: absolute; font-size: 0.44rem; letter-spacing: 1.2px; color: #8a7a60; text-transform: uppercase; pointer-events: none; }
+  .rr-spine { display: none; }
+  .table-round { display: none; }
+  .chair { display: none; }
+  .shelf-bar { display: none; }
   .reading-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 20px; padding: 10px; }
   .book-tile { cursor: pointer; }
   .book-tile:hover .book-cover-face { filter: brightness(1.2); transform: translateY(-3px) rotate(-0.5deg); }
@@ -465,9 +533,13 @@ function TlTrack({ events }: { events: TEvent[] }) {
 
 // ─── Floor Plan ───────────────────────────────────────────────────────────────
 
-const SPINE_COLORS = [
-  "#8c4a20","#3a5c2a","#4a2a6b","#7a2020","#1a3a5c","#5c4a10",
-  "#2a5c4a","#6b3a10","#1c3a1c","#4a1c6b","#5c2a2a","#1a4a4a",
+const ERA_BOOK_COLORS = [
+  ["#8B3A2A","#C4832D","#6E4E2A","#A85728","#5C2A18","#8B5728","#D4A04A","#6E3A1C","#9A472A","#B56A2A","#7A3A2A","#C47A35"],
+  ["#2A5C3A","#7A6914","#5C2A2A","#3A4E2A","#6E4E14","#2A3C5C","#8B7A2A","#4A2A4E","#5C3A2A","#2A5C5C","#8B3A3A","#4A5C2A"],
+  ["#4A2A6B","#8B6914","#2A1A5C","#6B3A2A","#3A2A6B","#8B4A2A","#4A3A8B","#6B6914","#2A4A6B","#8B2A4A","#4A6B2A","#6B2A6B"],
+  ["#1A2A4A","#8B1A1A","#2A2A2A","#4A3A1A","#1A4A3A","#8B4A1A","#1A3A4A","#8B8B1A","#4A1A1A","#2A4A2A","#8B2A1A","#1A4A4A"],
+  ["#3A2A5C","#5C3A1A","#1A3A2A","#4A2A3A","#2A2A5C","#5C5C1A","#3A1A4A","#1A4A2A","#5C2A3A","#2A5C3A","#4A4A1A","#3A3A5C"],
+  ["#8B1A1A","#1A1A1A","#4A2A1A","#8B5A1A","#1A2A4A","#5A1A1A","#8B8B2A","#2A1A4A","#8B3A1A","#1A4A1A","#5A1A4A","#8B1A4A"],
 ];
 
 function FloorPlan({ onEnterEra, onOpenGallery, onOpenAbout, onOpenReadingRoom }: {
@@ -476,43 +548,117 @@ function FloorPlan({ onEnterEra, onOpenGallery, onOpenAbout, onOpenReadingRoom }
   onOpenAbout: () => void;
   onOpenReadingRoom: () => void;
 }) {
+  // book heights for shelves — alternating to look natural
+  const SHELF_H = [22, 18, 20, 16, 21, 17, 19, 15, 22, 18, 20, 16];
+
   return (
     <div className="floorplan-wrap">
       <div className="floorplan">
-        {ZONES.map((z, i) => (
-          <div
-            key={i}
-            className={`zone${z.slim ? " slim" : ""}`}
-            style={{ left: z.left, top: z.top, width: z.width, height: z.height }}
-            onClick={() => onEnterEra(i)}
-          >
-            <div className="zone-label">{eras[i].name}</div>
-            <div className="zone-years">{eras[i].years}</div>
-            <div className="shelf-bars">
-              {Array.from({ length: z.bars }).map((_, j) => (
-                <div key={j} className="shelf-bar" />
-              ))}
+
+        {/* ── horizontal corridor between top and bottom zones ── */}
+        <div className="fp-corridor-h" style={{ left: "0%", top: "42%", width: "74%", height: "16%" }} />
+        {/* ── vertical corridor between left and right zone pairs ── */}
+        <div className="fp-corridor-v" style={{ left: "26%", top: "0%", width: "22%", height: "100%" }} />
+
+        {/* ── Bookcase Zones ── */}
+        {ZONES.map((z, i) => {
+          const eraColors = ERA_BOOK_COLORS[i] ?? ERA_BOOK_COLORS[0];
+          const numShelves = z.slim ? 2 : 3;
+          const booksPerShelf = z.slim ? 4 : 8;
+          return (
+            <div
+              key={i}
+              className={`zone${z.slim ? " slim" : ""}`}
+              style={{ left: z.left, top: z.top, width: z.width, height: z.height }}
+              onClick={() => onEnterEra(i)}
+            >
+              {/* header strip */}
+              <div className="zone-header">
+                <div className="zone-label">{eras[i].name}</div>
+                <div className="zone-years">{eras[i].years}</div>
+              </div>
+              {/* bookcase body */}
+              <div className="bc-unit">
+                {Array.from({ length: numShelves }).map((_, si) => (
+                  <div key={si} style={{ background: "#3a2510", paddingTop: 2 }}>
+                    <div className="bc-shelf">
+                      {Array.from({ length: booksPerShelf }).map((_, bi) => {
+                        const idx = (si * booksPerShelf + bi) % eraColors.length;
+                        const h = SHELF_H[(si * booksPerShelf + bi) % SHELF_H.length];
+                        return (
+                          <div key={bi} className="bc-book"
+                            style={{ background: eraColors[idx], height: h, alignSelf: "flex-end" }}
+                          />
+                        );
+                      })}
+                    </div>
+                    <div className="bc-shelf-top" />
+                  </div>
+                ))}
+              </div>
+              {/* floor label */}
+              <div className="fp-room-tag" style={{ bottom: 2, right: 4 }}>Bookcase</div>
             </div>
-          </div>
-        ))}
+          );
+        })}
+
+        {/* ── Entrance mat ── */}
         <div className="entrance-mat" onClick={onOpenAbout}>
           <span className="entrance-mat-label">Welcome</span>
         </div>
+
+        {/* ── Reading Room ── */}
         <div className="reading-room-label">Reading Room</div>
         <div className="reading-room" onClick={onOpenReadingRoom}>
-          {SPINE_COLORS.map((c, i) => <div key={i} className="rr-spine" style={{ background: c }} />)}
+          {/* oval table */}
+          <div className="rr-table" />
+          {/* 6 chairs around the table */}
+          <div className="rr-chair" style={{ top: "8%",  left: "38%" }} />
+          <div className="rr-chair" style={{ top: "8%",  left: "62%" }} />
+          <div className="rr-chair" style={{ top: "42%", left: "8%" }} />
+          <div className="rr-chair" style={{ top: "42%", right: "8%" }} />
+          <div className="rr-chair" style={{ bottom: "6%", left: "38%" }} />
+          <div className="rr-chair" style={{ bottom: "6%", left: "62%" }} />
+          <div className="fp-room-tag" style={{ bottom: 2, right: 4 }}>Reading Room</div>
         </div>
+
+        {/* ── Gallery Wing ── */}
         <div className="lounge" onClick={onOpenGallery}>
-          <div className="lounge-label">Gallery Lounge<br />(click to browse art)</div>
-          <div className="table-round" style={{ left: "14%", top: "8%" }} />
-          <div className="chair" style={{ left: "10%", top: "2%" }} />
-          <div className="table-round" style={{ left: "36%", top: "32%" }} />
-          <div className="chair" style={{ left: "32%", top: "26%" }} />
-          <div className="chair" style={{ left: "52%", top: "38%" }} />
-          <div className="table-round" style={{ left: "20%", top: "62%" }} />
-          <div className="chair" style={{ left: "16%", top: "56%" }} />
-          <div className="chair" style={{ left: "36%", top: "68%" }} />
+          <div className="lounge-label">Gallery Lounge</div>
+          {/* artwork frames on left wall */}
+          <div className="gal-frame" style={{ left: "6%", top: "14%", width: "22%", height: "18%" }}>
+            <div className="gal-frame-inner" />
+          </div>
+          <div className="gal-frame" style={{ left: "6%", top: "38%", width: "22%", height: "18%" }}>
+            <div className="gal-frame-inner" />
+          </div>
+          <div className="gal-frame" style={{ left: "6%", top: "62%", width: "22%", height: "18%" }}>
+            <div className="gal-frame-inner" />
+          </div>
+          {/* artwork frames on right wall */}
+          <div className="gal-frame" style={{ right: "6%", top: "14%", width: "22%", height: "18%" }}>
+            <div className="gal-frame-inner" />
+          </div>
+          <div className="gal-frame" style={{ right: "6%", top: "38%", width: "22%", height: "18%" }}>
+            <div className="gal-frame-inner" />
+          </div>
+          <div className="gal-frame" style={{ right: "6%", top: "62%", width: "22%", height: "18%" }}>
+            <div className="gal-frame-inner" />
+          </div>
+          {/* bench in center */}
+          <div className="gal-bench" style={{ left: "28%", top: "44%", width: "44%", height: "12%" }} />
+          <div className="fp-room-tag" style={{ bottom: 4, left: "50%", transform: "translateX(-50%)" }}>click to browse</div>
         </div>
+
+        {/* ── Compass rose (decorative SVG) ── */}
+        <svg className="fp-compass" viewBox="0 0 30 30" fill="none">
+          <polygon points="15,2 17,13 15,11 13,13" fill="#5a4a35" />
+          <polygon points="15,28 17,17 15,19 13,17" fill="#5a4a35" />
+          <polygon points="2,15 13,13 11,15 13,17" fill="#5a4a35" />
+          <polygon points="28,15 17,13 19,15 17,17" fill="#5a4a35" />
+          <circle cx="15" cy="15" r="2.5" fill="#5a4a35" />
+          <text x="15" y="7" textAnchor="middle" fontSize="4" fill="#5a4a35" fontWeight="bold">N</text>
+        </svg>
       </div>
     </div>
   );
