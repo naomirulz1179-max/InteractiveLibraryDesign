@@ -1,4 +1,11 @@
 import { useState } from "react";
+import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import imgDuncanson from "@/imports/Robert_Duncanson_-_Land_of_the_Lotos_Eaters.jpg";
+import imgBannister from "@/imports/under-the-oak_480x480.jpg";
+import imgDouglas from "@/imports/aspects_of_negro_life.jpg";
+import imgRinggold from "@/imports/Ringgold-American-People-Series-20-Die-800x399.jpg";
+import imgBasquiat from "@/imports/untitled_jmb.jpg";
+import imgKaphar from "@/imports/kaphar-analogous-colors-2023-03-e1727816005210.jpg";
 
 // ─── Type colours & labels (exact from source) ───────────────────────────────
 const TC: Record<string, string> = {
@@ -14,7 +21,8 @@ const TL: Record<string, string> = {
 interface TEvent { year: string; type: string; title: string; desc: string; }
 interface BookPages { form: string; aboutPoem: string[]; historyTitle: string; historyParas: string[]; sourceUrl: string; sourceDomain: string; }
 interface BookData { title: string; author: string; year: string; bio: string; context: string; pages?: BookPages; }
-interface ArtData { title: string; artist: string; year: string; style: string; bio: string; context: string; medium: string; dimensions: string; institution: string; link: string; }
+interface ArtPages { aboutWork: string[]; aboutArtist: string[]; contextParas: string[]; }
+interface ArtData { title: string; artist: string; year: string; style: string; bio: string; context: string; medium: string; dimensions: string; institution: string; link: string; img: string; artPages: ArtPages; }
 interface Era {
   name: string; years: string; wall: string; color1: string; color2: string;
   blurb: string; books: BookData[]; art: ArtData;
@@ -42,7 +50,12 @@ const eras: Era[] = [
       style: "linear-gradient(160deg, #3d5a3a 0%, #6b8c4a 35%, #d9c67a 60%, #7a9bb5 100%)",
       bio: "Robert S. Duncanson was one of the first Black American artists to achieve international recognition, working in the Hudson River School landscape tradition.",
       context: "Painted in 1861 as the Civil War began; Duncanson, based in Cincinnati near the Ohio River border with slave states, used sweeping landscape painting partly to sidestep the racial barriers that blocked Black portraitists from White patrons.",
-      medium: "Oil on canvas", dimensions: "52⅜ × 87½ in. (133 × 222.3 cm)", institution: "Tennessee State Museum, Nashville", link: "https://tnmuseum.org/permanentcollections/posts/land-of-the-lotus-eaters" },
+      medium: "Oil on canvas", dimensions: "52⅜ × 87½ in. (133 × 222.3 cm)", institution: "Smithsonian Magazine", link: "https://www.smithsonianmag.com/arts-culture/americas-forgotten-landscape-painter-robert-s-duncanson-112952174/", img: imgDuncanson,
+      artPages: {
+        aboutWork: ["The painting depicts the mythological island from Homer's Odyssey where lotus-eaters offer travelers a fruit that erases all desire to return home. Duncanson renders it as a sweeping Hudson River School landscape — soft golden light, mist-draped water, tiny figures dwarfed by lush vegetation — with no sign of the world's violence anywhere on the canvas.", "The choice of subject is historically charged. Painted at the outset of the Civil War by a man who had been born legally free but had navigated a society that denied full humanity to people of his race, the dreamscape reads as both an escapist vision and a pointed commentary: liberty as an unreachable mythological country, perpetually just out of reach."],
+        aboutArtist: ["Robert S. Duncanson (c. 1821–1872) was born in Fayette, New York to a free Black mother and a Scottish-Canadian father. He settled in Cincinnati, then one of the largest cities in the Midwest and a hub of abolitionist activity, where he received early patronage from the anti-slavery philanthropist Nicholas Longworth.", "He became one of the first Black American artists to achieve international recognition, exhibiting in the United States, Canada, Scotland, and Ireland. Working in the Hudson River School tradition, he painted landscapes, literary scenes, and mythology rather than portraits — a practical strategy in a market where white patrons were reluctant to commission Black artists for figurative work.", "He traveled to Europe during the Civil War years for safety and opportunity. His final years were marked by deteriorating mental health; he died in Detroit in 1872 after a breakdown during a public exhibition of his work."],
+        contextParas: ["Duncanson completed the canvas in 1861 as Southern states seceded and the Civil War began. Cincinnati sat on the Ohio River border between free and slave territory, making it a key stop on the Underground Railroad and a city permanently charged with the proximity of slavery.", "During the 1850s, the city had been shaken by highly publicized escapes and recaptures of enslaved people crossing from Kentucky, including the case of Margaret Garner — whose story Toni Morrison would later adapt in Beloved. Duncanson painted his otherworldly retreats in this environment, where the question of who was and was not free was a daily, urgent reality."]
+      } },
     timeline: [
       { year: "1619", type: "milestone", title: "First Enslaved Africans Arrive in Virginia", desc: "A ship carrying enslaved Africans arrived at Point Comfort, Virginia, beginning over two centuries of chattel slavery in what became the United States." },
       { year: "1793", type: "legislation", title: "Fugitive Slave Act of 1793", desc: "Allowed enslavers to reclaim escaped enslaved people across state lines, including from free states." },
@@ -77,7 +90,12 @@ const eras: Era[] = [
       style: "linear-gradient(160deg, #4a5c33 0%, #7a8f4a 40%, #b5a15f 70%, #5c4a2e 100%)",
       bio: "Edward Mitchell Bannister was a self-taught Rhode Island landscape painter and a founder of the Providence Art Club.",
       context: "This painting won a first-place medal at the 1876 Centennial Exposition in Philadelphia; when Bannister arrived to claim it, judges initially tried to withdraw the prize on learning he was Black, before fellow artists forced them to honor it.",
-      medium: "Oil on canvas", dimensions: "40 × 54 in. (101.6 × 137.2 cm)", institution: "Smithsonian American Art Museum, Washington, D.C.", link: "https://americanart.si.edu/artist/edward-mitchell-bannister-199" },
+      medium: "Oil on canvas", dimensions: "40 × 54 in. (101.6 × 137.2 cm)", institution: "Black Art in America", link: "https://www.blackartinamerica.com/blogs/news/baia-bits-edward-mitchell-bannister", img: imgBannister,
+      artPages: {
+        aboutWork: ["A quiet pastoral landscape: an open meadow beneath spreading oaks, painted in warm afternoon light with the loose, tonal handling Bannister developed from the French Barbizon school. The mood is contemplative, unhurried — nothing in the picture announces the confrontation its creation caused.", "The painting won first prize at the 1876 Philadelphia Centennial Exposition, America's first World's Fair, competing against hundreds of entries by white artists. When Bannister arrived to claim his medal, Centennial officials initially refused to believe a Black man had made the winning painting and attempted to deny him the award. He was only admitted to the exhibition hall and the prize honored after fellow exhibiting artists publicly vouched for him."],
+        aboutArtist: ["Edward Mitchell Bannister (1828–1901) was born in St. Andrews, New Brunswick, Canada, and moved to Boston as a young man, later settling permanently in Providence, Rhode Island.", "He was largely self-taught and became one of the leading landscape painters of New England, a founding member of the Providence Art Club, and a respected figure in Rhode Island's art community — a community that was otherwise almost entirely white.", "He later said that a derisive 1867 New York Herald article claiming that Black people could appreciate art but were incapable of producing it had been a direct motivator for his career. His Centennial prize was, for him and for Black Americans following the story, a documented public refutation of that claim."],
+        contextParas: ["The 1876 Centennial Exposition celebrated the hundredth anniversary of American independence — an occasion freighted with racial irony. Legal slavery had ended only eleven years earlier, Black men had held federal office during Reconstruction, and yet the ceremony of national self-congratulation proceeded largely as a white event, in a country still enforcing segregation and political disenfranchisement across the South.", "The Compromise of 1877, reached the following year, withdrew federal troops from the South and effectively ended Reconstruction. The systematic rollback of Black voting rights, officeholding, and legal protections that followed — through violence, fraud, and law — made Bannister's recognized artistry and his moment of public dignity at the Centennial all the more exceptional."]
+      } },
     timeline: [
       { year: "1865", type: "amendment", title: "13th Amendment Ratified", desc: "Abolished slavery and involuntary servitude throughout the United States, except as punishment for a crime." },
       { year: "1865-66", type: "legislation", title: "Black Codes Enacted", desc: "Southern states passed restrictive laws limiting the rights and freedoms of Black Americans, re-imposing many controls of slavery." },
@@ -111,7 +129,12 @@ const eras: Era[] = [
       style: "linear-gradient(160deg, #2e2a4a 0%, #5a4a8c 30%, #b56a3a 60%, #2e1c14 100%)",
       bio: "Aaron Douglas was known as the 'father of Black American art,' developing a signature style of silhouetted figures and geometric color that defined the visual language of the Harlem Renaissance.",
       context: "Painted as a WPA-funded mural for the New York Public Library's Harlem branch during the Great Depression, tracing Black history from Africa through slavery to the urban North.",
-      medium: "Oil on canvas (mural cycle, 4 panels)", dimensions: "Each panel approx. 60 × 139 in. (152.4 × 353 cm)", institution: "Schomburg Center for Research in Black Culture, NYPL, New York", link: "https://www.nypl.org/locations/schomburg" },
+      medium: "Oil on canvas (mural cycle, 4 panels)", dimensions: "Each panel approx. 60 × 139 in. (152.4 × 353 cm)", institution: "NYPL Digital Collections", link: "https://digitalcollections.nypl.org/items/242f84e0-c6f4-012f-6fee-58d385a7bc34?canvasIndex=0", img: imgDouglas,
+      artPages: {
+        aboutWork: ["\"Aspects of Negro Life\" is a cycle of four large murals commissioned for the 135th Street branch of the New York Public Library in Harlem. The panels trace a sweeping arc of Black American history: Africa before the slave trade, the Middle Passage and emancipation, the Great Migration north, and the ongoing struggle for rights and dignity in an urban America that had not made good on its promises.", "Douglas's signature style defines the work: silhouetted Black figures layered over concentric rings of color — violet, gold, green — with shafts of light cutting through crowd scenes that feel simultaneously ancient and urgently modern. The influence of African visual traditions and Art Deco geometry gives the Renaissance a graphic language that was immediately recognizable and widely imitated across the following decade."],
+        aboutArtist: ["Aaron Douglas (1899–1979) was born in Topeka, Kansas, trained at the University of Nebraska, and moved to Harlem in 1925 at the direct invitation of the philosopher Alain Locke, who was then assembling contributors for The New Negro — the anthology that defined the Harlem Renaissance in print.", "Douglas became the visual voice of the movement, illustrating covers for The Crisis and Opportunity magazines and working with writers including Langston Hughes and Countee Cullen. His work was the first to synthesize African visual forms with American modernism in a way that felt neither derivative nor exoticized.", "After the Harlem years he taught at Fisk University in Nashville for over thirty years, shaping generations of Black artists who passed through its art department. He is widely credited as the founding figure of a distinctly African American visual modernism."],
+        contextParas: ["The murals were completed in 1934, during the Great Depression, funded through the Public Works of Art Project — a New Deal predecessor to the Works Progress Administration that paid artists to create public work during mass unemployment.", "The 135th Street library branch had become the intellectual center of Black Harlem. Its collection of African and African American history and culture, assembled by the Puerto Rican–born scholar Arturo Schomburg, drew researchers from across the diaspora and made it a place where Black history was treated as a serious scholarly subject at a time when white academic institutions largely ignored it.", "The New Deal programs that funded this work were simultaneously a form of relief and a vehicle of racial discrimination: the federal agencies administering them frequently excluded Black workers or paid them at lower rates, and segregated housing programs built specifically for white families. Douglas's murals were installed in a building serving a community that the government was, at the same moment, both funding and excluding."]
+      } },
     timeline: [
       { year: "1909", type: "organization", title: "NAACP Founded", desc: "The National Association for the Advancement of Colored People formed to fight for civil rights through legal action and advocacy." },
       { year: "1910s-30s", type: "milestone", title: "The Great Migration", desc: "Millions of Black Americans moved from the rural South to cities in the North, Midwest, and West seeking work and escape from segregation." },
@@ -144,7 +167,12 @@ const eras: Era[] = [
       style: "linear-gradient(160deg, #8c1c1c 0%, #4a1414 40%, #d9c67a 65%, #1a1a1a 100%)",
       bio: "Faith Ringgold is a painter and quilt artist whose work confronts race and gender in American life; she later became known for her narrative story quilts.",
       context: "Painted during the 1967 uprisings in Newark and Detroit, sparked by police violence and economic inequality; Ringgold depicted graphic interracial violence to force viewers to confront the era's racial unrest directly.",
-      medium: "Oil on canvas", dimensions: "72 × 144 in. (182.9 × 365.8 cm)", institution: "Museum of Modern Art (MoMA), New York", link: "https://www.moma.org/collection/works/79299" },
+      medium: "Oil on canvas", dimensions: "72 × 144 in. (182.9 × 365.8 cm)", institution: "Museum of Modern Art (MoMA), New York", link: "https://www.moma.org/collection/works/199915", img: imgRinggold,
+      artPages: {
+        aboutWork: ["\"Die\" is the twentieth and final painting in Ringgold's American People Series (1963–1967), and its most confrontational. The canvas shows a violent street scene: Black and white figures — men, women, children — caught in a melee, bleeding, fleeing, falling. A small child crawls through the legs of fighting adults who don't see her.", "Ringgold modeled the composition deliberately on Picasso's Guernica — borrowing its panoramic scale, its monumental horror, and its insistence that this violence deserves to be seen as a historical catastrophe rather than a local incident. The implicit argument: American racial violence warranted the same gravity that European modernism had extended to the Spanish Civil War. MoMA, which owns Guernica's study materials, did not acquire \"Die\" until 2005, nearly forty years after it was painted."],
+        aboutArtist: ["Faith Ringgold (1930–2024) grew up in Harlem and studied at the City College of New York, where she was initially directed away from the fine arts program. She became a painter, sculptor, performance artist, and writer whose work across six decades consistently refused to separate aesthetic ambition from political necessity.", "She was also a prominent activist in the art world itself: she organized campaigns against the exclusion of Black and women artists from major New York museum exhibitions in the late 1960s and early 1970s, targeting the Whitney Museum and the Museum of Modern Art directly.", "She is perhaps best known today for her narrative story quilts — particularly Tar Beach (1988) — which combined painting, quilted fabric borders, and written narrative to tell stories that moved between autobiography, myth, and history. She published more than twenty children's books, many based on the quilts."],
+        contextParas: ["\"Die\" was completed in 1967, the year of the Newark and Detroit uprisings — the largest urban rebellions in American history since the Civil War — triggered by decades of police brutality, residential segregation, and the systematic economic exclusion of Black city residents.", "The Kerner Commission, appointed by President Lyndon Johnson to investigate the uprisings, delivered its report the following year. Its central conclusion — that \"white racism\" was the primary cause, not Black militancy — was largely ignored by the administration that commissioned it. Johnson declined to present the report publicly.", "Ringgold's decision to depict the violence as shared — white and Black bodies equally caught, equally brutal — was a provocation aimed at viewers who preferred to understand racial conflict as something done to Black people, not a structure that damaged everyone inside it."]
+      } },
     timeline: [
       { year: "1954", type: "court", title: "Brown v. Board of Education", desc: "Supreme Court unanimously ruled that racial segregation in public schools was unconstitutional, overturning Plessy v. Ferguson." },
       { year: "1955-56", type: "protest", title: "Montgomery Bus Boycott", desc: "A 381-day boycott sparked by Rosa Parks' arrest led to the desegregation of Montgomery's public buses." },
@@ -178,7 +206,12 @@ const eras: Era[] = [
       style: "linear-gradient(160deg, #d9c67a 0%, #2a2a2a 35%, #8c1c1c 65%, #1a1a1a 100%)",
       bio: "Jean-Michel Basquiat rose from New York's downtown street art scene to become one of the era's most celebrated painters, fusing text, symbols, and raw figuration.",
       context: "Painted at the height of Basquiat's career, as Black artists gained new visibility in a gallery system that had long excluded them, while cities like New York faced disinvestment and rising inequality in Black neighborhoods.",
-      medium: "Acrylic and oil paintstick on canvas", dimensions: "68⅛ × 60¼ in. (173 × 153 cm)", institution: "Private collection (sold Sotheby's New York, 2017)", link: "https://www.basquiat.com" },
+      medium: "Acrylic and oil paintstick on canvas", dimensions: "68⅛ × 60¼ in. (173 × 153 cm)", institution: "Sotheby's New York, 2017", link: "https://www.sothebys.com/en/auctions/ecatalogue/2017/contemporary-art-evening-auction-n09761/lot.24.html?locale=en", img: imgBasquiat,
+      artPages: {
+        aboutWork: ["The 1982 skull paintings are among Basquiat's most recognized works: a monumental skull rendered in fierce, rapid strokes — exposed teeth, scrawled text, crude cross-hatching — against a luminous yellow or orange ground. The skull is simultaneously a self-portrait, a medical diagram, an African mask, and a tag-based glyph, collapsing the boundaries between fine art, street writing, and anthropological specimen.", "The works meditate on Black mortality with a directness that made the art market uncomfortable even as it paid extraordinary prices for them. Basquiat was keenly aware of the contradiction: the same institutions that had always treated Black bodies as objects to be catalogued and consumed were now cataloguing and consuming his paintings about exactly that history. This particular untitled skull sold at Sotheby's in May 2017 for $110.5 million — then the highest auction price ever achieved for an American artist."],
+        aboutArtist: ["Jean-Michel Basquiat (1960–1988) was born in Brooklyn to a Haitian father and a Puerto Rican mother. He dropped out of school at seventeen and began his career tagging walls across lower Manhattan under the name SAMO© — a commentary on the art world's absorption of anything it deemed \"authentic\" from Black and brown communities.", "He broke into the gallery circuit in the early 1980s and became the first Black artist to achieve superstardom in the contemporary art world, exhibiting internationally and collaborating with Andy Warhol. He spoke openly about the racism embedded in the attention paid to him, describing the experience of being simultaneously celebrated and treated as an exotic spectacle.", "He died of a heroin overdose in 1988 at twenty-seven — an art world prince whose career lasted roughly six years and produced a body of work that has only grown in cultural and financial value in the decades since."],
+        contextParas: ["1982 was the peak year of Basquiat's output and the moment of his commercial breakthrough. New York City at the time was being defined by the crack epidemic, the AIDS crisis, and the Reagan administration's systematic withdrawal of federal investment from cities and public health — all of which fell hardest on Black and Latino communities in neighborhoods like the South Bronx and Harlem.", "The art world that was making Basquiat famous existed in explicit tension with this: the same decade that produced record auction prices and the international expansion of the contemporary art market was gutting the social infrastructure of the communities that had produced the street art culture from which he emerged.", "Basquiat worked with a speed and intensity that may partly reflect his awareness of how brief the art world's tolerance for Black artists at the center of its attention tended to be. His diaries and interviews from this period suggest a man who understood his position clearly and was painting as fast as he could."]
+      } },
     timeline: [
       { year: "1978", type: "court", title: "Regents of UC v. Bakke", desc: "Supreme Court upheld affirmative action in principle but ruled rigid racial quotas in admissions unconstitutional." },
       { year: "1980s", type: "legislation", title: "War on Drugs Escalates", desc: "Federal and state policy expanded mandatory minimum sentencing, contributing to a sharp rise in Black incarceration rates." },
@@ -209,7 +242,12 @@ const eras: Era[] = [
       style: "linear-gradient(160deg, #1a1a1a 0%, #8c1c1c 30%, #d9c67a 55%, #1a1a1a 100%)",
       bio: "Titus Kaphar is a painter and sculptor known for reworking historical portraiture to surface erased or overlooked Black figures.",
       context: "Created for a June 2020 TIME magazine cover depicting a Black mother holding the outline of an absent child, painted in direct response to George Floyd's murder and the nationwide Black Lives Matter protests that followed.",
-      medium: "Oil on canvas", dimensions: "Commissioned work (TIME cover format)", institution: "TIME Magazine / Kaphar Studio, New Haven, CT", link: "https://kapharstudio.com" },
+      medium: "Oil on canvas", dimensions: "Commissioned work (TIME cover format)", institution: "Oakland Museum of Art", link: "https://omart.org/artwork/analogous-colors/", img: imgKaphar,
+      artPages: {
+        aboutWork: ["\"Analogous Colors\" depicts a Black mother whose arms cradle a child-shaped void — the silhouette of a child cut away from the canvas entirely, replaced by bright, almost painful yellow light shining through the absence. The mother's expression is not grief exactly; it is something more sustained and more exhausting than grief.", "Kaphar has described the absent child as a reference to every Black child lost to racial violence, and to his own experience of dread as a Black father raising sons in America. The painting was commissioned for the cover of TIME magazine's June 22, 2020 issue, published in the weeks of global protest following George Floyd's murder, when that compound fear — specific loss, structural precariousness — had become impossible to ignore."],
+        aboutArtist: ["Titus Kaphar (born 1976) grew up in Kalamazoo, Michigan, and studied at the California College of the Arts and the Yale School of Art. He is known for works that intervene directly into the Western art-historical canon: paintings that expose the Black figures cropped from or rendered invisible in canonical portraits, canvases covered in tar to obscure white subjects, sections physically cut from completed works to make the overlooked visible.", "His practice is rooted in the idea that the history of art is also a history of who was deemed worth depicting, and that making that erasure legible is itself a political act. He received a MacArthur Foundation Fellowship in 2018.", "He co-founded NXTHVN, a studio incubator and arts education program in New Haven, Connecticut, designed to provide studio space, mentorship, and education to artists and high school students of color who would not otherwise have access to those resources."],
+        contextParas: ["The painting was made in the immediate aftermath of George Floyd's murder on May 25, 2020, and the global protests that followed — demonstrations in all fifty U.S. states and over sixty countries, widely described as the largest protest movement in American history.", "The summer of 2020 had already seen the killings of Ahmaud Arbery and Breonna Taylor; the combination of these deaths during a global pandemic that was itself killing Black Americans at disproportionate rates produced a sustained national reckoning with anti-Black violence unlike anything since the civil rights era in its scope and visibility.", "Kaphar painted the work in days and delivered it to TIME under the compressed timeline of a news commission — which makes the sustained emotional precision of the image all the more striking. The cover became one of the most widely circulated images of that moment, an artistic response to grief that arrived in the same news cycle as the events that caused it."]
+      } },
     timeline: [
       { year: "2013", type: "organization", title: "Black Lives Matter Founded", desc: "Movement founded after the acquittal of George Zimmerman in the shooting death of Trayvon Martin, growing into a national organizing force." },
       { year: "2014", type: "protest", title: "Ferguson Protests", desc: "The killing of Michael Brown by police sparked sustained protests and a national reckoning over policing and race." },
@@ -483,7 +521,7 @@ function EraOverlay({ eraIdx, onBack, onOpenBook, onOpenArt, onOpenTimeline, onO
           <div className="wall-content">
             <div className="frame-wrap" onClick={() => onOpenArt(era.art)}>
               <div className="frame">
-                <div className="frame-inner" style={{ background: era.art.style }} />
+                <ImageWithFallback src={era.art.img} alt={era.art.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
               <div className="art-caption">
                 <b>{era.art.title}</b>
@@ -561,7 +599,7 @@ function GalleryOverlay({ onBack, onPickArt }: {
           {eras.map((era, i) => (
             <div key={i} className="gallery-tile" onClick={() => onPickArt(i)}>
               <div className="frame">
-                <div className="frame-inner" style={{ background: era.art.style }} />
+                <ImageWithFallback src={era.art.img} alt={era.art.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
               <div className="art-caption">
                 <b>{era.art.title}</b>
@@ -674,7 +712,7 @@ function ArtModal({ art, eraName, onClose, onOpenInfo }: {
       <div className="art-card" onClick={e => e.stopPropagation()}>
         <button className="close-x" onClick={onClose}>×</button>
         <div className="art-frame-big">
-          <div className="art-canvas-big" style={{ background: art.style }} />
+          <ImageWithFallback src={art.img} alt={art.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
           <div className="art-plaque">
             <div className="t">{art.title}</div>
             <div className="s">{art.artist} · {art.year}</div>
@@ -689,14 +727,48 @@ function ArtModal({ art, eraName, onClose, onOpenInfo }: {
 function ArtInfoModal({ art, eraName, onClose }: {
   art: ArtData; eraName: string; onClose: () => void;
 }) {
+  const [pg, setPg] = useState(0);
+  const { aboutWork, aboutArtist, contextParas } = art.artPages;
+
+  const pages = [
+    { label: "About the Work", heading: art.title, paras: aboutWork },
+    { label: "About the Artist", heading: art.artist, paras: aboutArtist },
+    { label: "Sociopolitical Context", heading: eraName, paras: contextParas },
+  ];
+
+  const isLast = pg === pages.length;
+
   return (
     <div className="overlay" onClick={onClose}>
-      <div className="info-card" onClick={e => e.stopPropagation()}>
+      <div className="info-card" onClick={e => e.stopPropagation()} style={{ width: "min(600px, 92vw)" }}>
         <button className="info-close" onClick={onClose}>×</button>
-        <h2>{art.title}</h2>
-        <div className="info-author-line">{art.artist} · {art.year} · {eraName}</div>
-        <div className="info-section"><h3>About the Artist</h3><p>{art.bio}</p></div>
-        <div className="info-section"><h3>Sociopolitical Context</h3><p>{art.context}</p></div>
+        {!isLast ? (
+          <>
+            <div style={{ fontSize: "0.63rem", letterSpacing: "1.3px", textTransform: "uppercase", color: "#9a6b2f", marginBottom: 6 }}>{pages[pg].label}</div>
+            <h2>{pages[pg].heading}</h2>
+            <div className="info-author-line">{art.artist} · {art.medium} · {art.year}</div>
+            <div className="info-section">
+              {pages[pg].paras.map((p, i) => <p key={i}>{p}</p>)}
+            </div>
+          </>
+        ) : (
+          <div style={{ textAlign: "center", padding: "24px 0 8px" }}>
+            <div style={{ width: 48, height: 48, borderRadius: "50%", background: "linear-gradient(135deg, #c9a24a, #7a5b23 40%, #c9a24a 60%, #6b4d1c)", margin: "0 auto 16px", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 10px rgba(0,0,0,0.3)" }}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff8e8" strokeWidth="1.6" width="22" height="22"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <h2 style={{ marginBottom: 4 }}>{art.title}</h2>
+            <div className="info-author-line">{art.artist} · {art.year}</div>
+            <div style={{ fontSize: "0.78rem", color: "#6e6248", margin: "6px 0 4px" }}>{art.medium}</div>
+            <div style={{ fontSize: "0.78rem", color: "#6e6248", marginBottom: 6 }}>{art.dimensions}</div>
+            <div style={{ fontSize: "0.72rem", color: "#9a6b2f", marginBottom: 18 }}>{art.institution}</div>
+            <a href={art.link} target="_blank" rel="noopener" style={{ display: "inline-block", padding: "10px 22px", background: "#6b2e1f", color: "#f4e9c9", borderRadius: 3, textDecoration: "none", fontFamily: "Georgia, serif", fontSize: "0.8rem", letterSpacing: "0.5px", boxShadow: "0 4px 10px rgba(0,0,0,0.2)" }}>View at {art.institution.split(",")[0]} →</a>
+          </div>
+        )}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 22, paddingTop: 12, borderTop: "1px solid #d8c9a3" }}>
+          <button disabled={pg === 0} onClick={() => setPg(p => p - 1)} style={{ background: pg === 0 ? "transparent" : "#9a6b2f", color: pg === 0 ? "#c8b898" : "#fff", border: pg === 0 ? "1px solid #d8c9a3" : "none", padding: "7px 14px", borderRadius: 3, cursor: pg === 0 ? "default" : "pointer", fontSize: "0.78rem", fontFamily: "Georgia, serif" }}>← Previous</button>
+          <span style={{ fontSize: "0.68rem", color: "#9a6b2f", letterSpacing: "0.5px" }}>{pg + 1} / {pages.length + 1}</span>
+          <button disabled={pg === pages.length} onClick={() => setPg(p => p + 1)} style={{ background: pg === pages.length ? "transparent" : "#9a6b2f", color: pg === pages.length ? "#c8b898" : "#fff", border: pg === pages.length ? "1px solid #d8c9a3" : "none", padding: "7px 14px", borderRadius: 3, cursor: pg === pages.length ? "default" : "pointer", fontSize: "0.78rem", fontFamily: "Georgia, serif" }}>Next →</button>
+        </div>
       </div>
     </div>
   );
