@@ -363,6 +363,15 @@ const CSS = `
   }
   /* ── Compass rose ── */
   .fp-compass { position: absolute; right: 1.5%; bottom: 2%; width: 30px; height: 30px; opacity: 0.35; pointer-events: none; }
+  /* ── Ceiling light fixture ── */
+  .fp-light { position: absolute; pointer-events: none; transform: translate(-50%,-50%); opacity: 0.7; }
+  /* ── Window symbols ── */
+  .fp-win { position: absolute; pointer-events: none; background: #d4eaf5; border: 1.5px solid #5a4a35; }
+  .fp-win-h::after { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: #5a4a35; }
+  .fp-win-v::after { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: #5a4a35; }
+  /* ── Study table + chairs ── */
+  .fp-tbl { position: absolute; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #9a7448, #6a4c28); box-shadow: 0 2px 5px rgba(0,0,0,0.35); pointer-events: none; }
+  .fp-chr { position: absolute; background: #b08858; border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.3); pointer-events: none; }
   /* ── Room walls (shared) ── */
   .fp-room {
     position: absolute;
