@@ -474,6 +474,9 @@ const CSS = `
   .didactic-panel .dp-sub { font-style: italic; color: #6e6248; font-size: 0.8rem; margin-bottom: 4px; }
   .didactic-panel .dp-label { font-size: 0.6rem; letter-spacing: 1.2px; text-transform: uppercase; color: #9a6b2f; border-bottom: 1px solid #d8c9a3; padding-bottom: 4px; margin: 12px 0 10px; }
   .dp-evdesc { font-size: 0.74rem; line-height: 1.4; color: #3a2a1c; }
+  .dp-event-btn { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; padding: 8px 12px; background: #6b2e1f; color: #f4e9c9; border-radius: 3px; font-size: 0.72rem; font-family: Georgia, serif; letter-spacing: 0.4px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); transition: background 0.15s, transform 0.12s; }
+  .didactic-panel:hover .dp-event-btn { background: #8c3d28; transform: translateX(2px); }
+  .dp-event-btn-arrow { font-size: 0.9rem; line-height: 1; }
   .bookcase { background: linear-gradient(180deg, #5a3d22, #3f2a17); padding: 16px 16px 0; border-radius: 4px 4px 0 0; box-shadow: inset 0 0 0 3px rgba(0,0,0,0.25), 0 6px 18px rgba(0,0,0,0.4); }
   .books-row { display: flex; gap: 12px; align-items: flex-end; padding: 14px 10px 0; flex-wrap: wrap; }
   .shelf-board { height: 22px; margin: 0 -16px; background: repeating-linear-gradient(90deg, #7a5230 0px, #6e492b 3px, #7a5230 6px), linear-gradient(180deg, #8a5f36, #4e3419); box-shadow: inset 0 3px 4px rgba(255,255,255,0.08), inset 0 -6px 10px rgba(0,0,0,0.5), 0 6px 8px rgba(0,0,0,0.45); border-bottom: 2px solid #2c1c0d; }
@@ -482,9 +485,38 @@ const CSS = `
   .book-spine::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(180deg, transparent 0px, transparent 24px, rgba(0,0,0,0.3) 24px, rgba(0,0,0,0.3) 27px, transparent 27px, transparent 30px); pointer-events: none; }
   .book-spine::after { content: ''; position: absolute; top: 0; bottom: 0; left: 4px; width: 3px; background: rgba(255,255,255,0.18); pointer-events: none; }
   .spine-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.62rem; font-weight: bold; letter-spacing: 0.4px; color: #f2e6c2; text-shadow: 0 1px 1px rgba(0,0,0,0.5); z-index: 2; }
-  .bookend { flex: 0 0 auto; width: 38px; height: 178px; cursor: pointer; border-radius: 3px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; position: relative; background: linear-gradient(160deg, #2c2418 0%, #17130c 100%); box-shadow: 2px 3px 6px rgba(0,0,0,0.55), inset -4px 0 8px rgba(0,0,0,0.4), inset 3px 0 3px rgba(255,255,255,0.08); border: 2px solid rgba(0,0,0,0.45); transition: transform 0.18s ease, filter 0.18s ease; }
-  .bookend:hover { transform: translateY(-8px); filter: brightness(1.25); }
-  .bookend-label { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.56rem; letter-spacing: 0.6px; text-transform: uppercase; color: #d4af6a; white-space: nowrap; }
+  .bookend {
+    flex: 0 0 auto; width: 14px; height: 178px; cursor: pointer;
+    position: relative; overflow: visible;
+    background: linear-gradient(90deg, #0d0904 0%, #2e2010 20%, #5a3f1a 50%, #2e2010 80%, #0d0904 100%);
+    box-shadow: 1px 0 4px rgba(0,0,0,0.7), -1px 0 4px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,210,80,0.12);
+    border-radius: 2px 2px 0 0;
+    border: 1px solid #1a1208;
+    transition: transform 0.18s ease, filter 0.18s ease;
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* horizontal foot — left bookend foot extends right, right bookend foot extends left */
+  .bookend::after {
+    content: ''; position: absolute; bottom: -1px; height: 12px; width: 30px;
+    background: linear-gradient(180deg, #4a3214 0%, #26180a 60%, #1a1008 100%);
+    border-radius: 1px 1px 2px 2px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,200,60,0.1);
+    border: 1px solid #0e0a04;
+  }
+  .bookend-l::after { left: 0; }
+  .bookend-r::after { right: 0; }
+  /* decorative ridge on the panel */
+  .bookend::before {
+    content: ''; position: absolute; top: 14px; bottom: 18px; left: 4px; right: 4px;
+    background: linear-gradient(180deg,
+      rgba(255,200,60,0.14) 0%, rgba(255,200,60,0.06) 30%,
+      rgba(0,0,0,0.1) 70%, rgba(255,200,60,0.08) 100%);
+    border-radius: 1px;
+    border: 1px solid rgba(255,200,60,0.1);
+    pointer-events: none;
+  }
+  .bookend:hover { transform: translateY(-6px); filter: brightness(1.4); }
+  .bookend-label { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.44rem; letter-spacing: 0.8px; text-transform: uppercase; color: #c9a050; white-space: nowrap; opacity: 0.75; z-index: 1; }
   .overlay { position: fixed; inset: 0; background: rgba(8,6,4,0.9); display: flex; align-items: center; justify-content: center; z-index: 300; padding: 20px; animation: fadeIn 0.2s ease; }
   .cover-card { width: 290px; position: relative; animation: popIn 0.22s ease; }
   .cover-face { height: 410px; border-radius: 3px; padding: 24px 22px; color: #fff; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 25px 55px rgba(0,0,0,0.6), inset 0 0 40px rgba(0,0,0,0.25); }
@@ -495,10 +527,12 @@ const CSS = `
   .cover-author { font-size: 0.95rem; font-style: italic; opacity: 0.95; }
   .cover-year { font-size: 0.78rem; opacity: 0.8; margin-top: 4px; }
   .cover-hint { font-size: 0.66rem; opacity: 0.75; }
-  .bookmark-tab { position: absolute; top: 0; right: 22px; width: 32px; height: 58px; background: #b5301f; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%); cursor: pointer; box-shadow: -2px 3px 6px rgba(0,0,0,0.35); display: flex; align-items: flex-start; justify-content: center; padding-top: 8px; transition: transform 0.15s ease, background 0.15s ease; z-index: 5; }
+  .bookmark-tab { position: absolute; top: 0; right: 60px; width: 32px; height: 58px; background: #b5301f; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%); cursor: pointer; box-shadow: -2px 3px 6px rgba(0,0,0,0.35); display: flex; align-items: flex-start; justify-content: center; padding-top: 8px; transition: transform 0.15s ease, background 0.15s ease; z-index: 5; }
   .bookmark-tab:hover { transform: translateY(4px); background: #d1432e; }
-  .close-x { position: absolute; top: -14px; left: -14px; width: 32px; height: 32px; border-radius: 50%; border: none; font-size: 1rem; cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.4); background: #e8dfc9; color: #24201a; }
-  .info-close { position: absolute; top: -14px; left: -14px; width: 32px; height: 32px; border-radius: 50%; border: none; font-size: 1rem; cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.4); background: #6b2e1f; color: #f7f1e1; }
+  .close-x { position: absolute; top: 10px; right: 10px; width: 34px; height: 34px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.25); font-size: 1.1rem; line-height: 1; cursor: pointer; z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.45); background: #e8dfc9; color: #24201a; display: flex; align-items: center; justify-content: center; transition: background 0.15s, transform 0.12s; }
+  .close-x:hover { background: #fff; transform: scale(1.1); }
+  .info-close { position: absolute; top: 10px; right: 10px; width: 34px; height: 34px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); font-size: 1.1rem; line-height: 1; cursor: pointer; z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.45); background: #6b2e1f; color: #f7f1e1; display: flex; align-items: center; justify-content: center; transition: background 0.15s, transform 0.12s; }
+  .info-close:hover { background: #8c3d28; transform: scale(1.1); }
   .info-card { width: min(560px, 90vw); max-height: 80vh; overflow-y: auto; background: #f7f1e1; color: #2c2416; border-radius: 6px; padding: 30px 32px; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.6); animation: popIn 0.22s ease; }
   .info-card h2 { font-size: 1.25rem; color: #6b2e1f; margin-bottom: 2px; }
   .info-author-line { font-style: italic; color: #6e6248; margin-bottom: 16px; font-size: 0.9rem; }
@@ -744,7 +778,7 @@ function EraOverlay({ eraIdx, onBack, onOpenBook, onOpenArt, onOpenTimeline, onO
   const era = eras[eraIdx];
   return (
     <div className="full-overlay">
-      <button className="back-btn" onClick={onBack}>← Floor Plan</button>
+      <button className="back-btn" onClick={onBack}>← Back to Library</button>
       <div className="room">
         <div className="wall" style={{ background: era.wall }}>
           <div className="room-header">
@@ -778,16 +812,15 @@ function EraOverlay({ eraIdx, onBack, onOpenBook, onOpenArt, onOpenTimeline, onO
                 onClick={e => e.stopPropagation()}
                 style={{ display: "inline-block", fontSize: "0.7rem", color: "#6b2e1f", borderBottom: "1px solid #c9a05c", paddingBottom: 1, textDecoration: "none", letterSpacing: "0.3px", marginBottom: 10 }}
               >View original artwork →</a>
-              <div className="dp-label" style={{ marginTop: 4 }}>Related Events</div>
-              <div style={{ fontSize: "0.82rem", color: "#3a2a1c", marginTop: 8 }}>
-                Click this panel to view landmark events connected to the artist and artwork.
+              <div className="dp-event-btn">
+                <span>View related events</span>
+                <span className="dp-event-btn-arrow">→</span>
               </div>
             </div>
           </div>
           <div className="bookcase">
             <div className="books-row">
-              <div className="bookend" onClick={() => onOpenTimeline(eraIdx)} title="View era timeline">
-                <BookendSVG />
+              <div className="bookend bookend-l" onClick={() => onOpenTimeline(eraIdx)} title="View era timeline">
                 <div className="bookend-label">Timeline</div>
               </div>
               {era.books.map((b, bi) => (
@@ -800,8 +833,7 @@ function EraOverlay({ eraIdx, onBack, onOpenBook, onOpenArt, onOpenTimeline, onO
                   <div className="spine-text">{b.title}</div>
                 </div>
               ))}
-              <div className="bookend" onClick={() => onOpenTimeline(eraIdx)} title="View era timeline">
-                <BookendSVG />
+              <div className="bookend bookend-r" onClick={() => onOpenTimeline(eraIdx)} title="View era timeline">
                 <div className="bookend-label">Timeline</div>
               </div>
             </div>
@@ -821,7 +853,7 @@ function GalleryOverlay({ onBack, onPickArt }: {
 }) {
   return (
     <div className="full-overlay">
-      <button className="back-btn" onClick={onBack}>← Floor Plan</button>
+      <button className="back-btn" onClick={onBack}>← Back to Library</button>
       <div className="gallery-grid-wrap">
         <div className="room-header" style={{ justifyContent: "center", marginBottom: 6 }}>
           <div className="era-name">Gallery Lounge</div>
@@ -855,7 +887,7 @@ function ReadingRoomOverlay({ onBack, onPickBook }: {
 }) {
   return (
     <div className="full-overlay">
-      <button className="back-btn" onClick={onBack}>← Floor Plan</button>
+      <button className="back-btn" onClick={onBack}>← Back to Library</button>
       <div className="reading-grid-wrap">
         <div className="room-header" style={{ justifyContent: "center", marginBottom: 6 }}>
           <div className="era-name">Reading Room</div>
@@ -910,7 +942,6 @@ function BookCoverModal({ book, eraIdx, onClose, onOpenInfo }: {
             <div className="cover-author">{book.author}</div>
             <div className="cover-year">{book.year}</div>
           </div>
-          <div className="cover-hint">Click the bookmark ↑ for historical context</div>
         </div>
       </div>
     </div>
