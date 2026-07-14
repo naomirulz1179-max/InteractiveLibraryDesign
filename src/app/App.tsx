@@ -294,11 +294,24 @@ const CSS = `
   .lounge-label { position: absolute; top: 8%; left: 50%; transform: translateX(-50%); font-size: 0.75rem; letter-spacing: 1px; color: #fff2de; text-shadow: 0 1px 3px rgba(0,0,0,0.5); text-align: center; white-space: nowrap; }
   .table-round { position: absolute; width: 44px; height: 44px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #7a5636, #4d3620); box-shadow: 0 4px 8px rgba(0,0,0,0.4); }
   .chair { position: absolute; width: 14px; height: 18px; background: #6b5a45; border: 1px solid #3a2e1c; border-radius: 2px; }
-  .entrance-mat { position: absolute; left: 32%; top: 0%; width: 9%; height: 6%; background: #cdadd1; border-radius: 0 0 6px 6px; z-index: 2; }
-  .reading-room { position: absolute; left: 37%; top: 44%; width: 18%; height: 12%; background: #6b6458; border-radius: 4px; cursor: pointer; display: grid; grid-template-columns: repeat(2, 1fr); gap: 6%; padding: 8%; box-shadow: inset 0 0 0 2px rgba(0,0,0,0.2); }
+  .entrance-mat { position: absolute; left: 32%; top: 0%; width: 9%; height: 6%; background: #cdadd1; border-radius: 0 0 6px 6px; z-index: 2; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: filter 0.15s; }
+  .entrance-mat:hover { filter: brightness(1.12); }
+  .entrance-mat-label { font-size: 0.52rem; letter-spacing: 0.6px; font-weight: 700; color: #3a1a4a; text-transform: uppercase; }
+  .reading-room { position: absolute; left: 37%; top: 44%; width: 18%; height: 12%; background: #6b6458; border-radius: 4px; cursor: pointer; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4%; padding: 6%; box-shadow: inset 0 0 0 2px rgba(0,0,0,0.2); }
   .reading-room:hover { filter: brightness(1.15); }
-  .rr-table { background: #4a4438; border: 1px solid #2c2820; border-radius: 2px; }
+  .rr-spine { border-radius: 1px; height: 100%; }
   .reading-room-label { position: absolute; left: 37%; top: 38%; width: 18%; text-align: center; font-size: 0.62rem; color: rgba(255,255,255,0.7); letter-spacing: 0.5px; }
+  .reading-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 20px; padding: 10px; }
+  .book-tile { cursor: pointer; }
+  .book-tile:hover .book-cover-face { filter: brightness(1.2); transform: translateY(-3px) rotate(-0.5deg); }
+  .book-cover-face { aspect-ratio: 2/3; border-radius: 2px 8px 8px 2px; padding: 14px 12px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: -5px 5px 14px rgba(0,0,0,0.45), inset -3px 0 8px rgba(0,0,0,0.25); transition: filter 0.2s, transform 0.2s; color: rgba(255,255,255,0.92); position: relative; overflow: hidden; }
+  .book-cover-face::before { content: ""; position: absolute; left: 0; top: 0; width: 6px; height: 100%; background: rgba(0,0,0,0.25); border-radius: 2px 0 0 2px; }
+  .book-tile-era { font-size: 0.5rem; letter-spacing: 0.8px; text-transform: uppercase; opacity: 0.65; padding-left: 8px; }
+  .book-tile-title { font-size: 0.78rem; font-weight: 700; line-height: 1.2; margin-top: 6px; padding-left: 8px; }
+  .book-tile-author { font-size: 0.64rem; opacity: 0.75; margin-top: 4px; padding-left: 8px; }
+  .book-tile-year { font-size: 0.55rem; opacity: 0.55; padding-left: 8px; }
+  .book-tile-badge { font-size: 0.48rem; letter-spacing: 0.5px; text-transform: uppercase; background: rgba(255,255,255,0.18); border-radius: 2px; padding: 2px 5px; margin-left: 8px; align-self: flex-start; }
+  .reading-grid-wrap { max-width: 900px; margin: 0 auto; }
 
   .full-overlay { position: fixed; inset: 0; background: rgba(6,5,3,0.94); z-index: 200; overflow-y: auto; padding: 30px 16px 60px; animation: fadeIn 0.2s ease; }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -452,10 +465,16 @@ function TlTrack({ events }: { events: TEvent[] }) {
 
 // ─── Floor Plan ───────────────────────────────────────────────────────────────
 
-function FloorPlan({ onEnterEra, onOpenGallery, onOpenAbout }: {
+const SPINE_COLORS = [
+  "#8c4a20","#3a5c2a","#4a2a6b","#7a2020","#1a3a5c","#5c4a10",
+  "#2a5c4a","#6b3a10","#1c3a1c","#4a1c6b","#5c2a2a","#1a4a4a",
+];
+
+function FloorPlan({ onEnterEra, onOpenGallery, onOpenAbout, onOpenReadingRoom }: {
   onEnterEra: (i: number) => void;
   onOpenGallery: () => void;
   onOpenAbout: () => void;
+  onOpenReadingRoom: () => void;
 }) {
   return (
     <div className="floorplan-wrap">
@@ -476,10 +495,12 @@ function FloorPlan({ onEnterEra, onOpenGallery, onOpenAbout }: {
             </div>
           </div>
         ))}
-        <div className="entrance-mat" />
+        <div className="entrance-mat" onClick={onOpenAbout}>
+          <span className="entrance-mat-label">Welcome</span>
+        </div>
         <div className="reading-room-label">Reading Room</div>
-        <div className="reading-room" onClick={onOpenAbout}>
-          {Array.from({ length: 8 }).map((_, i) => <div key={i} className="rr-table" />)}
+        <div className="reading-room" onClick={onOpenReadingRoom}>
+          {SPINE_COLORS.map((c, i) => <div key={i} className="rr-spine" style={{ background: c }} />)}
         </div>
         <div className="lounge" onClick={onOpenGallery}>
           <div className="lounge-label">Gallery Lounge<br />(click to browse art)</div>
@@ -607,6 +628,46 @@ function GalleryOverlay({ onBack, onPickArt }: {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Reading Room Overlay ─────────────────────────────────────────────────────
+
+function ReadingRoomOverlay({ onBack, onPickBook }: {
+  onBack: () => void;
+  onPickBook: (book: BookData, eraIdx: number) => void;
+}) {
+  return (
+    <div className="full-overlay">
+      <button className="back-btn" onClick={onBack}>← Floor Plan</button>
+      <div className="reading-grid-wrap">
+        <div className="room-header" style={{ justifyContent: "center", marginBottom: 6 }}>
+          <div className="era-name">Reading Room</div>
+        </div>
+        <div className="era-blurb" style={{ textAlign: "center", margin: "0 auto 20px", maxWidth: 600 }}>
+          All featured poems from every era of the exhibit. Click any cover to read.
+        </div>
+        <div className="reading-grid">
+          {eras.map((era, eraIdx) =>
+            era.books.map((book, bookIdx) => (
+              <div key={`${eraIdx}-${bookIdx}`} className="book-tile" onClick={() => onPickBook(book, eraIdx)}>
+                <div className="book-cover-face" style={{ background: `linear-gradient(160deg, ${era.color1}, ${era.color2})` }}>
+                  <div>
+                    <div className="book-tile-era">{era.name}</div>
+                    <div className="book-tile-title">{book.title}</div>
+                    <div className="book-tile-author">{book.author}</div>
+                  </div>
+                  <div>
+                    <div className="book-tile-year">{book.year}</div>
+                    {book.pages && <div className="book-tile-badge">Full text</div>}
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>
@@ -812,7 +873,23 @@ function AboutModal({ onClose }: { onClose: () => void; }) {
         <button className="info-close" onClick={onClose}>×</button>
         <h2>Welcome to the Exhibit</h2>
         <div className="info-section">
-          <p>This museum walks through six eras of Black American poetry and art. Click any bookcase on the floor plan to step inside and browse its poems and artwork. Click a book for its cover, then the bookmark ribbon for historical context. Click the bookends on either side of a shelf for a timeline of major events from that era. A didactic panel beside each artwork adds further landmark events from that era. Visit the Gallery Lounge to browse all the featured artworks at once.</p>
+          <p>This museum traces six eras of Black American poetry and visual art — from enslaved poets writing under chattel slavery to contemporary painters responding to the Black Lives Matter movement. Each era is represented by a bookcase on the floor plan below.</p>
+        </div>
+        <div className="info-section">
+          <h3>The Bookcases</h3>
+          <p>Click any bookcase to step inside that era's room. There you'll find two featured poems and a major artwork from the period. Click a book spine to open its cover, then click the bookmark ribbon on the cover to enter a paginated reader with context about the poem and its historical moment. Click the bookend figures on either side of a shelf to open a timeline of major events from that era.</p>
+        </div>
+        <div className="info-section">
+          <h3>The Artworks</h3>
+          <p>Each era's room displays a featured painting or work. A didactic panel beside the artwork lists its medium, dimensions, and collection, and links to the original. Click the panel to see a curated timeline of landmark events connected to that era. Click the artwork frame itself to open an in-depth reader covering the work, the artist, and its sociopolitical context.</p>
+        </div>
+        <div className="info-section">
+          <h3>The Reading Room</h3>
+          <p>The rectangular Reading Room at the center of the floor plan collects all twelve featured poems in one place. Click any book cover to open its reader. Books marked "Full text" include the complete poem alongside historical background.</p>
+        </div>
+        <div className="info-section">
+          <h3>The Gallery Lounge</h3>
+          <p>The round lounge on the right side of the floor plan displays all six featured artworks as a browsable grid. Click any piece to open its story.</p>
         </div>
       </div>
     </div>
@@ -821,7 +898,7 @@ function AboutModal({ onClose }: { onClose: () => void; }) {
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 
-type View = "floor" | "era" | "gallery";
+type View = "floor" | "era" | "gallery" | "reading";
 
 export default function App() {
   const [view, setView] = useState<View>("floor");
@@ -839,6 +916,7 @@ export default function App() {
   const enterEra = (i: number) => { setCurrentEra(i); setView("era"); setSelectedBook(null); setSelectedArt(null); setTimelineEra(null); };
   const backToFloor = () => { setView("floor"); setCurrentEra(null); setSelectedBook(null); setSelectedArt(null); setTimelineEra(null); };
   const openGallery = () => { setView("gallery"); setGalleryPickEra(null); setGalleryPickInfo(false); };
+  const openReadingRoom = () => { setView("reading"); setSelectedBook(null); setShowBookInfo(false); };
 
   return (
     <div className="exhibit-root">
@@ -846,9 +924,9 @@ export default function App() {
 
       <div className="exhibit-title">Black American Poetry &amp; Art</div>
       <div className="exhibit-subtitle">A Museum Floor Plan Across Six Eras of Verse, Image, and Struggle</div>
-      <div className="exhibit-instructions">Click a bookcase to enter that era · click a bookend for the era timeline · click the round lounge to browse artworks</div>
+      <div className="exhibit-instructions">Click a bookcase to enter that era · click a bookend for the era timeline · click the round lounge to browse artworks · click the reading room to browse poems</div>
 
-      <FloorPlan onEnterEra={enterEra} onOpenGallery={openGallery} onOpenAbout={() => setShowAbout(true)} />
+      <FloorPlan onEnterEra={enterEra} onOpenGallery={openGallery} onOpenAbout={() => setShowAbout(true)} onOpenReadingRoom={openReadingRoom} />
 
       {/* Era overlay */}
       {view === "era" && currentEra !== null && (
@@ -867,6 +945,14 @@ export default function App() {
         <GalleryOverlay
           onBack={backToFloor}
           onPickArt={i => { setGalleryPickEra(i); setGalleryPickInfo(false); }}
+        />
+      )}
+
+      {/* Reading room overlay */}
+      {view === "reading" && (
+        <ReadingRoomOverlay
+          onBack={backToFloor}
+          onPickBook={(book, eraIdx) => { setSelectedBook({ book, eraIdx }); setShowBookInfo(false); }}
         />
       )}
 
