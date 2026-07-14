@@ -14,7 +14,7 @@ const TL: Record<string, string> = {
 interface TEvent { year: string; type: string; title: string; desc: string; }
 interface BookPages { form: string; aboutPoem: string[]; historyTitle: string; historyParas: string[]; sourceUrl: string; sourceDomain: string; }
 interface BookData { title: string; author: string; year: string; bio: string; context: string; pages?: BookPages; }
-interface ArtData { title: string; artist: string; year: string; style: string; bio: string; context: string; }
+interface ArtData { title: string; artist: string; year: string; style: string; bio: string; context: string; medium: string; dimensions: string; institution: string; link: string; }
 interface Era {
   name: string; years: string; wall: string; color1: string; color2: string;
   blurb: string; books: BookData[]; art: ArtData;
@@ -41,7 +41,8 @@ const eras: Era[] = [
     art: { title: "Land of the Lotus Eaters", artist: "Robert S. Duncanson", year: "1861",
       style: "linear-gradient(160deg, #3d5a3a 0%, #6b8c4a 35%, #d9c67a 60%, #7a9bb5 100%)",
       bio: "Robert S. Duncanson was one of the first Black American artists to achieve international recognition, working in the Hudson River School landscape tradition.",
-      context: "Painted in 1861 as the Civil War began; Duncanson, based in Cincinnati near the Ohio River border with slave states, used sweeping landscape painting partly to sidestep the racial barriers that blocked Black portraitists from White patrons." },
+      context: "Painted in 1861 as the Civil War began; Duncanson, based in Cincinnati near the Ohio River border with slave states, used sweeping landscape painting partly to sidestep the racial barriers that blocked Black portraitists from White patrons.",
+      medium: "Oil on canvas", dimensions: "52⅜ × 87½ in. (133 × 222.3 cm)", institution: "Tennessee State Museum, Nashville", link: "https://tnmuseum.org/permanentcollections/posts/land-of-the-lotus-eaters" },
     timeline: [
       { year: "1619", type: "milestone", title: "First Enslaved Africans Arrive in Virginia", desc: "A ship carrying enslaved Africans arrived at Point Comfort, Virginia, beginning over two centuries of chattel slavery in what became the United States." },
       { year: "1793", type: "legislation", title: "Fugitive Slave Act of 1793", desc: "Allowed enslavers to reclaim escaped enslaved people across state lines, including from free states." },
@@ -75,7 +76,8 @@ const eras: Era[] = [
     art: { title: "Under the Oaks", artist: "Edward Mitchell Bannister", year: "1876",
       style: "linear-gradient(160deg, #4a5c33 0%, #7a8f4a 40%, #b5a15f 70%, #5c4a2e 100%)",
       bio: "Edward Mitchell Bannister was a self-taught Rhode Island landscape painter and a founder of the Providence Art Club.",
-      context: "This painting won a first-place medal at the 1876 Centennial Exposition in Philadelphia; when Bannister arrived to claim it, judges initially tried to withdraw the prize on learning he was Black, before fellow artists forced them to honor it." },
+      context: "This painting won a first-place medal at the 1876 Centennial Exposition in Philadelphia; when Bannister arrived to claim it, judges initially tried to withdraw the prize on learning he was Black, before fellow artists forced them to honor it.",
+      medium: "Oil on canvas", dimensions: "40 × 54 in. (101.6 × 137.2 cm)", institution: "Smithsonian American Art Museum, Washington, D.C.", link: "https://americanart.si.edu/artist/edward-mitchell-bannister-199" },
     timeline: [
       { year: "1865", type: "amendment", title: "13th Amendment Ratified", desc: "Abolished slavery and involuntary servitude throughout the United States, except as punishment for a crime." },
       { year: "1865-66", type: "legislation", title: "Black Codes Enacted", desc: "Southern states passed restrictive laws limiting the rights and freedoms of Black Americans, re-imposing many controls of slavery." },
@@ -108,7 +110,8 @@ const eras: Era[] = [
     art: { title: "Aspects of Negro Life", artist: "Aaron Douglas", year: "1934",
       style: "linear-gradient(160deg, #2e2a4a 0%, #5a4a8c 30%, #b56a3a 60%, #2e1c14 100%)",
       bio: "Aaron Douglas was known as the 'father of Black American art,' developing a signature style of silhouetted figures and geometric color that defined the visual language of the Harlem Renaissance.",
-      context: "Painted as a WPA-funded mural for the New York Public Library's Harlem branch during the Great Depression, tracing Black history from Africa through slavery to the urban North." },
+      context: "Painted as a WPA-funded mural for the New York Public Library's Harlem branch during the Great Depression, tracing Black history from Africa through slavery to the urban North.",
+      medium: "Oil on canvas (mural cycle, 4 panels)", dimensions: "Each panel approx. 60 × 139 in. (152.4 × 353 cm)", institution: "Schomburg Center for Research in Black Culture, NYPL, New York", link: "https://www.nypl.org/locations/schomburg" },
     timeline: [
       { year: "1909", type: "organization", title: "NAACP Founded", desc: "The National Association for the Advancement of Colored People formed to fight for civil rights through legal action and advocacy." },
       { year: "1910s-30s", type: "milestone", title: "The Great Migration", desc: "Millions of Black Americans moved from the rural South to cities in the North, Midwest, and West seeking work and escape from segregation." },
@@ -140,7 +143,8 @@ const eras: Era[] = [
     art: { title: "American People Series #20: Die", artist: "Faith Ringgold", year: "1967",
       style: "linear-gradient(160deg, #8c1c1c 0%, #4a1414 40%, #d9c67a 65%, #1a1a1a 100%)",
       bio: "Faith Ringgold is a painter and quilt artist whose work confronts race and gender in American life; she later became known for her narrative story quilts.",
-      context: "Painted during the 1967 uprisings in Newark and Detroit, sparked by police violence and economic inequality; Ringgold depicted graphic interracial violence to force viewers to confront the era's racial unrest directly." },
+      context: "Painted during the 1967 uprisings in Newark and Detroit, sparked by police violence and economic inequality; Ringgold depicted graphic interracial violence to force viewers to confront the era's racial unrest directly.",
+      medium: "Oil on canvas", dimensions: "72 × 144 in. (182.9 × 365.8 cm)", institution: "Museum of Modern Art (MoMA), New York", link: "https://www.moma.org/collection/works/79299" },
     timeline: [
       { year: "1954", type: "court", title: "Brown v. Board of Education", desc: "Supreme Court unanimously ruled that racial segregation in public schools was unconstitutional, overturning Plessy v. Ferguson." },
       { year: "1955-56", type: "protest", title: "Montgomery Bus Boycott", desc: "A 381-day boycott sparked by Rosa Parks' arrest led to the desegregation of Montgomery's public buses." },
@@ -173,7 +177,8 @@ const eras: Era[] = [
     art: { title: "Untitled", artist: "Jean-Michel Basquiat", year: "1982",
       style: "linear-gradient(160deg, #d9c67a 0%, #2a2a2a 35%, #8c1c1c 65%, #1a1a1a 100%)",
       bio: "Jean-Michel Basquiat rose from New York's downtown street art scene to become one of the era's most celebrated painters, fusing text, symbols, and raw figuration.",
-      context: "Painted at the height of Basquiat's career, as Black artists gained new visibility in a gallery system that had long excluded them, while cities like New York faced disinvestment and rising inequality in Black neighborhoods." },
+      context: "Painted at the height of Basquiat's career, as Black artists gained new visibility in a gallery system that had long excluded them, while cities like New York faced disinvestment and rising inequality in Black neighborhoods.",
+      medium: "Acrylic and oil paintstick on canvas", dimensions: "68⅛ × 60¼ in. (173 × 153 cm)", institution: "Private collection (sold Sotheby's New York, 2017)", link: "https://www.basquiat.com" },
     timeline: [
       { year: "1978", type: "court", title: "Regents of UC v. Bakke", desc: "Supreme Court upheld affirmative action in principle but ruled rigid racial quotas in admissions unconstitutional." },
       { year: "1980s", type: "legislation", title: "War on Drugs Escalates", desc: "Federal and state policy expanded mandatory minimum sentencing, contributing to a sharp rise in Black incarceration rates." },
@@ -203,7 +208,8 @@ const eras: Era[] = [
     art: { title: "Analogous Colors", artist: "Titus Kaphar", year: "2020",
       style: "linear-gradient(160deg, #1a1a1a 0%, #8c1c1c 30%, #d9c67a 55%, #1a1a1a 100%)",
       bio: "Titus Kaphar is a painter and sculptor known for reworking historical portraiture to surface erased or overlooked Black figures.",
-      context: "Created for a June 2020 TIME magazine cover depicting a Black mother holding the outline of an absent child, painted in direct response to George Floyd's murder and the nationwide Black Lives Matter protests that followed." },
+      context: "Created for a June 2020 TIME magazine cover depicting a Black mother holding the outline of an absent child, painted in direct response to George Floyd's murder and the nationwide Black Lives Matter protests that followed.",
+      medium: "Oil on canvas", dimensions: "Commissioned work (TIME cover format)", institution: "TIME Magazine / Kaphar Studio, New Haven, CT", link: "https://kapharstudio.com" },
     timeline: [
       { year: "2013", type: "organization", title: "Black Lives Matter Founded", desc: "Movement founded after the acquittal of George Zimmerman in the shooting death of Trayvon Martin, growing into a national organizing force." },
       { year: "2014", type: "protest", title: "Ferguson Protests", desc: "The killing of Michael Brown by police sparked sustained protests and a national reckoning over policing and race." },
@@ -485,11 +491,22 @@ function EraOverlay({ eraIdx, onBack, onOpenBook, onOpenArt, onOpenTimeline, onO
               </div>
             </div>
             <div className="didactic-panel" onClick={() => onOpenDidacticTimeline(eraIdx)}>
-              <div className="dp-title">{era.art.artist}</div>
-              <div className="dp-sub">About the Artist · {era.art.year}</div>
-              <div className="dp-label">Biography</div>
-              <div className="dp-evdesc" style={{ marginBottom: 12 }}>{era.art.bio}</div>
-              <div className="dp-label" style={{ marginTop: 6 }}>Related Events</div>
+              <div className="dp-title">{era.art.title}</div>
+              <div className="dp-sub">{era.art.artist} · {era.art.year}</div>
+              <div className="dp-label">Medium</div>
+              <div className="dp-evdesc">{era.art.medium}</div>
+              <div className="dp-label" style={{ marginTop: 10 }}>Dimensions</div>
+              <div className="dp-evdesc">{era.art.dimensions}</div>
+              <div className="dp-label" style={{ marginTop: 10 }}>Collection</div>
+              <div className="dp-evdesc" style={{ marginBottom: 8 }}>{era.art.institution}</div>
+              <a
+                href={era.art.link}
+                target="_blank"
+                rel="noopener"
+                onClick={e => e.stopPropagation()}
+                style={{ display: "inline-block", fontSize: "0.7rem", color: "#6b2e1f", borderBottom: "1px solid #c9a05c", paddingBottom: 1, textDecoration: "none", letterSpacing: "0.3px", marginBottom: 10 }}
+              >View original artwork →</a>
+              <div className="dp-label" style={{ marginTop: 4 }}>Related Events</div>
               <div style={{ fontSize: "0.82rem", color: "#3a2a1c", marginTop: 8 }}>
                 Click this panel to view landmark events connected to the artist and artwork.
               </div>
