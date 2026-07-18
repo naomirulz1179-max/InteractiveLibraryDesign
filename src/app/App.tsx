@@ -429,10 +429,8 @@ const CSS = `
   }
   .reading-room:hover { filter: brightness(1.06); }
   .reading-room-label { position: absolute; left: 28%; top: 40%; width: 18%; text-align: center; font-size: 0.68rem; color: #3a2a14; letter-spacing: 1px; font-weight: 700; text-transform: uppercase; z-index: 3; }
-  /* oval table from above */
-  .rr-table { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 55%; height: 45%; background: radial-gradient(circle at 35% 30%, #8a6640, #5a3c20); border-radius: 50%; box-shadow: 0 3px 8px rgba(0,0,0,0.4), inset 0 0 4px rgba(255,255,255,0.08); }
-  /* chair (overhead view) */
-  .rr-chair { position: absolute; width: 18%; height: 16%; background: #a07848; border-radius: 2px; box-shadow: 0 1px 4px rgba(0,0,0,0.35); }
+  /* 2D floor-plan furniture (top view, outlined icon style) */
+  .rr-plan-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
   /* ── Entrance mat ── */
   .entrance-mat { position: absolute; left: 35%; top: 1%; width: 8%; height: 7%; height: 6%; background: #9b6db5; border-radius: 0 0 8px 8px; z-index: 2; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: filter 0.15s; box-shadow: 0 4px 10px rgba(0,0,0,0.4); border: 2px solid #7a4a96; border-top: none; }
   .entrance-mat:hover { filter: brightness(1.15); }
@@ -720,15 +718,29 @@ function FloorPlan({ onEnterEra, onOpenGallery, onOpenAbout, onOpenReadingRoom }
         {/* ── Reading Room ── */}
         <div className="reading-room-label">Reading Room</div>
         <div className="reading-room" onClick={onOpenReadingRoom}>
-          {/* oval table */}
-          <div className="rr-table" />
-          {/* 6 chairs around the table */}
-          <div className="rr-chair" style={{ top: "8%",  left: "38%" }} />
-          <div className="rr-chair" style={{ top: "8%",  left: "62%" }} />
-          <div className="rr-chair" style={{ top: "42%", left: "8%" }} />
-          <div className="rr-chair" style={{ top: "42%", right: "8%" }} />
-          <div className="rr-chair" style={{ bottom: "6%", left: "38%" }} />
-          <div className="rr-chair" style={{ bottom: "6%", left: "62%" }} />
+          {/* 2D floor-plan furniture icon: oval table with 8 chairs (top view) */}
+          <svg className="rr-plan-svg" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              {/* chair seen from above: rounded seat + backrest arc, pointing up */}
+              <g id="rr-chair-icon">
+                <path d="M -11 2 A 11 9 0 0 1 11 2 L 11 4 A 11 8 0 0 1 -11 4 Z" fill="#e9dfc6" stroke="#3d3226" strokeWidth="1.6" strokeLinejoin="round" />
+                <rect x="-8" y="0" width="16" height="12" rx="3" fill="#e9dfc6" stroke="#3d3226" strokeWidth="1.6" />
+              </g>
+            </defs>
+            {/* oval table */}
+            <ellipse cx="100" cy="65" rx="58" ry="27" fill="#a38f79" stroke="#3d3226" strokeWidth="2" />
+            {/* top chairs */}
+            <use href="#rr-chair-icon" transform="translate(66 26)" />
+            <use href="#rr-chair-icon" transform="translate(100 22)" />
+            <use href="#rr-chair-icon" transform="translate(134 26)" />
+            {/* bottom chairs */}
+            <use href="#rr-chair-icon" transform="translate(66 104) rotate(180)" />
+            <use href="#rr-chair-icon" transform="translate(100 108) rotate(180)" />
+            <use href="#rr-chair-icon" transform="translate(134 104) rotate(180)" />
+            {/* end chairs */}
+            <use href="#rr-chair-icon" transform="translate(28 65) rotate(-90)" />
+            <use href="#rr-chair-icon" transform="translate(172 65) rotate(90)" />
+          </svg>
           <div className="fp-room-tag" style={{ bottom: 2, right: 4 }}>Reading Room</div>
         </div>
 
