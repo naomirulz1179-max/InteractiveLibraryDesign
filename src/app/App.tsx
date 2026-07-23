@@ -6,6 +6,15 @@ import imgDouglas from "@/imports/aspects_of_negro_life.jpg";
 import imgRinggold from "@/imports/Ringgold-American-People-Series-20-Die-800x399.jpg";
 import imgBasquiat from "@/imports/untitled_jmb.jpg";
 import imgKaphar from "@/imports/kaphar-analogous-colors-2023-03-e1727816005210.jpg";
+import imgPostRecon from "@/imports/Written_and_Visual_07.09.png";
+import imgBanjoLesson from "@/imports/the-banjo-lesson-1893.jpg_Large.jpg";
+// Gallery perspective paintings (all 7 eras)
+import galDuncanson from "@/imports/Robert_Duncanson_-_Land_of_the_Lotos_Eaters-1.jpg";
+import galBannister from "@/imports/under-the-oak_480x480-1.jpg";
+import galDouglas from "@/imports/aspects_of_negro_life-1.jpg";
+import galRinggold from "@/imports/Ringgold-American-People-Series-20-Die-800x399-1.jpg";
+import galBasquiat from "@/imports/untitled_jmb-1.jpg";
+import galKaphar from "@/imports/kaphar-analogous-colors-2023-03-e1727816005210-1.jpg";
 
 // ─── Type colours & labels (exact from source) ───────────────────────────────
 const TC: Record<string, string> = {
@@ -45,6 +54,18 @@ const eras: Era[] = [
         bio: "Frances E. W. Harper was a free-born Black poet, abolitionist, and suffragist from Baltimore who became one of the most widely read Black poets of the 19th century.",
         context: "Published a year after the Fugitive Slave Act of 1850 intensified the separation of enslaved families through recapture, and amid rising tensions that would culminate in the Dred Scott decision of 1857 and the Civil War.",
         pages: { form: "A Poem · from Poems on Miscellaneous Subjects, 1854", aboutPoem: ["This short lyric depicts a mother's anguish at the moment of forced separation from her child, an all-too-common event under slavery, where families could be broken apart at auction with no warning and no recourse.", "Harper builds the poem through repeated images of physical and emotional pain, then closes by naming the woman simply as a mother, without any qualifying word for her race or legal status — a deliberate choice that asks the reader to recognize her grief as universal, not distant or abstract."], historyTitle: "Frances Ellen Watkins Harper", historyParas: ["Frances Ellen Watkins Harper was born free in Baltimore, Maryland in 1825, orphaned as a young child, and raised by an uncle who ran a school for free Black children. She became one of the first African American women to be widely published in the United States.", "This poem appeared in her 1854 collection Poems on Miscellaneous Subjects, prefaced by the prominent white abolitionist William Lloyd Garrison, and it sold well enough that Harper released an expanded edition a few years later.", "Alongside her writing, Harper worked as a public speaker on the abolitionist circuit and supported the Underground Railroad. After the Civil War she remained a lifelong activist, campaigning for civil rights, women's suffrage, and temperance, and she later wrote several novels, including Iola Leroy, one of the first novels published by a Black woman in the United States."], sourceUrl: "https://www.poetryfoundation.org/poems/51977/the-slave-mother-56d23017ceaad", sourceDomain: "poetryfoundation.org", excerpt: "Heard you that shriek? It rose\nSo wildly on the air,\nIt seemed as if a burden'd heart\nWas breaking in despair.\n\nSaw you those hands so sadly clasped—\nThe bowed and feeble head—\nThe shuddering of that fragile form—\nThat look of grief and dread?\n\nShe is a mother pale with fear,\nHer boy clings to her side,\nAnd in her kirtle vainly tries\nHis trembling form to hide." } },
+      { title: "Bars Fight", author: "Lucy Terry Prince", year: "1746",
+        bio: "Lucy Terry Prince, brought to Rhode Island in enslavement from Africa, composed this oral account of a raid in Deerfield, Massachusetts. Her husband Abijah Prince purchased his own freedom and later hers; she became a noted orator and landowner in Vermont.",
+        context: "Composed in 1746 as colonial tensions with Native nations flared along the New England frontier, this poem circulated orally for over a century before being published in 1855 — making it the oldest known work of literature by an African American.",
+        pages: { form: "An oral narrative poem of twenty-eight lines in rhyming couplets, preserved by memory and recitation for over a century before appearing in print in 1855.", aboutPoem: ["Terry Prince composed this poem as an eyewitness account of a 1746 raid by Abenaki warriors on the meadows of Deerfield, Massachusetts — named 'Bars Fight' after the local name for the riverside meadows. She names each settler killed or captured, giving the poem both documentary precision and the shape of an elegy.", "As the oldest known work of literature by an African American, 'Bars Fight' arrived not from the literary mainstream but from oral tradition — passed person to person for over a hundred years before it was written down. That survival is itself remarkable given how systematically the literacy and speech of enslaved people were suppressed."], historyTitle: "Lucy Terry Prince and Colonial New England", historyParas: ["Lucy Terry was abducted from Africa as an infant and enslaved in Rhode Island, then sold to Ebenezer Wells in Deerfield, Massachusetts, where she would live through the raid she describes. She was enslaved for most of her early life, composing the poem at around age sixteen.", "She married Abijah Prince, a free Black man, who purchased her freedom after their marriage in 1756. The couple moved to Vermont after emancipation, where they owned land and raised six children. She became known throughout Vermont for her eloquence and argued her own case before the state supreme court in a land dispute — winning the judges' admiration.", "Her poem was preserved orally until published by Josiah Holland in 1855 in his History of Western Massachusetts. The tradition of her poem had been passed down for over a hundred years through a community that valued her voice long before anyone thought to write it down."], sourceUrl: "https://www.poetry.com/poem/43236/bars-fight", sourceDomain: "poetry.com", excerpt: "August, 'twas the twenty-fifth,\nSeventeen hundred forty-six,\nThe Indians did in ambush lay,\nSome very valiant men to slay.\n'Twas nigh unto Sam Dickinson's mill,\nThe Indians there five men did kill.\n\nSamuel Allen like a hero foute,\nAnd though he was so brave and bold,\nHis face no more shall we behold.\nEleazer Hawks was killed outright,\nBefore he had time to fight." } },
+      { title: "To the Right Honourable William, Earl of Dartmouth", author: "Phillis Wheatley", year: "1773",
+        bio: "Phillis Wheatley was kidnapped from West Africa around age seven and enslaved in Boston. She became the first African American — and one of the first American women — to publish a book of poetry.",
+        context: "Published in Wheatley's landmark 1773 collection, the first book of poetry by an African American, the poem addresses a new British colonial secretary and embeds a first-person account of her own abduction from Africa.",
+        pages: { form: "An ode in heroic couplets addressed to William Legge, the Earl of Dartmouth, on his appointment as Secretary of State for the Colonies — borrowing the form of a conventional political ode to insert a devastating personal testimony.", aboutPoem: ["The poem opens as a conventional celebration of a new colonial secretary that many colonists hoped would protect American freedoms. But in its third stanza, Wheatley pivots: 'Should you, my lord, while you peruse my song, / Wonder from whence my love of Freedom sprung' — and answers with a first-person account of being abducted from Africa as a child.", "That pivot is one of the most quietly devastating maneuvers in eighteenth-century American literature. Wheatley borrows the colonists' own rhetoric of liberty and tyranny and turns it toward her own enslavement, asking the Earl, and the reader, to recognize that the same instinct for freedom animating the American Revolution was present in her heart too — and had been violated in her case far more completely."], historyTitle: "Phillis Wheatley and the Question of Black Intellect", historyParas: ["Phillis Wheatley was kidnapped from West Africa, likely from the Wolof or Fulani people, around 1753 and sold into slavery in Boston at approximately age seven. She was purchased by John and Susanna Wheatley and given access to education — unusual, even exceptional, for an enslaved person — through which she rapidly learned to read and write in English and Latin.", "By her teenage years she was composing sophisticated verse, and she was examined by a panel of eighteen prominent Boston men — including John Hancock — who certified that the poems attributed to her were genuinely hers. That examination was itself a testament to disbelief: the idea that an enslaved African woman could produce accomplished poetry required public proof.", "Her 1773 collection, published in London, was the first book of poetry by an African American and the second by an American woman. It attracted subscribers from both sides of the Atlantic, including George Washington. She was manumitted around the time of its publication, but her freedom came with little material security; she died in poverty in 1784."], sourceUrl: "https://www.poetryfoundation.org/poems/46638/to-the-right-honourable-william-earl-of-dartmouth", sourceDomain: "poetryfoundation.org", excerpt: "Hail, happy day, when, smiling like the morn,\nFair Freedom rose New-England to adorn:\nThe northern clime beneath her genial ray,\nDartmouth, congratulates thy blissful sway.\n\nShould you, my lord, while you peruse my song,\nWonder from whence my love of Freedom sprung,\nWhence flow these wishes for the common good,\nBy feeling hearts alone best understood,\nI, young in life, by seeming cruel fate\nWas snatch'd from Afric's fancy'd happy seat." } },
+      { title: "Bury Me in a Free Land", author: "Frances E. W. Harper", year: "1858",
+        bio: "Frances E. W. Harper was a free-born Black abolitionist and poet who became one of the most widely read Black poets of the 19th century, publishing widely in abolitionist newspapers.",
+        context: "Written for The Anti-Slavery newspaper as the nation hurtled toward civil war, one year after the Dred Scott decision denied Black Americans any standing as citizens.",
+        pages: { form: "A lyric of six quatrains in alternating rhyme, organized around one speaker's final wish — not a monument, but a grave in a land where no one can be enslaved.", aboutPoem: ["The poem is built on a negative space: not what the speaker wants but what she cannot endure. Each stanza imagines a different nightmare that would make even death restless — the sound of a slave coffle, a child torn from her mother, the bay of bloodhounds. These are not abstractions; they are documented, daily sounds of slavery that Harper and her readers would have known.", "Harper's choice of short, plain quatrains was deliberate. She published frequently in abolitionist papers and on the lecture circuit, and her poems were written to be carried by voice and memory. The simplicity is the argument: there is nothing complicated about wanting to rest in a world without slavery."], historyTitle: "Frances Harper and the Anti-Slavery Press", historyParas: ["Frances Ellen Watkins Harper was born free in Baltimore in 1825, orphaned young, and educated by an uncle who ran a school for free Black children. She became one of the most in-demand speakers on the anti-slavery circuit, able to draw large crowds and move audiences to tears with her combination of oratory and verse.", "This poem appeared in The Anti-Slavery newspaper in 1858, three years after the Fugitive Slave Act of 1850 had made the terror of recapture a reality even in the free North, and one year after the Supreme Court's Dred Scott decision declared that Black Americans held no rights that white Americans were bound to respect.", "Harper would continue writing through the Civil War, Reconstruction, and into the twentieth century. Her 1892 novel Iola Leroy was one of the first novels published by an African American woman in the United States. She worked alongside Frederick Douglass in the anti-slavery cause and later aligned with women's suffrage while insisting that the rights of Black women could not be separated from either racial or gender justice."], sourceUrl: "https://www.poetryfoundation.org/poems/154190/bury-me-in-a-free-land", sourceDomain: "poetryfoundation.org", excerpt: "Make me a grave where'er you will,\nIn a lowly plain, or a lofty hill;\nMake it among earth's humblest graves,\nBut not in a land where men are slaves.\n\nI could not rest if around my grave\nI heard the steps of a trembling slave;\nHis shadow above my silent tomb\nWould make it a place of fearful gloom.\n\nI could not rest if I heard the tread\nOf a coffle gang to the shambles led,\nAnd the mother's shriek of wild despair\nRise like a curse on the trembling air." } },
     ],
     art: { title: "Land of the Lotus Eaters", artist: "Robert S. Duncanson", year: "1861",
       style: "linear-gradient(160deg, #3d5a3a 0%, #6b8c4a 35%, #d9c67a 60%, #7a9bb5 100%)",
@@ -72,19 +93,19 @@ const eras: Era[] = [
     ],
   },
   {
-    name: "Reconstruction Era", years: "1865 – 1896",
+    name: "Reconstruction Era", years: "1865 – 1877",
     wall: "linear-gradient(160deg, #55401f, #332512)",
     color1: "#6b4a23", color2: "#3a2810",
-    blurb: "Verse from the brief window of Black citizenship and political power after emancipation, through its violent reversal and the rise of Jim Crow.",
+    blurb: "Verse from the brief window of Black citizenship and political power after emancipation — before the Compromise of 1877 withdrew federal troops from the South and dismantled those gains.",
     books: [
       { title: "Learning to Read", author: "Frances E. W. Harper", year: "1872",
         bio: "Harper continued writing after emancipation, becoming a leading voice on Black literacy, education, and civic participation during Reconstruction.",
         context: "Published as the Freedmen's Bureau ran thousands of schools for formerly enslaved people and the 15th Amendment (1870) granted Black men the vote — gains that would be rolled back after the Compromise of 1877 ended Reconstruction.",
         pages: { form: "A Poem · from Sketches of Southern Life, 1872", aboutPoem: ["Written in first-person dialect as \"Aunt Chloe,\" a recurring character Harper created for a formerly enslaved narrator, the poem recounts the resourceful, often hidden ways Black people found to teach themselves and each other to read despite laws and customs designed to keep them illiterate.", "It then follows Chloe into freedom after the Civil War, where, even in old age, she sets out to finally learn to read for herself — treating literacy not just as a skill but as a form of independence and dignity that had long been deliberately withheld."], historyTitle: "Aunt Chloe & Reconstruction", historyParas: ["Frances Ellen Watkins Harper wrote \"Learning to Read\" as part of Sketches of Southern Life, a collection built around the voice of Aunt Chloe, a formerly enslaved woman reflecting on slavery, emancipation, and the early years of Reconstruction.", "Throughout the antebellum South, teaching enslaved people to read was illegal in most states, a policy enforced precisely because literacy was understood, by enslavers and the enslaved alike, as a path toward independent thought and resistance.", "Harper herself was a committed advocate for freedmen's education after the Civil War, traveling extensively through the South to speak and organize on behalf of newly emancipated communities, work that directly informed the character and voice of Aunt Chloe."], sourceUrl: "https://www.poetryfoundation.org/poems/52448/learning-to-read-56d230ed0fdc0", sourceDomain: "poetryfoundation.org", excerpt: "Very soon the Yankee teachers\nCame down and set up school;\nBut, oh! how the Rebs did hate it,—\nIt was agin' their rule.\n\nOur masters always tried to hide\nBook learning from our eyes;\nKnowledge didn't agree with slavery—\n'Twould make us all too wise.\n\nBut some of us would try to steal\nA little from the book,\nAnd put the words together,\nAnd learn by hook or crook." } },
-      { title: "We Wear the Mask", author: "Paul Laurence Dunbar", year: "1895",
-        bio: "Paul Laurence Dunbar was the first Black American poet to gain national literary fame, writing in both standard English and dialect verse.",
-        context: "Published as Jim Crow laws hardened across the South following Reconstruction's collapse, one year before Plessy v. Ferguson (1896) constitutionalized 'separate but equal' segregation.",
-        pages: { form: "A Rondeau · from Lyrics of Lowly Life, 1896", aboutPoem: ["The poem is a rondeau, a tightly patterned French form built on a repeating refrain, and Dunbar uses that repetition to circle back, again and again, to a single extended metaphor: the smiling mask that hides pain from a world uninterested in seeing past it.", "Written in the collective \"we,\" it describes the exhausting labor of performing cheerfulness while carrying private suffering, briefly letting the mask slip with a cry near the poem's center before it is deliberately put back in place by its final line."], historyTitle: "Paul Laurence Dunbar", historyParas: ["Paul Laurence Dunbar was born in Dayton, Ohio in 1872 to parents who had both been enslaved before the Civil War. He became the first African American poet to achieve wide national literary fame, championed early on by the influential critic William Dean Howells.", "Much of Dunbar's fame during his lifetime rested on poems written in Black dialect, which white audiences of the era often preferred, while Dunbar himself felt constrained by that expectation and also wrote extensively in standard English, as he does here.", "This poem appeared in his 1896 collection Lyrics of Lowly Life, and it's frequently cited by scholars as his finest and most enduring work — a poem that can be read as a private meditation on grief, and just as easily as a wider statement about the performance of composure demanded of Black Americans in the post-Reconstruction era.", "Dunbar died in 1906 at only thirty-three, after years of declining health, but his body of work made him one of the most widely read American poets of his generation."], sourceUrl: "https://www.poetryfoundation.org/poems/44203/we-wear-the-mask", sourceDomain: "poetryfoundation.org", excerpt: "We wear the mask that grins and lies,\nIt hides our cheeks and shades our eyes,—\nThis debt we pay to human guile;\nWith torn and bleeding hearts we smile,\nAnd mouth with myriad subtleties.\n\nWhy should the world be over-wise,\nIn counting all our tears and sighs?\nNay, let them only see us, while\n       We wear the mask.\n\nWe smile, but, O great Christ, our cries\nTo thee from tortured souls arise.\nWe sing, but oh the clay is vile\nBeneath our feet, and long the mile;\nBut let the world dream otherwise,\n       We wear the mask!" } },
+      { title: "The Triumph of Liberty", author: "James Madison Bell", year: "1870",
+        bio: "James Madison Bell was an abolitionist poet, close friend of John Brown, and commemorative orator who wrote long celebratory odes marking each milestone of Black freedom — emancipation, citizenship, and the right to vote.",
+        context: "Written in 1870 to celebrate the ratification of the 15th Amendment, which granted Black men the right to vote — a milestone Bell frames as the culmination of a decade of war and legislation.",
+        pages: { form: "A long commemorative ode in rhymed couplets and quatrains, tracing the decade from John Brown's 1859 raid through emancipation to the 15th Amendment, framing each step as a stage in Liberty's triumphant ascent.", aboutPoem: ["Bell writes as a witness to history — a poet who had known John Brown personally and lived through the preceding decade's reversals and hard-won victories. The poem moves through set pieces: slavery's hold on the nation, the reluctance to arm Black soldiers, Lincoln's leadership, and the amendment he sees as completing freedom's 'temple.'", "Unlike the short lyric forms favored by many contemporaries, Bell's long commemorative odes were written for public occasions and designed to be read aloud at celebrations. His verse is explicitly political: it honors specific people, names specific legislation, and treats law and war as the proper subjects of poetry."], historyTitle: "The 15th Amendment and Black Political Power", historyParas: ["The 15th Amendment, ratified on February 3, 1870, prohibited the federal and state governments from denying the right to vote based on 'race, color, or previous condition of servitude.' For Black Americans and their allies, it represented the culmination of a legal and political revolution — coming five years after emancipation and two years after the 14th Amendment's guarantee of citizenship.", "James Madison Bell was a close collaborator of John Brown, participating in planning sessions for the Harper's Ferry raid in 1859. After the Civil War he became known for long commemorative poems on emancipation and Reconstruction, performed at public celebrations in Black communities across the North.", "The optimism of Bell's poem would prove tragically premature. The Compromise of 1877 effectively ended Reconstruction, withdrawing federal troops from the South and enabling a systematic campaign of voter suppression and disenfranchisement to undo the political gains Black men had briefly enjoyed. The 15th Amendment remained law for nearly a century while the conditions it was meant to address continued unchallenged."], sourceUrl: "https://poets.org/poem/triumph-liberty", sourceDomain: "poets.org", excerpt: "One decade back and every eye\nThat scann'd us closely saw the lie,\nAnd turned from our spread banner's face\nTo men in chains, and cried disgrace.\n\nBut changes of the recent past\nHave swept our theories away,\nAnd crowned with wonders unsurpassed\nThe radiant glories of to-day.\n\nThe ballot's in the black man's hand;\nPromotion waits him at his door,\nAnd peace and plenty crown our land,\nAnd freedom reigns from shore to shore." } },
     ],
     art: { title: "Under the Oaks", artist: "Edward Mitchell Bannister", year: "1876",
       style: "linear-gradient(160deg, #4a5c33 0%, #7a8f4a 40%, #b5a15f 70%, #5c4a2e 100%)",
@@ -111,6 +132,48 @@ const eras: Era[] = [
     ],
   },
   {
+    name: "Post-Reconstruction Era", years: "1877 – 1917",
+    wall: "linear-gradient(160deg, #5a3a18, #2e1c0a)",
+    color1: "#7a5228", color2: "#3a2610",
+    blurb: "Verse written under Jim Crow's tightening grip — as Reconstruction's gains were systematically undone and Black writers forged new voices of endurance, protest, and dignity.",
+    books: [
+      { title: "We Wear the Mask", author: "Paul Laurence Dunbar", year: "1895",
+        bio: "Paul Laurence Dunbar was the first Black American poet to gain national literary fame, writing in both standard English and dialect verse.",
+        context: "Published as Jim Crow laws hardened across the South following Reconstruction's collapse, one year before Plessy v. Ferguson (1896) constitutionalized 'separate but equal' segregation.",
+        pages: { form: "A Rondeau · from Lyrics of Lowly Life, 1896", aboutPoem: ["The poem is a rondeau, a tightly patterned French form built on a repeating refrain, and Dunbar uses that repetition to circle back, again and again, to a single extended metaphor: the smiling mask that hides pain from a world uninterested in seeing past it.", "Written in the collective \"we,\" it describes the exhausting labor of performing cheerfulness while carrying private suffering, briefly letting the mask slip with a cry near the poem's center before it is deliberately put back in place by its final line."], historyTitle: "Paul Laurence Dunbar", historyParas: ["Paul Laurence Dunbar was born in Dayton, Ohio in 1872 to parents who had both been enslaved before the Civil War. He became the first African American poet to achieve wide national literary fame, championed early on by the influential critic William Dean Howells.", "Much of Dunbar's fame during his lifetime rested on poems written in Black dialect, which white audiences of the era often preferred, while Dunbar himself felt constrained by that expectation and also wrote extensively in standard English, as he does here.", "This poem appeared in his 1896 collection Lyrics of Lowly Life, and it's frequently cited by scholars as his finest and most enduring work — a poem that can be read as a private meditation on grief, and just as easily as a wider statement about the performance of composure demanded of Black Americans in the post-Reconstruction era.", "Dunbar died in 1906 at only thirty-three, after years of declining health, but his body of work made him one of the most widely read American poets of his generation."], sourceUrl: "https://www.poetryfoundation.org/poems/44203/we-wear-the-mask", sourceDomain: "poetryfoundation.org", excerpt: "We wear the mask that grins and lies,\nIt hides our cheeks and shades our eyes,—\nThis debt we pay to human guile;\nWith torn and bleeding hearts we smile,\nAnd mouth with myriad subtleties.\n\nWhy should the world be over-wise,\nIn counting all our tears and sighs?\nNay, let them only see us, while\n       We wear the mask.\n\nWe smile, but, O great Christ, our cries\nTo thee from tortured souls arise.\nWe sing, but oh the clay is vile\nBeneath our feet, and long the mile;\nBut let the world dream otherwise,\n       We wear the mask!" } },
+      { title: "The Ethiopian's Song", author: "Fenton Johnson", year: "1913",
+        bio: "Fenton Johnson was a Chicago poet and journalist who drew on African American folk traditions and urban experience, anticipating the Harlem Renaissance with his break from Victorian conventions.",
+        context: "Written during the early Jim Crow era as the Great Migration began bringing millions of Black Southerners to Northern cities, and race riots and legal segregation defined everyday life.",
+        pages: { form: "A brief lyric in two parallel sections, each opening 'Where I go' — an incantation of place and movement — before pivoting to a sovereign declaration of contentment and identity.", aboutPoem: ["In a period when much Black poetry was expected to address slavery's legacy or protest racial violence, 'The Ethiopian's Song' takes a deliberately different angle. Its speaker claims an interior sovereignty — 'I, the Lord of sweet content' — refusing the role of supplicant or victim. The magnolias, jonquils, and ivy are landscape details, but also a claimed territory, a world the speaker inhabits on his own terms.", "Fenton Johnson's short lyrics anticipate qualities central to the Harlem Renaissance: directness of voice, refusal of performance, and the insistence that Black interiority had its own worth independent of its relationship to white society. Johnson himself remained relatively unknown, but his work circulated in the journals that would later feed the Renaissance."], historyTitle: "Fenton Johnson and the Pre-Harlem Black Press", historyParas: ["Fenton Johnson was born in Chicago in 1888 into a prosperous Black family and educated at the University of Chicago. He published in influential journals including Poetry and Others alongside the early modernists, making him one of the few Black writers of his generation to appear in mainstream literary magazines alongside white contemporaries.", "His career took place during the years of the most intense Jim Crow violence — including the Springfield, Illinois race riot of 1908 and the beginnings of the Great Migration — and yet his poems often refused the documentation of racial terror that many readers and editors expected from Black writers.", "He is now regarded as a significant transitional figure between the nineteenth-century tradition of protest poetry and the Harlem Renaissance's more expansive artistic program, anticipating the Renaissance's range and its insistence that Black literature could be more than a record of grievance."], sourceUrl: "https://www.poetryfoundation.org/poets/fenton-johnson", sourceDomain: "poetryfoundation.org", excerpt: "Where I go the lily blooms,\nWhere I go the ivy climbs;\nAll the earth is slave to me,\nAll the orbs are merry chimes.\nWhite man longs to rule the world;\nI am happy where I am,—\nI, the Lord of sweet content.\n\nWhere I go magnolias dance,\nWhere I go the jonquils prance;\nStrength and might and power are mine,\nSong and cheer my freedom's lance.\nLet Ambition die her death;\nI am happy where I am,—\nI, the Lord of sweet content." } },
+      { title: "The Colored Soldiers", author: "Paul Laurence Dunbar", year: "1896",
+        bio: "Paul Laurence Dunbar was the first Black American poet to achieve national literary fame, writing verse in both standard English and dialect that captured the full range of Black life in the post-Reconstruction South.",
+        context: "Written as Black veterans of the Civil War were being stripped of political rights under Jim Crow — the men who fought to save the Union now denied the citizenship that Union victory had promised.",
+        pages: { form: "A commemorative ode in rhymed quatrains, honoring Black Union soldiers and charging the nation with honoring its debt to them — written in formal standard English, claiming the register appropriate to men who died for their country.", aboutPoem: ["Dunbar's poem is a form of public witness, naming what Black soldiers did and demanding the nation remember it. He traces their presence from Lexington and Bunker Hill through the Civil War's darkest battles, ending by calling on 'Columbia' to live up to the loyalty of the men she called on in her hour of need.", "The poem's power comes partly from its setting in 1896, the year Plessy v. Ferguson constitutionalized 'separate but equal' and confirmed that the nation had no intention of honoring that debt. Writing a formal ode to Black military service in this moment is itself an act of counter-history: insisting the record be seen."], historyTitle: "Black Soldiers and the Betrayal of Reconstruction", historyParas: ["Black men fought in the Civil War in segregated units known as the United States Colored Troops, comprising nearly 180,000 soldiers by the war's end. They fought under white officers, were paid less than white soldiers for most of the war, and faced execution rather than prisoner-of-war status if captured — and yet served with documented valor in dozens of major engagements.", "After the war, Black veterans returned to a country already rolling back the promises of emancipation. By the time Dunbar wrote this poem in 1896, the Supreme Court had just ruled in Plessy v. Ferguson that racial segregation was constitutional, and the systematic disenfranchisement of Black voters across the South was well underway.", "The figure of the Black soldier — who had proved his manhood and patriotism under fire only to be denied citizenship — became one of the central contested images of post-Reconstruction Black writing, deployed by poets, novelists, and orators as evidence of a nation's broken promise."], sourceUrl: "https://poets.org/poem/colored-soldiers", sourceDomain: "poets.org", excerpt: "If the muse were mine to tempt it\nAnd my feeble voice were strong,\nAll the world should ring with the praises\nOf the service of the song;\n\nFor the men who did the fighting\nWith a faith serene and strong,\nWho have shouldered gun and knapsack\nWhere the ways were hard and long,\n\nFor the men who bore their burden\nIn the heat and rain and cold,\nFor the men who marched to glory\nThrough the blood and mire and cold." } },
+    ],
+    art: { title: "The Banjo Lesson", artist: "Henry Ossawa Tanner", year: "1893",
+      style: "linear-gradient(160deg, #5c4a2e 0%, #8c7a4a 35%, #c4a870 60%, #3a2810 100%)",
+      bio: "Henry Ossawa Tanner was the most celebrated Black American visual artist of the post-Reconstruction era, achieving international recognition through meticulous figurative paintings of biblical scenes and everyday Black life.",
+      context: "Painted in Philadelphia before Tanner relocated to Paris to escape American racism, 'The Banjo Lesson' depicts an elderly man teaching a young boy to play, representing Black mentorship and cultural transmission as a form of dignity that Jim Crow could not erase.",
+      medium: "Oil on canvas", dimensions: "49 × 35½ in. (124.5 × 90.2 cm)", institution: "Hampton University Museum, Hampton, Virginia", link: "https://artincontext.org/the-banjo-lesson-painting-henry-ossawa-tanner/", img: imgBanjoLesson,
+      artPages: {
+        aboutWork: ["'The Banjo Lesson' shows an elderly man and a small boy, seated together, the man's hands guiding the boy's fingers on the strings of a banjo. The light is warm and interior, pooling around the two figures in a way that recalls the Dutch Golden Age masters Tanner had studied closely. There is nothing sentimental about the image; it is quiet, concentrated, serious — a record of knowledge passing between generations.", "The painting is frequently read as a counter-image to the minstrel tradition that used the banjo as a prop for racial caricature. Tanner refuses caricature entirely: his figures are individualized, absorbed, dignified. The banjo in his painting is a cultural inheritance, not a joke."],
+        aboutArtist: ["Henry Ossawa Tanner (1859–1937) was born in Pittsburgh to a bishop of the African Methodist Episcopal Church and a formerly enslaved mother. He studied at the Pennsylvania Academy of Fine Arts under Thomas Eakins, one of America's leading realists, and later traveled to Paris, where he would spend most of his adult life.", "He is the only Black American artist to have been elected to the National Academy of Design in his lifetime. He won international prizes and exhibited widely in Europe and the United States, achieving a level of institutional recognition that no other Black American artist of his generation reached.", "He relocated to Paris in 1891 partly to escape the constant racial hostility he faced in the United States, where galleries that admired his work still declined to exhibit it alongside white artists. His Paris studio became a gathering place for Black American artists and intellectuals passing through Europe."],
+        contextParas: ["'The Banjo Lesson' was completed in 1893, the same year as the World's Columbian Exposition in Chicago — an exhibition that celebrated American progress while hosting a parallel 'Colored People's Day' in a gesture of condescension. Frederick Douglass and Ida B. Wells responded by distributing a pamphlet titled 'The Reason Why the Colored American Is Not in the World's Columbian Exposition.'", "Tanner painted this work during the height of the 'nadir' — the term historian Rayford Logan used for the period from roughly 1877 to 1920 when anti-Black violence, legal disenfranchisement, and systematic economic exclusion reached their post-Reconstruction peak. The painting's insistence on interiority, warmth, and cultural transmission in that context is itself an argument."]
+      } },
+    timeline: [
+      { year: "1877", type: "milestone", title: "Compromise of 1877", desc: "Federal troops withdrawn from the South, ending Reconstruction and enabling the systematic rollback of Black political and civil rights." },
+      { year: "1896", type: "court", title: "Plessy v. Ferguson", desc: "Supreme Court upheld racial segregation under the 'separate but equal' doctrine, constitutionalizing Jim Crow for the next six decades." },
+      { year: "1898", type: "riot", title: "Wilmington Massacre", desc: "White supremacists violently overthrew the elected Fusionist government of Wilmington, North Carolina, killing dozens of Black residents and destroying the city's Black-owned newspaper." },
+      { year: "1909", type: "organization", title: "NAACP Founded", desc: "The National Association for the Advancement of Colored People formed to fight for civil rights through legal action and advocacy." },
+      { year: "1910s", type: "milestone", title: "The Great Migration Begins", desc: "Millions of Black Americans began leaving the rural South for Northern and Midwestern cities, seeking work and escape from racial terror." },
+    ],
+    panelEvents: [
+      { year: "1898", type: "legislation", title: "Louisiana Grandfather Clause", desc: "Louisiana adopted a 'grandfather clause' that effectively disenfranchised Black voters while exempting white voters from new literacy and property tests — a model soon copied across the South." },
+      { year: "1906", type: "riot", title: "Atlanta Race Massacre", desc: "White mobs attacked Black residents of Atlanta over four days, killing dozens and destroying Black-owned businesses." },
+      { year: "1915", type: "organization", title: "Second Ku Klux Klan Founded", desc: "The second Klan, inspired by the film 'Birth of a Nation,' was founded in Georgia and grew to millions of members nationwide by the 1920s." },
+    ],
+  },
+  {
     name: "Harlem Renaissance", years: "1918 – 1937",
     wall: "linear-gradient(160deg, #6b2f2f, #3a1717)",
     color1: "#7a2f2f", color2: "#3f1414",
@@ -124,6 +187,14 @@ const eras: Era[] = [
         bio: "Langston Hughes was a central figure of the Harlem Renaissance whose poetry fused jazz and blues rhythms with everyday Black life and speech.",
         context: "Published as the Great Migration reshaped Northern cities and Harlem became a hub of Black artistic and intellectual life, with the NAACP and Urban League backing new Black literary magazines and prizes.",
         pages: { form: "A Poem · from Opportunity magazine, 1925", aboutPoem: ["The poem is set in a Harlem bar on Lenox Avenue, where a first-person speaker listens through the night to a piano player working through a slow, sorrowful tune. Hughes lets the reader hear the musician's own sung lines rise up inside the poem, so that the blues form itself becomes part of the poem's structure rather than just its subject.", "It's often credited as one of the first poems to translate the repeating, call-and-response pattern of twelve-bar blues directly into English verse — a technique that helped establish blues poetry as its own literary tradition, and one Hughes returned to throughout his career."], historyTitle: "Langston Hughes & the Harlem Renaissance", historyParas: ["Langston Hughes wrote this poem in 1925, during the years he lived in Washington, D.C. and then Harlem, immersing himself in the city's jazz clubs and nightlife.", "It was first published in Opportunity, the magazine of the National Urban League, where it won first prize in the magazine's inaugural poetry contest that May — a contest dinner that also introduced Hughes to the writer and patron Carl Van Vechten, who helped arrange a publishing deal with Alfred A. Knopf.", "The poem gave its title to Hughes's first book, published the following year, which alongside Alain Locke's anthology The New Negro is considered one of the defining literary debuts of the Harlem Renaissance — the flowering of Black art, music, and literature centered in 1920s Harlem.", "Hughes would go on to become one of the most influential American poets of the twentieth century, prized for grounding his work in the everyday rhythms, voices, and music of Black life rather than imitating European poetic tradition."], sourceUrl: "https://www.poetryfoundation.org/poems/47347/the-weary-blues", sourceDomain: "poetryfoundation.org", excerpt: "Droning a drowsy syncopated tune,\nRocking back and forth to a mellow croon,\n     I heard a Negro play.\nDown on Lenox Avenue the other night\nBy the pale dull pallor of an old gas light\n     He did a lazy sway . . .\n     He did a lazy sway . . .\nTo the tune o' those Weary Blues.\nWith his ebony hands on each ivory key\nHe made that poor piano moan with melody.\n     O Blues!\nSwaying to and fro on his rickety stool\nHe played that sad raggy tune like a musical fool.\n     Sweet Blues!\nComing from a black man's soul.\n     O Blues!" } },
+      { title: "Harlem", author: "Langston Hughes", year: "1951",
+        bio: "Langston Hughes was the central voice of the Harlem Renaissance, whose poetry fused jazz, blues, and everyday Black speech into a new American literary language.",
+        context: "Written as postwar prosperity bypassed Black veterans and communities, while the legal foundations of the civil rights movement were beginning to be laid — and Black patience with deferred promises was wearing thin.",
+        pages: { form: "Eleven lines of free verse built around a single central question — what happens to a dream deferred — and five possible answers, escalating from quiet decay to the final explosive suggestion of violence.", aboutPoem: ["The poem is structured as a question and a series of similes, each one more corrosive than the last: a raisin drying in the sun, a festering sore, rotten meat, a sugary crust. Hughes arranges them in ascending order of damage — from simple decay to the threat of explosion — and leaves the explosion as the final possibility, not quite a prediction but not quite a metaphor either.", "Written as part of the longer sequence Montage of a Dream Deferred, it functions as that work's compressed center: the twelve words of the title question hold an entire history of broken promises, while the final line asks whether patience has any limit at all."], historyTitle: "The Dream Deferred: Black Urbanization After World War II", historyParas: ["'Harlem' appeared in 1951, in the sequence Montage of a Dream Deferred, written against the backdrop of Black World War II veterans returning home to find their service had not altered their second-class citizenship. The GI Bill, which funded education and homeownership for returning soldiers, was administered in ways that largely excluded Black veterans, concentrating postwar prosperity in white communities.", "The 'dream deferred' carried specific historical weight: the promise of equality enshrined in the Declaration of Independence and expanded by the post-Civil War Amendments — a promise consistently deferred by law, violence, and custom since Reconstruction ended in 1877.", "The poem's final question — 'Or does it explode?' — proved both prophetic and diagnostic. The urban uprisings of the 1960s in Watts, Newark, and Detroit would be read by many through exactly the framework Hughes had constructed fifteen years earlier: a question about how long deferred dreams could be postponed before they became something else entirely."], sourceUrl: "https://www.poetryfoundation.org/poems/46548/harlem", sourceDomain: "poetryfoundation.org", excerpt: "What happens to a dream deferred?\n\n      Does it dry up\n      like a raisin in the sun?\n      Or fester like a sore—\n      And then run?\n      Does it stink like rotten meat?\n      Or crust and sugar over—\n      like a syrupy sweet?\n\n      Maybe it just sags\n      like a heavy load.\n\n      Or does it explode?" } },
+      { title: "Yet Do I Marvel", author: "Countee Cullen", year: "1925",
+        bio: "Countee Cullen was a major Harlem Renaissance poet whose formally rigorous, traditionally structured verse engaged questions of race, identity, and faith while maintaining classical European poetic conventions.",
+        context: "Published during the height of the Harlem Renaissance, as Black artists and intellectuals debated whether to work within or against European literary traditions to assert a distinctly Black cultural identity.",
+        pages: { form: "A Shakespearean sonnet — fourteen lines in iambic pentameter with a concluding couplet — that borrows the most canonical European poem type to hold a question about why God would make a Black poet and command him to sing.", aboutPoem: ["Cullen opens by listing puzzles he accepts without requiring God to explain them: why the mole is blind, why flesh dies, why Tantalus is baited with fruit he cannot reach, why Sisyphus pushes his stone forever. These are classical theodicy problems, borrowed from mythology, and Cullen places them in a sonnet form that signals mastery of the European tradition.", "Then the final couplet lands: 'Yet do I marvel at this curious thing: / To make a poet black, and bid him sing!' The compression of that last line — a whole argument about race, art, and American society packed into ten syllables — is what has made the poem endure. If God makes inexplicable things that humans must accept, then being a Black poet in America is just one more inscrutable given: difficult, unjustified, and commanded nonetheless."], historyTitle: "Countee Cullen and the Harlem Renaissance Debate", historyParas: ["Countee Cullen was born in 1903 and raised in Harlem, where his adoptive father was a Methodist minister. He studied at New York University and Harvard, and by the mid-1920s was one of the most celebrated young poets in America, winning prizes from The Crisis and Opportunity magazines and from mainstream literary competitions.", "His preference for traditional poetic forms — the sonnet, the ode, the ballad — put him in ongoing creative tension with Langston Hughes, who championed free verse, blues rhythms, and everyday Black speech. The debate between them became a public discussion about what Black American poetry should sound like and who it was for.", "Cullen insisted that a Black poet was, first and foremost, a poet — that the formal traditions of English and American poetry were available to him and worth mastering. His critics argued that this approach reproduced European values as the default standard. That disagreement, never fully resolved, continues in discussions of Black literary aesthetics today."], sourceUrl: "https://www.poetryfoundation.org/poems/43434/yet-do-i-marvel", sourceDomain: "poetryfoundation.org", excerpt: "I doubt not God is good, well-meaning, kind,\nAnd did He stoop to quibble could tell why\nThe little buried mole continues blind,\nWhy flesh that mirrors Him must some day die,\nMake plain the reason tortured Tantalus\nIs baited by the fickle fruit, declare\nIf merely brute caprice dooms Sisyphus\nTo struggle up a never-ending stair.\nInscrutable His ways are, and immune\nTo catechism by a mind too strewn\nWith petty cares to slightly understand\nWhat awful brain compels His awful hand.\nYet do I marvel at this curious thing:\nTo make a poet black, and bid him sing!" } },
     ],
     art: { title: "Aspects of Negro Life", artist: "Aaron Douglas", year: "1934",
       style: "linear-gradient(160deg, #2e2a4a 0%, #5a4a8c 30%, #b56a3a 60%, #2e1c14 100%)",
@@ -162,6 +233,14 @@ const eras: Era[] = [
         bio: "Amiri Baraka (formerly LeRoi Jones) was a poet and playwright who founded the Black Arts Movement, calling for art that directly served Black political liberation.",
         context: "Published the year after the Watts uprising of 1965 and amid the rise of the Black Power movement and the founding of the Black Panther Party in 1966.",
         pages: { form: "A Manifesto in Verse · Liberator magazine, January 1966", aboutPoem: ["Written in urgent free verse with no fixed meter or rhyme, the poem argues that art should act as a direct instrument of Black political power rather than something polite or decorative. Baraka repeatedly imagines poems as physical weapons, capable of confronting oppression the way a fist or a gun might, and closes by calling for a poetry, and a world, entirely made and spoken by Black people.", "Its confrontational language and imagery made it controversial from the start, and it has been debated by critics and scholars ever since — but its influence on a generation of writers who followed is not in dispute."], historyTitle: "Amiri Baraka & the Black Arts Movement", historyParas: ["Amiri Baraka, writing at the time under his birth name LeRoi Jones, composed this poem in 1965, in the weeks after the assassination of Malcolm X, a loss that pushed Baraka toward a more radical political and artistic path. He soon moved to Harlem and founded the Black Arts Repertory Theatre/School.", "The poem was first performed publicly on the jazz drummer Sonny Murray's 1965 album Sonny's Time Now, before appearing in print in the January 1966 issue of Liberator magazine. It quickly became the de facto manifesto of the Black Arts Movement, the artistic wing of the broader Black Power movement, inspiring a generation of poets including Nikki Giovanni and Sonia Sanchez.", "Baraka remained a prominent, often polarizing figure in American letters for decades afterward, serving briefly as New Jersey's poet laureate before the position was eliminated by the state legislature in 2003 amid controversy over a later poem. He died in 2014, widely recognized as the central architect of the Black Arts Movement."], sourceUrl: "https://poemanalysis.com/amiri-baraka/black-art/", sourceDomain: "poemanalysis.com", excerpt: "Poems are bullshit unless they are\nteeth or trees or lemons piled\non a step. Or black fists.\n\nWe want poems\nthat kill.\nAssassin poems, Poems that shoot\nguns. Poems that wrestle cops into alleys\nand take their weapons leaving them dead\n\nWe want a black poem. And a\nBlack World.\nLet the world be a Black Poem\nAnd Let All Black People Speak This Poem\nSilently\nor LOUD" } },
+      { title: "For My People", author: "Margaret Walker", year: "1942",
+        bio: "Margaret Walker was a poet and novelist who was among the first Black writers to win a major literary prize when her poetry collection won the Yale Younger Poets competition in 1942.",
+        context: "Written during World War II as Black Americans confronted the contradiction of fighting for democracy abroad while living under Jim Crow at home — the 'Double V Campaign' named it explicitly: victory over fascism, and victory over racism.",
+        pages: { form: "Ten stanzas of free verse, each beginning 'For my people' or 'For my playmates' or 'Let' — a liturgical anaphora that builds like a preacher's invocation, ending with a declaration and a blessing rather than a plea.", aboutPoem: ["Walker builds the poem as a series of witness statements, each beginning 'For my people' and cataloguing a different aspect of Black life: the labor, the praying, the playing, the confusion, the grief. The accumulation is the argument: this is an entire people's history, too large and too various to reduce to a single story.", "The final stanza breaks the pattern, shifting from description to demand: 'Let a new earth rise.' The liturgical tone that has built through the poem's repetitions now delivers a blessing and a command simultaneously — this is not a poem of grievance but of consecration, anointing its subjects as worthy of the world they have not yet been allowed to inhabit."], historyTitle: "Margaret Walker and the Southern Black Literary Tradition", historyParas: ["Margaret Walker was born in Birmingham, Alabama in 1915 and educated at Northwestern University and the University of Iowa, where she earned a Ph.D. Her first poetry collection, For My People, was selected for the Yale Younger Poets series in 1942, making her the first African American to win the prize.", "The poem was originally written in 1937 during the WPA's Federal Writers' Project, the New Deal program that employed writers and intellectuals during the Great Depression. The Federal Writers' Project also commissioned oral history interviews with formerly enslaved people, creating an extraordinary documentary archive.", "Walker spent most of her academic career at Jackson State University in Mississippi, where she founded the Institute for the Study of the History, Life and Culture of Black People. She later wrote the novel Jubilee (1966), based on her great-grandmother's life under slavery, which became one of the most widely read novels of the Black experience in the Civil War era."], sourceUrl: "https://www.poetryfoundation.org/poems/52622/for-my-people", sourceDomain: "poetryfoundation.org", excerpt: "For my people everywhere singing their slave songs\n     repeatedly: their dirges and their ditties and their blues\n     and jubilees, praying their prayers nightly to an\n     unknown god, bending their knees humbly to an\n     unseen power;\n\nFor my people lending their strength to the years, to the\n     gone years and the now years and the maybe years,\n     washing ironing cooking scrubbing sewing mending\n     hoeing plowing digging planting pruning patching\n     dragging along never gaining never reaping never\n     knowing and never understanding." } },
+      { title: "A Litany for Survival", author: "Audre Lorde", year: "1978",
+        bio: "Audre Lorde was a Black feminist poet and activist who described herself as 'Black, lesbian, mother, warrior, poet.' Her work named the intersecting oppressions of race, gender, and sexuality as inseparable.",
+        context: "Published as second-wave feminism fractured along racial lines and Black feminist organizations like the Combahee River Collective were articulating a politics that confronted race, gender, and sexuality simultaneously.",
+        pages: { form: "A litany — a prayer form built on repetition and accumulation, traditionally used in liturgical call-and-response — addressed to 'those of us who live at the shoreline,' Lorde's recurring image for people at the margins of multiple communities.", aboutPoem: ["Lorde opens by naming her audience precisely: people who were not meant to survive — by birth, by circumstance, by desire. The litany accumulates, stacking the hazards of Black women's daily lives before pivoting to a declaration that speaking is the only answer to fear, even though speaking 'is never without fear.' The choice, she says, is to speak from fear or to be 'silent and die of it.'", "The poem operates through its liturgical form: the repetition of phrases creates the same effect as call-and-response, building communal recognition through accumulation. It does not argue for survival; it enacts it — performing the act of speaking as the poem's own evidence."], historyTitle: "Black Feminism and the Combahee River Collective", historyParas: ["The Combahee River Collective, a Boston-based Black feminist organization, published its landmark statement in 1977, the year before this poem's publication. The statement argued that the liberation of Black women required simultaneously addressing race, gender, class, and sexuality as 'interlocking' systems of oppression rather than separate issues to be addressed in turn.", "Lorde was part of a generation of Black feminist thinkers — alongside bell hooks, Barbara Smith, and June Jordan — who insisted that mainstream (white) feminism had excluded Black women's experience, and that mainstream (male) Black liberation had excluded Black women's voices. Her 1984 essay collection Sister Outsider became foundational to what would later be called intersectionality.", "The poem's image of the shoreline — a liminal space between two territories, belonging fully to neither — is characteristic of Lorde's recurring figure for the position of those who live at the intersection of multiple marginalities. It is not a comfortable metaphor; it is an accurate one."], sourceUrl: "https://www.poetryfoundation.org/poems/147275/a-litany-for-survival", sourceDomain: "poetryfoundation.org", excerpt: "For those of us who live at the shoreline\nstanding upon the constant edges of decision\ncritical and alone,\nfor those of us who cannot indulge\nthe passing dreams of choice\nwho love in doorways coming and going\nin the hours between dawns\nlooking inward and outward\nat once before and after\nseeking a now that can breed\nfutures\nlike bread in our children's mouths\nso their dreams will not reflect\nthe death of ours." } },
     ],
     art: { title: "American People Series #20: Die", artist: "Faith Ringgold", year: "1967",
       style: "linear-gradient(160deg, #8c1c1c 0%, #4a1414 40%, #d9c67a 65%, #1a1a1a 100%)",
@@ -333,113 +412,44 @@ const eras: Era[] = [
 
 // ─── Zone layout (exact from source) ─────────────────────────────────────────
 const ZONES = [
-  { left: "0%",  top: "10%", width: "20%", height: "28%", bars: 3, slim: false },
-  { left: "25%", top: "10%", width: "20%", height: "28%", bars: 3, slim: false },
-  { left: "50%", top: "10%", width: "20%", height: "28%", bars: 3, slim: false },
-  { left: "0%",  top: "68%", width: "20%", height: "28%", bars: 3, slim: false },
-  { left: "25%", top: "68%", width: "20%", height: "28%", bars: 3, slim: false },
-  { left: "50%", top: "68%", width: "20%", height: "28%", bars: 3, slim: false },
+  // Top row: 4 eras (Antebellum → Post-Reconstruction → Harlem)
+  { left: "0%",   top: "10%", width: "17%", height: "28%", bars: 3, slim: false },
+  { left: "19%",  top: "10%", width: "17%", height: "28%", bars: 3, slim: false },
+  { left: "38%",  top: "10%", width: "17%", height: "28%", bars: 3, slim: false },
+  { left: "57%",  top: "10%", width: "17%", height: "28%", bars: 3, slim: false },
+  // Bottom row: 3 eras (Civil Rights → Post-Civil Rights → BLM)
+  { left: "0%",   top: "68%", width: "20%", height: "28%", bars: 3, slim: false },
+  { left: "25%",  top: "68%", width: "20%", height: "28%", bars: 3, slim: false },
+  { left: "50%",  top: "68%", width: "20%", height: "28%", bars: 3, slim: false },
 ];
 
 // ─── Injected CSS (exact from source) ────────────────────────────────────────
 const CSS = `
-  .exhibit-root { font-family: Georgia, 'Times New Roman', serif; background: #100d09; color: #e8dfc9; min-height: 100vh; padding: 30px 16px 60px; }
-  .exhibit-title { text-align: center; font-size: 2rem; letter-spacing: 2px; color: #d4af6a; margin-bottom: 4px; text-transform: uppercase; }
-  .exhibit-subtitle { text-align: center; color: #a89a7c; font-style: italic; font-size: 0.92rem; margin-bottom: 8px; }
-  .exhibit-instructions { text-align: center; color: #756a52; font-size: 0.76rem; margin-bottom: 28px; }
-  .floorplan-wrap { max-width: 1100px; margin: 0 auto; }
-  .floorplan {
-    position: relative; width: 100%; aspect-ratio: 1180 / 620;
-    background: #d6c9b0;
-    background-image:
-      linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
-    background-size: 28px 28px;
-    border: 3px solid #7a6a50;
-    border-radius: 4px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 0 60px rgba(0,0,0,0.08);
-    overflow: hidden;
-    font-family: 'Arial Narrow', Arial, sans-serif;
-  }
-  /* ── Compass rose ── */
-  .fp-compass { position: absolute; right: 1.5%; bottom: 2%; width: 30px; height: 30px; opacity: 0.35; pointer-events: none; }
-  /* ── Ceiling light fixture ── */
-  .fp-light { position: absolute; pointer-events: none; transform: translate(-50%,-50%); opacity: 0.7; }
-  /* ── Window symbols ── */
-  .fp-win { position: absolute; pointer-events: none; background: #d4eaf5; border: 1.5px solid #5a4a35; }
-  .fp-win-h::after { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: #5a4a35; }
-  .fp-win-v::after { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: #5a4a35; }
-  /* ── Study table + chairs ── */
-  .fp-tbl { position: absolute; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #9a7448, #6a4c28); box-shadow: 0 2px 5px rgba(0,0,0,0.35); pointer-events: none; }
-  .fp-chr { position: absolute; background: #b08858; border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.3); pointer-events: none; }
-  /* ── Room walls (shared) ── */
-  .fp-room {
-    position: absolute;
-    background: #e8dfc8;
-    border: 2.5px solid #5a4a35;
-    box-shadow: inset 0 0 0 6px #cfc0a3, 2px 2px 6px rgba(0,0,0,0.25);
-  }
-  /* ── Bookcase zone ── */
-  .zone {
-    position: absolute; cursor: pointer;
-    background: #e8dfc8;
-    border: 2.5px solid #5a4a35;
-    box-shadow: inset 0 0 0 6px #cfc0a3, 2px 2px 6px rgba(0,0,0,0.25);
-    overflow: hidden;
-    transition: filter 0.15s ease;
-  }
-  .zone:hover { filter: brightness(1.06); z-index: 5; }
-  .zone-header { position: absolute; top: 0; left: 0; right: 0; background: rgba(90,74,53,0.92); padding: 3px 6px; z-index: 3; }
-  .zone-label { font-size: 0.58rem; letter-spacing: 0.8px; color: #f0e5c8; text-transform: uppercase; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .zone-years { font-size: 0.48rem; color: rgba(240,229,200,0.7); }
-  /* bookcase unit inside a zone */
-  .bc-unit { position: absolute; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column; gap: 0; }
-  .bc-shelf { display: flex; align-items: flex-end; padding: 0 4px; gap: 1.5px; background: #3a2510; height: 26px; border-top: 3px solid #6b4a28; }
-  .bc-shelf-top { background: #5a3a1a; height: 4px; }
-  .bc-book { flex: 1; border-radius: 1px 2px 2px 1px; min-width: 5px; max-width: 14px; position: relative; }
-  .bc-book::after { content: ''; position: absolute; top: 0; left: 2px; width: 1px; bottom: 0; background: rgba(255,255,255,0.12); }
-  .bc-wall-top { position: absolute; top: 22px; left: 4px; right: 4px; bottom: 0; background: #f0e8d0; border: 1.5px solid #cfc0a3; border-top: none; }
-  /* slim zone variant */
-  .zone.slim .bc-unit { left: 0; right: 0; }
-  /* ── Gallery wing ── */
-  .lounge {
-    position: absolute; left: 77%; top: 5%; width: 21%; height: 90%;
-    background: #ede4cf;
-    border: 2.5px solid #5a4a35;
-    box-shadow: inset 0 0 0 6px #d8cdb0, 2px 2px 6px rgba(0,0,0,0.25);
-    cursor: pointer; overflow: hidden;
-    transition: filter 0.15s ease;
-    z-index: 1;
-  }
-  .lounge:hover { filter: brightness(1.06); }
-  .lounge-label { position: absolute; top: 3%; left: 50%; transform: translateX(-50%); font-size: 0.6rem; letter-spacing: 0.8px; color: #3a2a14; font-weight: 700; text-transform: uppercase; white-space: nowrap; text-align: center; z-index: 5; }
-  /* artwork frames hung on gallery walls */
-  .gal-frame { position: absolute; background: #b8902a; border: 3px solid #7a5a1a; box-shadow: 0 3px 8px rgba(0,0,0,0.45), inset 0 0 0 2px rgba(0,0,0,0.3); }
-  .gal-frame-inner { width: 100%; height: 100%; background: #c8b89a; box-shadow: inset 0 0 6px rgba(0,0,0,0.35); }
-  /* bench */
-  .gal-bench { position: absolute; background: #7a5a35; border-radius: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.4); }
-  /* ── Reading room ── */
-  .reading-room {
-    position: absolute; left: 28%; top: 46%; width: 18%; height: 18%;
-    background: #ede8d8;
-    border: 2.5px solid #5a4a35;
-    box-shadow: inset 0 0 0 6px #d8cdb0, 2px 2px 6px rgba(0,0,0,0.25);
-    cursor: pointer; overflow: hidden;
-    transition: filter 0.15s ease;
-  }
-  .reading-room:hover { filter: brightness(1.06); }
-  .reading-room-label { position: absolute; left: 28%; top: 40%; width: 18%; text-align: center; font-size: 0.68rem; color: #3a2a14; letter-spacing: 1px; font-weight: 700; text-transform: uppercase; z-index: 3; }
-  /* 2D floor-plan furniture (top view, outlined icon style) */
-  .rr-plan-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-  /* ── Entrance mat ── */
-  .entrance-mat { position: absolute; left: 35%; top: 1%; width: 8%; height: 7%; height: 6%; background: #9b6db5; border-radius: 0 0 8px 8px; z-index: 2; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: filter 0.15s; box-shadow: 0 4px 10px rgba(0,0,0,0.4); border: 2px solid #7a4a96; border-top: none; }
-  .entrance-mat:hover { filter: brightness(1.15); }
-  .entrance-mat-label { font-size: 0.52rem; letter-spacing: 0.8px; font-weight: 700; color: #f8f0ff; text-transform: uppercase; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
-  /* ── Corridor between zones ── */
-  .fp-corridor-h { position: absolute; background: #c8b89a; border-top: 1.5px solid #9a8a6a; border-bottom: 1.5px solid #9a8a6a; }
-  .fp-corridor-v { position: absolute; background: #c8b89a; border-left: 1.5px solid #9a8a6a; border-right: 1.5px solid #9a8a6a; }
-  /* room labels on floor */
-  .fp-room-tag { position: absolute; font-size: 0.44rem; letter-spacing: 1.2px; color: #8a7a60; text-transform: uppercase; pointer-events: none; }
+  .exhibit-root { font-family: Georgia,'Times New Roman',serif; background: #0A0705; color: #e8dfc9; min-height: 100vh; }
+  /* ── Perspective navigation ── */
+  .persp-wrap { position: fixed; inset: 0; overflow: hidden; background: #0A0705; }
+  .persp-topnav { position: absolute; top: 0; left: 0; right: 0; height: 84px; background: rgba(8,4,1,0.99); border-bottom: 1px solid #2A1508; z-index: 20; display: flex; flex-direction: column; }
+  .persp-topnav-row1 { display: flex; align-items: center; height: 46px; padding: 0 18px; gap: 12px; border-bottom: 1px solid #1C0C04; flex-shrink: 0; }
+  .persp-nav-title { font-size: 0.86rem; letter-spacing: 2.5px; color: #D4AF6A; text-transform: uppercase; white-space: nowrap; font-weight: bold; flex-shrink: 0; font-family: Georgia,serif; }
+  .persp-nav-sep { width: 1px; height: 20px; background: #2A1508; flex-shrink: 0; }
+  .persp-nav-links { display: flex; gap: 5px; margin-left: auto; flex-shrink: 0; }
+  .persp-nav-link { font-size: 0.62rem; letter-spacing: 0.8px; color: #A08040; text-transform: uppercase; cursor: pointer; padding: 6px 12px; border: 1px solid #3A1E08; border-radius: 2px; transition: all 0.15s; font-family: Arial,sans-serif; background: transparent; }
+  .persp-nav-link:hover { background: rgba(212,175,106,0.12); color: #D4AF6A; border-color: #6A4820; }
+  .persp-nav-eras { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; align-items: center; padding: 0 14px; flex: 1; }
+  .persp-nav-eras::-webkit-scrollbar { display: none; }
+  .persp-nav-era { font-size: 0.6rem; letter-spacing: 0.5px; color: #9A7840; text-transform: uppercase; cursor: pointer; padding: 5px 9px; border-radius: 2px; white-space: nowrap; transition: background 0.15s,color 0.15s; font-family: Arial,sans-serif; background: transparent; border: none; flex-shrink: 0; }
+  .persp-nav-era:hover { background: rgba(212,175,106,0.14); color: #D4AF6A; }
+  .persp-scene { position: absolute; top: 84px; left: 0; right: 0; bottom: 68px; overflow: hidden; }
+  .persp-scene svg { width: 100%; height: 100%; display: block; }
+  .persp-bottomnav { position: absolute; bottom: 0; left: 0; right: 0; height: 68px; background: rgba(6,3,0,0.99); border-top: 1px solid #1E1008; z-index: 20; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; }
+  .persp-arrow-btn { display: flex; align-items: center; gap: 8px; cursor: pointer; color: #9A7840; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; padding: 9px 16px; border: 1px solid #3A1E08; border-radius: 2px; transition: all 0.15s; font-family: Arial,sans-serif; background: transparent; }
+  .persp-arrow-btn:hover { color: #D4AF6A; border-color: #6A4820; background: rgba(212,175,106,0.09); }
+  .persp-arrow-ghost { opacity: 0; pointer-events: none; }
+  .persp-loc-center { text-align: center; }
+  .persp-loc-label { color: #7A5A28; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; font-family: Arial,sans-serif; }
+  .persp-loc-dots { display: flex; gap: 10px; justify-content: center; margin-top: 7px; }
+  .persp-loc-dot { width: 6px; height: 6px; border-radius: 50%; background: #3A2010; transition: background 0.2s; cursor: pointer; border: none; padding: 0; outline: none; }
+  .persp-loc-dot-active { background: #D4AF6A; }
   .rr-spine { display: none; }
   .table-round { display: none; }
   .chair { display: none; }
@@ -644,14 +654,557 @@ function TlTrack({ events }: { events: TEvent[] }) {
 // ─── Floor Plan ───────────────────────────────────────────────────────────────
 
 const ERA_BOOK_COLORS = [
+  // Antebellum: deep reds and burnt siennas
   ["#8B3A2A","#C4832D","#6E4E2A","#A85728","#5C2A18","#8B5728","#D4A04A","#6E3A1C","#9A472A","#B56A2A","#7A3A2A","#C47A35"],
+  // Reconstruction: forest greens and blues
   ["#2A5C3A","#7A6914","#5C2A2A","#3A4E2A","#6E4E14","#2A3C5C","#8B7A2A","#4A2A4E","#5C3A2A","#2A5C5C","#8B3A3A","#4A5C2A"],
+  // Post-Reconstruction: warm sepia, ochre, and tobacco browns
+  ["#8B6B2A","#5C4A20","#A08030","#7A6038","#C4A040","#6E5530","#5C6B20","#A06B2A","#8B7A30","#9A5C20","#C46B30","#7A8B28"],
+  // Harlem Renaissance: deep purples and gold
   ["#4A2A6B","#8B6914","#2A1A5C","#6B3A2A","#3A2A6B","#8B4A2A","#4A3A8B","#6B6914","#2A4A6B","#8B2A4A","#4A6B2A","#6B2A6B"],
+  // Civil Rights & Black Power: dark navy and crimson
   ["#1A2A4A","#8B1A1A","#2A2A2A","#4A3A1A","#1A4A3A","#8B4A1A","#1A3A4A","#8B8B1A","#4A1A1A","#2A4A2A","#8B2A1A","#1A4A4A"],
+  // Post–Civil Rights: indigo and teal
   ["#3A2A5C","#5C3A1A","#1A3A2A","#4A2A3A","#2A2A5C","#5C5C1A","#3A1A4A","#1A4A2A","#5C2A3A","#2A5C3A","#4A4A1A","#3A3A5C"],
+  // Black Lives Matter: stark black, red, and gold
   ["#8B1A1A","#1A1A1A","#4A2A1A","#8B5A1A","#1A2A4A","#5A1A1A","#8B8B2A","#2A1A4A","#8B3A1A","#1A4A1A","#5A1A4A","#8B1A4A"],
 ];
 
+// Gallery paintings — left [0-2], right [3-5], back wall [6]
+const GALLERY_ARTS: Array<{ img: string; eraIdx: number }> = [
+  { img: galDuncanson,   eraIdx: 0 }, // left near  — Duncanson
+  { img: galBannister,   eraIdx: 1 }, // left mid   — Bannister
+  { img: galDouglas,     eraIdx: 3 }, // left far   — Douglas
+  { img: galRinggold,    eraIdx: 4 }, // right near — Ringgold
+  { img: galBasquiat,    eraIdx: 5 }, // right mid  — Basquiat
+  { img: galKaphar,      eraIdx: 6 }, // right far  — Kaphar
+  { img: imgBanjoLesson, eraIdx: 2 }, // back wall  — Tanner / Banjo Lesson
+];
+
+// ─── Perspective Walk-through ─────────────────────────────────────────────────
+
+type PerspScene = "library" | "gallery" | "reading";
+
+function toSVGPts(arr: number[]): string {
+  const out: string[] = [];
+  for (let i = 0; i < arr.length; i += 2) out.push(`${arr[i]},${arr[i + 1]}`);
+  return out.join(" ");
+}
+
+// VP = (600, 310). Face coords: [TLx,TLy, BLx,BLy, BRx,BRy, TRx,TRy]
+// Left wall: near edge x=0, recedes rightward toward VP
+const L_FACES = [
+  { era: 0, p: [0,80,   0,640,  240,508, 240,172] },
+  { era: 1, p: [240,172, 240,508, 370,437, 370,222] },
+  { era: 2, p: [370,222, 370,437, 450,393, 450,253] },
+  { era: 3, p: [450,253, 450,393, 490,368, 490,268] },
+];
+// Right wall: near edge x=1200, recedes leftward toward VP
+const R_FACES = [
+  { era: 4, p: [960,172, 960,508, 1200,640, 1200,80]  },
+  { era: 5, p: [830,222, 830,437, 960,508,  960,172]  },
+  { era: 6, p: [750,253, 750,393, 830,437,  830,222]  },
+];
+
+function ShelfFace({ fd, onEnterEra }: { fd: { era: number; p: number[] }; onEnterEra: (i: number) => void }) {
+  const [hov, setHov] = useState(false);
+  const [tlx, tly, blx, bly, brx, bry, trx, trY] = fd.p;
+  const era = eras[fd.era];
+  const colors = ERA_BOOK_COLORS[fd.era];
+  const xMin = Math.min(tlx, trx), xMax = Math.max(tlx, trx);
+  const fw = xMax - xMin;
+  // Limit visible books to what fits without looking crushed
+  const N = Math.max(3, Math.min(colors.length, Math.floor(fw / 7)));
+  const cid = `pbc${fd.era}`;
+  const cx = (xMin + xMax) / 2;
+  const topAvgY = (tly + trY) / 2 + 14;
+  const shelfFracs = [0, 0.3, 0.62, 1];
+  const boardW = Math.max(4, Math.min(16, fw * 0.055));
+  const midW = Math.max(2, Math.min(10, fw * 0.038));
+
+  return (
+    <g style={{ cursor: "pointer" }} onClick={() => onEnterEra(fd.era)}
+      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}>
+      <defs>
+        <clipPath id={cid}>
+          <polygon points={toSVGPts(fd.p)} />
+        </clipPath>
+      </defs>
+      {/* Dark wood back */}
+      <polygon points={toSVGPts(fd.p)} fill="#1A0D05" />
+      {/* Colored book spines, clipped to face shape */}
+      <g clipPath={`url(#${cid})`}>
+        {colors.slice(0, N).map((col, i) => (
+          <rect key={i} x={xMin + fw * (i / N)} y={0} width={Math.max(1.5, fw / N - 1)} height={700} fill={col} />
+        ))}
+        {/* Shelf boards — scaled to face width */}
+        {shelfFracs.map((f, si) => (
+          <line key={si}
+            x1={tlx} y1={tly + (bly - tly) * f}
+            x2={trx} y2={trY + (bry - trY) * f}
+            stroke="#0A0502" strokeWidth={si === 0 || si === 3 ? boardW : midW} />
+        ))}
+        {/* Header strip */}
+        <polygon
+          points={toSVGPts([tlx, tly, trx, trY, trx, trY + (bry - trY) * 0.13, tlx, tly + (bly - tly) * 0.13])}
+          fill="rgba(5,2,0,0.88)" />
+      </g>
+      {/* Hover highlight */}
+      {hov && <polygon points={toSVGPts(fd.p)} fill="rgba(212,175,106,0.11)" />}
+      {/* Era label */}
+      {fw >= 40 && (
+        <text x={cx} y={topAvgY} textAnchor="middle" fill="#D4AF6A"
+          fontSize={Math.min(13, Math.max(5.5, fw * 0.052))}
+          fontFamily="Georgia,'Times New Roman',serif" fontWeight="bold"
+          style={{ pointerEvents: "none", userSelect: "none" }}>
+          {fw >= 80 ? era.name.toUpperCase() : era.years}
+        </text>
+      )}
+      {fw >= 90 && (
+        <text x={cx} y={topAvgY + 14} textAnchor="middle" fill="#8A6A30"
+          fontSize={Math.min(9, Math.max(5, fw * 0.028))}
+          fontFamily="Georgia,'Times New Roman',serif"
+          style={{ pointerEvents: "none", userSelect: "none" }}>
+          {era.years}
+        </text>
+      )}
+    </g>
+  );
+}
+
+function LibraryScene({ onEnterEra, onNavRight, onNavReading }: { onEnterEra: (i: number) => void; onNavRight: () => void; onNavReading: () => void }) {
+  return (
+    <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="lib-vign" cx="50%" cy="50%" r="70%">
+          <stop offset="15%" stopColor="rgba(0,0,0,0)" />
+          <stop offset="100%" stopColor="rgba(0,0,0,0.82)" />
+        </radialGradient>
+        <radialGradient id="lib-ceil" cx="50%" cy="100%" r="80%">
+          <stop offset="0%" stopColor="rgba(210,165,70,0.22)" />
+          <stop offset="100%" stopColor="rgba(0,0,0,0)" />
+        </radialGradient>
+        <radialGradient id="lib-floor" cx="50%" cy="0%" r="75%">
+          <stop offset="0%" stopColor="rgba(155,108,38,0.3)" />
+          <stop offset="100%" stopColor="rgba(0,0,0,0)" />
+        </radialGradient>
+        <radialGradient id="lib-door" cx="50%" cy="50%" r="55%">
+          <stop offset="0%" stopColor="rgba(240,190,80,0.95)" />
+          <stop offset="55%" stopColor="rgba(180,130,50,0.55)" />
+          <stop offset="100%" stopColor="rgba(0,0,0,0)" />
+        </radialGradient>
+        <radialGradient id="lib-door-read" cx="50%" cy="50%" r="55%">
+          <stop offset="0%" stopColor="rgba(180,220,255,0.75)" />
+          <stop offset="55%" stopColor="rgba(100,160,220,0.38)" />
+          <stop offset="100%" stopColor="rgba(0,0,0,0)" />
+        </radialGradient>
+      </defs>
+
+      {/* Background */}
+      <rect width="1200" height="700" fill="#0C0703" />
+
+      {/* Ceiling */}
+      <polygon points="0,0 1200,0 710,252 490,252" fill="#130A03" />
+      {[180,350,500,650,820,1020].map((x, i) => (
+        <line key={i} x1={x} y1={0} x2={600} y2={310} stroke="#1C1008" strokeWidth="1.3" opacity="0.65" />
+      ))}
+      {/* Ceiling panels */}
+      {[[80,200],[220,380],[350,520],[480,640]].map(([ya,yb],i) => {
+        const fA = (ya/252), fB = (yb/252);
+        const xl = 490 * fA, xr = 1200 - 490 * fA;
+        const xlb = 490 * fB, xrb = 1200 - 490 * fB;
+        return <polygon key={i} points={`${xl},${ya} ${xr},${ya} ${xrb},${yb} ${xlb},${yb}`} fill="none" stroke="#1A0E06" strokeWidth="1" opacity="0.5" />;
+      })}
+      <ellipse cx="600" cy="0" rx="420" ry="290" fill="url(#lib-ceil)" style={{ pointerEvents: "none" }} />
+
+      {/* Floor — warm oak planks */}
+      <polygon points="0,700 1200,700 710,390 490,390" fill="#6B4D1A" />
+      {[652,604,560,520,484,454,430,410,396].map((y, i) => {
+        const t = (700 - y) / 310;
+        return <line key={i} x1={490 * t} y1={y} x2={1200 - 490 * t} y2={y} stroke="#5A3E12" strokeWidth="1.3" />;
+      })}
+      {[100,240,380,520,680,820,960,1100].map((xN, i) => (
+        <line key={i} x1={xN} y1={700} x2={600} y2={392} stroke="#5A3E12" strokeWidth="0.9" opacity="0.5" />
+      ))}
+      <rect x="240" y="390" width="720" height="310" fill="url(#lib-floor)" style={{ pointerEvents: "none" }} />
+
+      {/* Wall strips above/below shelves */}
+      <polygon points="0,0 0,80 490,268 490,252" fill="#140C03" />
+      <polygon points="0,640 0,700 490,390 490,372" fill="#140C03" />
+      <polygon points="1200,0 1200,80 710,268 710,252" fill="#140C03" />
+      <polygon points="1200,640 1200,700 710,390 710,372" fill="#140C03" />
+
+      {/* Bookshelves */}
+      {L_FACES.map((f, i) => <ShelfFace key={i} fd={f} onEnterEra={onEnterEra} />)}
+      {R_FACES.map((f, i) => <ShelfFace key={i + 4} fd={f} onEnterEra={onEnterEra} />)}
+
+      {/* Far wall */}
+      <rect x="490" y="252" width="220" height="138" fill="#1E1207" />
+
+      {/* Glowing doorway → Gallery (left door) */}
+      <g style={{ cursor: "pointer" }} onClick={onNavRight}>
+        <ellipse cx="554" cy="332" rx="62" ry="90" fill="url(#lib-door)" />
+        <rect x="510" y="282" width="88" height="108" rx="5" fill="#2C1A08" />
+        <rect x="516" y="288" width="76" height="98" rx="3" fill="rgba(230,180,70,0.20)" />
+        <rect x="521" y="292" width="66" height="90" rx="2" fill="rgba(240,190,80,0.09)" />
+        <path d="M510,308 Q554,264 598,308" fill="none" stroke="#5A3A14" strokeWidth="2.5" />
+        <text x="554" y="408" textAnchor="middle" fill="#9A7A38"
+          fontSize="7.5" fontFamily="Arial,sans-serif" letterSpacing="1.6">GALLERY ›</text>
+      </g>
+
+      {/* Glowing doorway → Reading Room (right door) */}
+      <g style={{ cursor: "pointer" }} onClick={onNavReading}>
+        <ellipse cx="648" cy="332" rx="62" ry="90" fill="url(#lib-door-read)" />
+        <rect x="604" y="282" width="88" height="108" rx="5" fill="#111C2A" />
+        <rect x="610" y="288" width="76" height="98" rx="3" fill="rgba(160,200,255,0.14)" />
+        <rect x="615" y="292" width="66" height="90" rx="2" fill="rgba(180,210,255,0.07)" />
+        <path d="M604,308 Q648,264 692,308" fill="none" stroke="#2A3C5A" strokeWidth="2.5" />
+        <text x="648" y="400" textAnchor="middle" fill="#7090B8"
+          fontSize="6.2" fontFamily="Arial,sans-serif" letterSpacing="1.1">READING</text>
+        <text x="648" y="410" textAnchor="middle" fill="#7090B8"
+          fontSize="6.2" fontFamily="Arial,sans-serif" letterSpacing="1.1">ROOM ›</text>
+      </g>
+
+      {/* Vignette */}
+      <rect width="1200" height="700" fill="url(#lib-vign)" style={{ pointerEvents: "none" }} />
+    </svg>
+  );
+}
+
+// Gallery wall painting helper (left wall VP geometry)
+function lWallPt(x: number, f: number): [number, number] {
+  const top = 80 + 188 * (x / 600);
+  const bot = 640 - 250 * (x / 600);
+  return [x, top + (bot - top) * f];
+}
+function rWallPt(x: number, f: number): [number, number] {
+  const top = 80 + 188 * ((1200 - x) / 600);
+  const bot = 640 - 250 * ((1200 - x) / 600);
+  return [x, top + (bot - top) * f];
+}
+function wallPoly(pts: [number, number][]): string {
+  return pts.map(p => p.join(",")).join(" ");
+}
+
+const ART_SVG = [
+  // 0 Antebellum — concentric rings/sunset
+  <g key="a0"><rect width="60" height="44" fill="#2c1a0a"/><ellipse cx="30" cy="22" rx="26" ry="18" fill="none" stroke="#8B3A2A" strokeWidth="5" opacity="0.7"/><ellipse cx="30" cy="22" rx="17" ry="11" fill="none" stroke="#C4832D" strokeWidth="3.5" opacity="0.8"/><ellipse cx="30" cy="22" rx="9" ry="5" fill="#D4A04A" opacity="0.7"/><circle cx="30" cy="22" r="2.5" fill="#D4A04A"/></g>,
+  // 1 Reconstruction — geometric fields
+  <g key="a1"><rect width="60" height="44" fill="#0e1f14"/><rect x="6" y="6" width="20" height="32" fill="#2A5C3A" opacity="0.85"/><rect x="16" y="10" width="28" height="24" fill="#3A4E2A" opacity="0.7"/><rect x="32" y="8" width="20" height="28" fill="#2A3C5C" opacity="0.8"/><rect x="10" y="18" width="40" height="8" fill="#7A6914" opacity="0.55"/><circle cx="30" cy="22" r="3.5" fill="#8B7A2A" opacity="0.9"/></g>,
+  // 2 Post-Reconstruction — triangle/ochre
+  <g key="a2"><rect width="60" height="44" fill="#1a1208"/><polygon points="0,44 30,0 60,44" fill="#8B6B2A" opacity="0.7"/><polygon points="0,44 30,10 60,44" fill="#C4A040" opacity="0.5"/><polygon points="10,44 30,20 50,44" fill="#A08030" opacity="0.6"/><circle cx="30" cy="30" r="5" fill="#C4A040" opacity="0.8"/></g>,
+  // 3 Harlem Renaissance — concentric arcs/purple gold
+  <g key="a3"><rect width="60" height="44" fill="#120a1e"/>{[28,22,16,10,5].map((r,i) => <circle key={i} cx="30" cy="22" r={r} fill="none" stroke={["#8B6914","#4A2A6B","#6B2A6B","#4A3A8B","#8B6914"][i]} strokeWidth="2.5" opacity={0.62+i*0.07}/>)}<circle cx="30" cy="22" r="3" fill="#8B6914"/></g>,
+  // 4 Civil Rights — flag stripes
+  <g key="a4"><rect width="60" height="44" fill="#060e18"/><rect x="0" y="0" width="60" height="14.6" fill="#1A2A4A" opacity="0.9"/><rect x="0" y="14.7" width="60" height="14.6" fill="#8B1A1A" opacity="0.85"/><rect x="0" y="29.4" width="60" height="14.6" fill="#1A2A4A" opacity="0.9"/><rect x="22" y="0" width="16" height="44" fill="#8B8B1A" opacity="0.35"/><circle cx="30" cy="22" r="9" fill="none" stroke="#8B8B1A" strokeWidth="2" opacity="0.8"/><circle cx="30" cy="22" r="4" fill="#8B8B1A" opacity="0.9"/></g>,
+  // 5 Post-Civil Rights — crosshatch indigo
+  <g key="a5"><rect width="60" height="44" fill="#0a0a18"/><rect x="0" y="0" width="60" height="22" fill="#3A2A5C" opacity="0.85"/><rect x="0" y="22" width="60" height="22" fill="#1A3A2A" opacity="0.9"/><line x1="0" y1="0" x2="60" y2="44" stroke="#5C5C1A" strokeWidth="1.5" opacity="0.7"/><line x1="60" y1="0" x2="0" y2="44" stroke="#5C5C1A" strokeWidth="1.5" opacity="0.7"/><rect x="24" y="16" width="12" height="12" fill="#8B8B2A" opacity="0.8"/></g>,
+];
+
+// Bilinear interpolation within a quad [TL, BL, BR, TR]
+function bilerp(pts: [number,number][], u: number, v: number): [number,number] {
+  const top: [number,number] = [pts[0][0]+(pts[3][0]-pts[0][0])*u, pts[0][1]+(pts[3][1]-pts[0][1])*u];
+  const bot: [number,number] = [pts[1][0]+(pts[2][0]-pts[1][0])*u, pts[1][1]+(pts[2][1]-pts[1][1])*u];
+  return [top[0]+(bot[0]-top[0])*v, top[1]+(bot[1]-top[1])*v];
+}
+
+function GalleryPainting({ pts, img, paintId, onClick }: { pts: [number,number][]; img: string; paintId: string; onClick: () => void }) {
+  const [hov, setHov] = useState(false);
+  const ptsStr = wallPoly(pts);
+  // Frame inset using bilinear interp — gold border on all 4 sides
+  const mf = 0.09;
+  const matPts: [number,number][] = [
+    bilerp(pts, mf, mf),
+    bilerp(pts, mf, 1-mf),
+    bilerp(pts, 1-mf, 1-mf),
+    bilerp(pts, 1-mf, mf),
+  ];
+  const matStr = wallPoly(matPts);
+  const xs = matPts.map(p => p[0]), ys = matPts.map(p => p[1]);
+  const artX = Math.min(...xs), artW = Math.max(...xs) - artX;
+  const artY = Math.min(...ys), artH = Math.max(...ys) - artY;
+
+  return (
+    <g style={{ cursor: "pointer" }} onClick={onClick}
+      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}>
+      <defs>
+        <clipPath id={`${paintId}f`}><polygon points={ptsStr} /></clipPath>
+        <clipPath id={`${paintId}i`}><polygon points={matStr} /></clipPath>
+      </defs>
+      {/* Drop shadow */}
+      <polygon points={ptsStr} fill="rgba(0,0,0,0.35)" transform="translate(3,3)" clipPath={`url(#${paintId}f)`} />
+      {/* Gold frame fills full trapezoid */}
+      <polygon points={ptsStr} fill={hov ? "#C49030" : "#9A6C18"} />
+      {/* Artwork image, clipped to bilinear-inset inner area */}
+      <image href={img} x={artX} y={artY} width={artW} height={artH}
+        preserveAspectRatio="xMidYMid slice" clipPath={`url(#${paintId}i)`} />
+      {hov && <polygon points={ptsStr} fill="rgba(255,245,210,0.10)" />}
+    </g>
+  );
+}
+
+function GalleryScene({ onOpenGallery, onEnterEra, onNavLeft, onNavRight }: {
+  onOpenGallery: () => void; onEnterEra: (i: number) => void; onNavLeft: () => void; onNavRight: () => void;
+}) {
+  // Left wall: 3 paintings (eras 0,1,3), right wall: 3 paintings (eras 4,5,6)
+  const leftPaintings: [number,number][][] = [
+    [lWallPt(18,0.13),  lWallPt(18,0.70),  lWallPt(215,0.70),  lWallPt(215,0.13)],
+    [lWallPt(278,0.17), lWallPt(278,0.66), lWallPt(400,0.66), lWallPt(400,0.17)],
+    [lWallPt(432,0.20), lWallPt(432,0.63), lWallPt(475,0.63), lWallPt(475,0.20)],
+  ];
+  const rightPaintings: [number,number][][] = [
+    [rWallPt(985,0.13), rWallPt(985,0.70), rWallPt(1180,0.70), rWallPt(1180,0.13)],
+    [rWallPt(800,0.17), rWallPt(800,0.66), rWallPt(922,0.66),  rWallPt(922,0.17)],
+    [rWallPt(725,0.20), rWallPt(725,0.63), rWallPt(770,0.63),  rWallPt(770,0.20)],
+  ];
+  const backWallArt = GALLERY_ARTS[6];
+
+  return (
+    <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="gal-vign" cx="50%" cy="50%" r="70%">
+          <stop offset="15%" stopColor="rgba(0,0,0,0)" />
+          <stop offset="100%" stopColor="rgba(0,0,0,0.72)" />
+        </radialGradient>
+        <radialGradient id="gal-floor" cx="50%" cy="0%" r="75%">
+          <stop offset="0%" stopColor="rgba(55,38,14,0.35)" />
+          <stop offset="100%" stopColor="rgba(0,0,0,0)" />
+        </radialGradient>
+        <radialGradient id="gal-far" cx="50%" cy="48%" r="52%">
+          <stop offset="0%" stopColor="rgba(240,220,165,0.88)" />
+          <stop offset="100%" stopColor="rgba(0,0,0,0)" />
+        </radialGradient>
+      </defs>
+
+      <rect width="1200" height="700" fill="#0B0906" />
+
+      {/* Cream walls */}
+      <polygon points="0,0 0,700 490,390 490,252" fill="#C5BCAA" />
+      <polygon points="1200,0 1200,700 710,390 710,252" fill="#C5BCAA" />
+      {/* Ceiling */}
+      <polygon points="0,0 1200,0 710,252 490,252" fill="#B8B2A4" />
+      {/* Rail line on walls */}
+      <line x1="0" y1={80+(640-80)*0.18} x2="490" y2={268+(390-268)*0.18} stroke="#A8A295" strokeWidth="2.5"/>
+      <line x1="1200" y1={80+(640-80)*0.18} x2="710" y2={268+(390-268)*0.18} stroke="#A8A295" strokeWidth="2.5"/>
+      {/* Dark parquet floor */}
+      <polygon points="0,700 1200,700 710,390 490,390" fill="#261A0A" />
+      {[652,608,566,528,494,466,442,422,406,396].map((y, i) => {
+        const t = (700-y)/310;
+        return <line key={i} x1={490*t} y1={y} x2={1200-490*t} y2={y} stroke="#1E1408" strokeWidth="1.1"/>;
+      })}
+      {[160,360,560,640,840,1040].map((xN, i) => (
+        <line key={i} x1={xN} y1={700} x2={600} y2={392} stroke="#1E1408" strokeWidth="0.9" opacity="0.6"/>
+      ))}
+      <rect x="300" y="390" width="600" height="310" fill="url(#gal-floor)" style={{ pointerEvents:"none" }} />
+      {/* Far wall */}
+      <rect x="490" y="252" width="220" height="138" fill="#D0C9B8" />
+
+      {/* Back wall — Banjo Lesson (portrait, centered) */}
+      <defs>
+        <clipPath id="bwclip"><rect x="548" y="263" width="104" height="112" /></clipPath>
+      </defs>
+      <g style={{ cursor: "pointer" }} onClick={() => onEnterEra(backWallArt.eraIdx)}>
+        {/* Shadow behind frame */}
+        <rect x="549" y="265" width="104" height="112" fill="rgba(0,0,0,0.28)" rx="1" />
+        {/* Gold frame */}
+        <rect x="545" y="261" width="110" height="118" fill="#9A6C18" rx="1" />
+        {/* Mat */}
+        <rect x="549" y="265" width="102" height="110" fill="#C8BFA8" />
+        {/* Artwork image */}
+        <image href={backWallArt.img} x="552" y="268" width="96" height="104"
+          preserveAspectRatio="xMidYMid slice" clipPath="url(#bwclip)" />
+        {/* Hover shimmer */}
+        <rect x="545" y="261" width="110" height="118" fill="transparent"
+          style={{ transition: "fill 0.15s" }}
+          onMouseEnter={e => (e.currentTarget.style.fill = "rgba(255,240,200,0.10)")}
+          onMouseLeave={e => (e.currentTarget.style.fill = "transparent")} />
+        {/* Label below */}
+        <text x="600" y="392" textAnchor="middle" fill="#6A5A38"
+          fontSize="6.5" fontFamily="Georgia,serif" letterSpacing="0.8">
+          The Banjo Lesson · Tanner · 1893
+        </text>
+      </g>
+
+      {/* Ceiling panels */}
+      {[[30,140],[155,260],[272,366]].map(([ya,yb],i) => {
+        const fA = ya/252, fB = yb/252;
+        return <polygon key={i} points={`${490*fA},${ya} ${1200-490*fA},${ya} ${1200-490*fB},${yb} ${490*fB},${yb}`}
+          fill="none" stroke="#A8A090" strokeWidth="1" opacity="0.5"/>;
+      })}
+
+      {/* Paintings — real artwork images. Left wall: eras 0-3, right wall: eras 4-6 */}
+      {leftPaintings.map((pts, i) => {
+        const art = GALLERY_ARTS[i];
+        return <GalleryPainting key={i} pts={pts} img={art.img} paintId={`gl${i}`}
+          onClick={() => onEnterEra(art.eraIdx)} />;
+      })}
+      {rightPaintings.map((pts, i) => {
+        const art = GALLERY_ARTS[i + 3];
+        return <GalleryPainting key={i+3} pts={pts} img={art.img} paintId={`gr${i}`}
+          onClick={() => onEnterEra(art.eraIdx)} />;
+      })}
+
+      {/* Far-end subtle glow only — no overlapping CTA label */}
+      <ellipse cx="600" cy="320" rx="50" ry="40" fill="url(#gal-far)" style={{ pointerEvents:"none" }} />
+
+      <rect width="1200" height="700" fill="url(#gal-vign)" style={{ pointerEvents:"none" }} />
+    </svg>
+  );
+}
+
+function ReadingScene({ onOpenReadingRoom, onNavLeft }: { onOpenReadingRoom: () => void; onNavLeft: () => void }) {
+  return (
+    <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="rr-vign" cx="50%" cy="50%" r="70%">
+          <stop offset="20%" stopColor="rgba(0,0,0,0)" />
+          <stop offset="100%" stopColor="rgba(0,0,0,0.86)" />
+        </radialGradient>
+        <radialGradient id="rr-lamp" cx="50%" cy="30%" r="58%">
+          <stop offset="0%" stopColor="rgba(235,190,85,0.45)" />
+          <stop offset="100%" stopColor="rgba(0,0,0,0)" />
+        </radialGradient>
+        <radialGradient id="rr-floor" cx="50%" cy="15%" r="68%">
+          <stop offset="0%" stopColor="rgba(155,105,35,0.28)" />
+          <stop offset="100%" stopColor="rgba(0,0,0,0)" />
+        </radialGradient>
+      </defs>
+
+      <rect width="1200" height="700" fill="#0E0A04" />
+
+      {/* Warm plaster walls */}
+      <polygon points="0,0 0,700 490,390 490,252" fill="#1E1710" />
+      <polygon points="1200,0 1200,700 710,390 710,252" fill="#1E1710" />
+      <polygon points="0,0 1200,0 710,252 490,252" fill="#180F07" />
+      <polygon points="0,700 1200,700 710,390 490,390" fill="#5C3E14" />
+
+      {/* Floor planks */}
+      {[650,604,560,520,482,452,428,408,394].map((y, i) => {
+        const t = (700-y)/310;
+        return <line key={i} x1={490*t} y1={y} x2={1200-490*t} y2={y} stroke="#4A3010" strokeWidth="1.3"/>;
+      })}
+      {[200,400,600,800,1000].map((xN, i) => (
+        <line key={i} x1={xN} y1={700} x2={600} y2={392} stroke="#4A3010" strokeWidth="0.9" opacity="0.5"/>
+      ))}
+      <rect x="250" y="390" width="700" height="310" fill="url(#rr-floor)" style={{ pointerEvents:"none" }} />
+
+      {/* Far wall with small bookshelves */}
+      <rect x="490" y="252" width="220" height="138" fill="#261606" />
+      {ERA_BOOK_COLORS.slice(0,6).map((cols, ei) =>
+        cols.slice(0,4).map((col, ci) => (
+          <rect key={`${ei}-${ci}`} x={496 + ei*34 + ci*7} y={270} width={6} height={44} fill={col} opacity="0.72"/>
+        ))
+      )}
+      <line x1="490" y1="270" x2="710" y2="270" stroke="#1A0E06" strokeWidth="7"/>
+      <line x1="490" y1="314" x2="710" y2="314" stroke="#1A0E06" strokeWidth="5"/>
+
+      {/* Lamp glow from ceiling */}
+      <ellipse cx="600" cy="0" rx="340" ry="240" fill="url(#rr-lamp)" style={{ pointerEvents:"none" }} />
+
+      {/* Reading table + chairs (perspective) */}
+      <g style={{ cursor:"pointer" }} onClick={onOpenReadingRoom}>
+        {/* Table shadow */}
+        <ellipse cx="600" cy="512" rx="200" ry="36" fill="rgba(0,0,0,0.52)" />
+        {/* Table body */}
+        <ellipse cx="600" cy="470" rx="195" ry="52" fill="#6B4A1A" />
+        <ellipse cx="600" cy="467" rx="188" ry="47" fill="#7A5820" />
+        <ellipse cx="600" cy="465" rx="182" ry="43" fill="none" stroke="#9A7030" strokeWidth="2" opacity="0.55" />
+        {/* Table lamp */}
+        <ellipse cx="600" cy="446" rx="24" ry="9" fill="#D4AF6A" opacity="0.9" />
+        <ellipse cx="600" cy="443" rx="18" ry="6" fill="#F0D880" opacity="0.95" />
+        {/* Chairs (perspective) */}
+        <rect x="408" y="440" width="54" height="32" rx="4" fill="#4A3210" />
+        <rect x="412" y="424" width="46" height="18" rx="3" fill="#5A4018" />
+        <rect x="738" y="440" width="54" height="32" rx="4" fill="#4A3210" />
+        <rect x="742" y="424" width="46" height="18" rx="3" fill="#5A4018" />
+        <rect x="555" y="418" width="90" height="28" rx="4" fill="#4A3210" />
+        <rect x="560" y="402" width="80" height="18" rx="3" fill="#5A4018" />
+        <rect x="370" y="492" width="64" height="36" rx="5" fill="#3A2810" />
+        <rect x="766" y="492" width="64" height="36" rx="5" fill="#3A2810" />
+        <rect x="524" y="515" width="88" height="38" rx="5" fill="#3A2810" />
+        <rect x="588" y="517" width="88" height="38" rx="5" fill="#3A2810" />
+        <text x="600" y="582" textAnchor="middle" fill="#8A6A30"
+          fontSize="9.5" fontFamily="Georgia,serif" letterSpacing="1.6">ENTER READING ROOM ›</text>
+      </g>
+
+      <rect width="1200" height="700" fill="url(#rr-vign)" style={{ pointerEvents:"none" }} />
+    </svg>
+  );
+}
+
+function PerspectiveView({ perspScene, setPerspScene, onEnterEra, onOpenGallery, onOpenReadingRoom, onOpenAbout }: {
+  perspScene: PerspScene;
+  setPerspScene: (s: PerspScene) => void;
+  onEnterEra: (i: number) => void;
+  onOpenGallery: () => void;
+  onOpenReadingRoom: () => void;
+  onOpenAbout: () => void;
+}) {
+  const SCENES: PerspScene[] = ["library", "gallery", "reading"];
+  const idx = SCENES.indexOf(perspScene);
+  const navLeft = () => { if (idx > 0) setPerspScene(SCENES[idx - 1]); };
+  const navRight = () => { if (idx < SCENES.length - 1) setPerspScene(SCENES[idx + 1]); };
+
+  const LABELS: Record<PerspScene, string> = {
+    library: "Main Library Hall",
+    gallery: "Gallery Lounge",
+    reading: "Reading Room",
+  };
+
+  return (
+    <div className="persp-wrap">
+      {/* Top nav — row 1: title + room links, row 2: era quick links */}
+      <div className="persp-topnav">
+        <div className="persp-topnav-row1">
+          <span className="persp-nav-title">Black American Poetry &amp; Art</span>
+          <span className="persp-nav-sep" />
+          <div className="persp-nav-links">
+            <button className="persp-nav-link" onClick={() => { setPerspScene("library"); }}>Library</button>
+            <button className="persp-nav-link" onClick={() => { setPerspScene("gallery"); onOpenGallery(); }}>Gallery</button>
+            <button className="persp-nav-link" onClick={() => { setPerspScene("reading"); onOpenReadingRoom(); }}>Reading Room</button>
+            <button className="persp-nav-link" onClick={onOpenAbout}>About</button>
+          </div>
+        </div>
+        <div className="persp-nav-eras">
+          {eras.map((era, i) => (
+            <button key={i} className="persp-nav-era"
+              onClick={() => { setPerspScene("library"); onEnterEra(i); }}>
+              {era.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Scene */}
+      <div className="persp-scene">
+        {perspScene === "library" && <LibraryScene onEnterEra={onEnterEra} onNavRight={navRight} onNavReading={() => setPerspScene("reading")} />}
+        {perspScene === "gallery" && <GalleryScene onOpenGallery={onOpenGallery} onEnterEra={onEnterEra} onNavLeft={navLeft} onNavRight={navRight} />}
+        {perspScene === "reading" && <ReadingScene onOpenReadingRoom={onOpenReadingRoom} onNavLeft={navLeft} />}
+      </div>
+
+      {/* Bottom nav */}
+      <div className="persp-bottomnav">
+        <button className={`persp-arrow-btn${idx === 0 ? " persp-arrow-ghost" : ""}`} onClick={navLeft}>
+          ‹ {idx > 0 ? LABELS[SCENES[idx - 1]] : ""}
+        </button>
+        <div className="persp-loc-center">
+          <div className="persp-loc-label">{LABELS[perspScene]}</div>
+          <div className="persp-loc-dots">
+            {SCENES.map((s, i) => (
+              <button key={s} className={`persp-loc-dot${i === idx ? " persp-loc-dot-active" : ""}`}
+                onClick={() => setPerspScene(s)} />
+            ))}
+          </div>
+        </div>
+        <button className={`persp-arrow-btn${idx === SCENES.length - 1 ? " persp-arrow-ghost" : ""}`} onClick={navRight}>
+          {idx < SCENES.length - 1 ? LABELS[SCENES[idx + 1]] : ""} ›
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// (FloorPlan removed — replaced by PerspectiveView above)
 function FloorPlan({ onEnterEra, onOpenGallery, onOpenAbout, onOpenReadingRoom }: {
   onEnterEra: (i: number) => void;
   onOpenGallery: () => void;
@@ -718,57 +1271,111 @@ function FloorPlan({ onEnterEra, onOpenGallery, onOpenAbout, onOpenReadingRoom }
         {/* ── Reading Room ── */}
         <div className="reading-room-label">Reading Room</div>
         <div className="reading-room" onClick={onOpenReadingRoom}>
-          {/* 2D floor-plan furniture icon: oval table with 8 chairs (top view) */}
-          <svg className="rr-plan-svg" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              {/* chair seen from above: rounded seat + backrest arc, pointing up */}
-              <g id="rr-chair-icon">
-                <path d="M -11 2 A 11 9 0 0 1 11 2 L 11 4 A 11 8 0 0 1 -11 4 Z" fill="#e9dfc6" stroke="#3d3226" strokeWidth="1.6" strokeLinejoin="round" />
-                <rect x="-8" y="0" width="16" height="12" rx="3" fill="#e9dfc6" stroke="#3d3226" strokeWidth="1.6" />
-              </g>
-            </defs>
-            {/* oval table */}
-            <ellipse cx="100" cy="65" rx="58" ry="27" fill="#a38f79" stroke="#3d3226" strokeWidth="2" />
-            {/* top chairs */}
-            <use href="#rr-chair-icon" transform="translate(66 26)" />
-            <use href="#rr-chair-icon" transform="translate(100 22)" />
-            <use href="#rr-chair-icon" transform="translate(134 26)" />
-            {/* bottom chairs */}
-            <use href="#rr-chair-icon" transform="translate(66 104) rotate(180)" />
-            <use href="#rr-chair-icon" transform="translate(100 108) rotate(180)" />
-            <use href="#rr-chair-icon" transform="translate(134 104) rotate(180)" />
-            {/* end chairs */}
-            <use href="#rr-chair-icon" transform="translate(28 65) rotate(-90)" />
-            <use href="#rr-chair-icon" transform="translate(172 65) rotate(90)" />
-          </svg>
+          {/* oval table */}
+          <div className="rr-table" />
+          {/* 6 chairs around the table */}
+          <div className="rr-chair" style={{ top: "8%",  left: "38%" }} />
+          <div className="rr-chair" style={{ top: "8%",  left: "62%" }} />
+          <div className="rr-chair" style={{ top: "42%", left: "8%" }} />
+          <div className="rr-chair" style={{ top: "42%", right: "8%" }} />
+          <div className="rr-chair" style={{ bottom: "6%", left: "38%" }} />
+          <div className="rr-chair" style={{ bottom: "6%", left: "62%" }} />
           <div className="fp-room-tag" style={{ bottom: 2, right: 4 }}>Reading Room</div>
         </div>
 
         {/* ── Gallery Wing ── */}
         <div className="lounge" onClick={onOpenGallery}>
           <div className="lounge-label">Gallery Lounge</div>
-          {/* artwork frames on left wall */}
+
+          {/* left wall — frame 1: Antebellum warm reds/burnt sienna */}
           <div className="gal-frame" style={{ left: "6%", top: "14%", width: "22%", height: "18%" }}>
-            <div className="gal-frame-inner" />
+            <svg width="100%" height="100%" viewBox="0 0 60 44" preserveAspectRatio="xMidYMid slice" style={{ display: "block" }}>
+              <rect width="60" height="44" fill="#2c1a0a" />
+              <ellipse cx="30" cy="22" rx="26" ry="18" fill="none" stroke="#8B3A2A" strokeWidth="5" opacity="0.7" />
+              <ellipse cx="30" cy="22" rx="18" ry="11" fill="none" stroke="#C4832D" strokeWidth="3.5" opacity="0.8" />
+              <ellipse cx="30" cy="22" rx="10" ry="5" fill="#D4A04A" opacity="0.6" />
+              <line x1="4" y1="22" x2="56" y2="22" stroke="#A85728" strokeWidth="1.5" opacity="0.5" />
+              <line x1="30" y1="4" x2="30" y2="40" stroke="#A85728" strokeWidth="1.5" opacity="0.5" />
+              <circle cx="30" cy="22" r="2.5" fill="#D4A04A" />
+            </svg>
           </div>
+
+          {/* left wall — frame 2: Reconstruction greens/teal */}
           <div className="gal-frame" style={{ left: "6%", top: "38%", width: "22%", height: "18%" }}>
-            <div className="gal-frame-inner" />
+            <svg width="100%" height="100%" viewBox="0 0 60 44" preserveAspectRatio="xMidYMid slice" style={{ display: "block" }}>
+              <rect width="60" height="44" fill="#0e1f14" />
+              <rect x="6" y="6" width="20" height="32" fill="#2A5C3A" opacity="0.85" />
+              <rect x="16" y="10" width="28" height="24" fill="#3A4E2A" opacity="0.75" />
+              <rect x="32" y="8" width="20" height="28" fill="#2A3C5C" opacity="0.8" />
+              <rect x="10" y="18" width="40" height="8" fill="#7A6914" opacity="0.55" />
+              <rect x="22" y="14" width="16" height="16" fill="#6E4E14" opacity="0.4" />
+              <circle cx="30" cy="22" r="3" fill="#8B7A2A" opacity="0.9" />
+            </svg>
           </div>
+
+          {/* left wall — frame 3: Post-Reconstruction ochre/tobacco */}
           <div className="gal-frame" style={{ left: "6%", top: "62%", width: "22%", height: "18%" }}>
-            <div className="gal-frame-inner" />
+            <svg width="100%" height="100%" viewBox="0 0 60 44" preserveAspectRatio="xMidYMid slice" style={{ display: "block" }}>
+              <rect width="60" height="44" fill="#1a1208" />
+              <polygon points="0,44 30,0 60,44" fill="#8B6B2A" opacity="0.7" />
+              <polygon points="0,44 30,10 60,44" fill="#C4A040" opacity="0.5" />
+              <polygon points="10,44 30,18 50,44" fill="#A08030" opacity="0.65" />
+              <line x1="0" y1="0" x2="60" y2="44" stroke="#5C4A20" strokeWidth="1.5" opacity="0.6" />
+              <line x1="60" y1="0" x2="0" y2="44" stroke="#5C4A20" strokeWidth="1.5" opacity="0.6" />
+              <circle cx="30" cy="30" r="5" fill="#C4A040" opacity="0.8" />
+              <circle cx="30" cy="30" r="2" fill="#2c1a08" />
+            </svg>
           </div>
-          {/* artwork frames on right wall */}
+
+          {/* right wall — frame 4: Harlem Renaissance deep purples/gold */}
           <div className="gal-frame" style={{ right: "6%", top: "14%", width: "22%", height: "18%" }}>
-            <div className="gal-frame-inner" />
+            <svg width="100%" height="100%" viewBox="0 0 60 44" preserveAspectRatio="xMidYMid slice" style={{ display: "block" }}>
+              <rect width="60" height="44" fill="#120a1e" />
+              {[28,22,16,10,5].map((r, i) => (
+                <circle key={i} cx="30" cy="22" r={r}
+                  fill="none"
+                  stroke={["#8B6914","#4A2A6B","#6B2A6B","#4A3A8B","#8B6914"][i]}
+                  strokeWidth="2.5"
+                  opacity={0.6 + i * 0.08}
+                />
+              ))}
+              {[0,45,90,135,180,225,270,315].map((angle, i) => {
+                const rad = angle * Math.PI / 180;
+                return <line key={i} x1="30" y1="22"
+                  x2={30 + Math.cos(rad) * 28} y2={22 + Math.sin(rad) * 28}
+                  stroke="#8B6914" strokeWidth="0.8" opacity="0.45" />;
+              })}
+              <circle cx="30" cy="22" r="3" fill="#8B6914" />
+            </svg>
           </div>
+
+          {/* right wall — frame 5: Civil Rights & Black Power navy/crimson */}
           <div className="gal-frame" style={{ right: "6%", top: "38%", width: "22%", height: "18%" }}>
-            <div className="gal-frame-inner" />
+            <svg width="100%" height="100%" viewBox="0 0 60 44" preserveAspectRatio="xMidYMid slice" style={{ display: "block" }}>
+              <rect width="60" height="44" fill="#060e18" />
+              <rect x="0" y="0" width="60" height="14" fill="#1A2A4A" opacity="0.9" />
+              <rect x="0" y="15" width="60" height="14" fill="#8B1A1A" opacity="0.85" />
+              <rect x="0" y="30" width="60" height="14" fill="#1A2A4A" opacity="0.9" />
+              <rect x="22" y="0" width="16" height="44" fill="#8B8B1A" opacity="0.35" />
+              <circle cx="30" cy="22" r="9" fill="none" stroke="#8B8B1A" strokeWidth="2" opacity="0.8" />
+              <circle cx="30" cy="22" r="4" fill="#8B8B1A" opacity="0.9" />
+            </svg>
           </div>
+
+          {/* right wall — frame 6: BLM era stark black/red/gold */}
           <div className="gal-frame" style={{ right: "6%", top: "62%", width: "22%", height: "18%" }}>
-            <div className="gal-frame-inner" />
+            <svg width="100%" height="100%" viewBox="0 0 60 44" preserveAspectRatio="xMidYMid slice" style={{ display: "block" }}>
+              <rect width="60" height="44" fill="#0a0a0a" />
+              <rect x="0" y="0" width="60" height="14.6" fill="#1A1A1A" />
+              <rect x="0" y="14.7" width="60" height="14.6" fill="#8B1A1A" />
+              <rect x="0" y="29.4" width="60" height="14.6" fill="#8B8B2A" opacity="0.9" />
+              <line x1="0" y1="0" x2="60" y2="44" stroke="#4A2A1A" strokeWidth="1.2" opacity="0.7" />
+              <line x1="60" y1="0" x2="0" y2="44" stroke="#4A2A1A" strokeWidth="1.2" opacity="0.7" />
+              <rect x="24" y="16" width="12" height="12" fill="#8B8B2A" opacity="0.8" />
+              <rect x="27" y="19" width="6" height="6" fill="#0a0a0a" />
+            </svg>
           </div>
-          {/* bench in center */}
-          <div className="gal-bench" style={{ left: "28%", top: "44%", width: "44%", height: "12%" }} />
+
           <div className="fp-room-tag" style={{ bottom: 4, left: "50%", transform: "translateX(-50%)" }}>click to browse</div>
         </div>
 
@@ -1177,6 +1784,8 @@ export default function App() {
   const [panelTimeline, setPanelTimeline] = useState<{ events: TEvent[]; name: string; years: string } | null>(null);
   const [showAbout, setShowAbout] = useState(false);
 
+  const [perspScene, setPerspScene] = useState<PerspScene>("library");
+
   const enterEra = (i: number) => { setCurrentEra(i); setView("era"); setSelectedBook(null); setSelectedArt(null); setTimelineEra(null); };
   const backToFloor = () => { setView("floor"); setCurrentEra(null); setSelectedBook(null); setSelectedArt(null); setTimelineEra(null); };
   const openGallery = () => { setView("gallery"); setGalleryPickEra(null); setGalleryPickInfo(false); };
@@ -1186,11 +1795,14 @@ export default function App() {
     <div className="exhibit-root">
       <style>{CSS}</style>
 
-      <div className="exhibit-title">Black American Poetry &amp; Art</div>
-      <div className="exhibit-subtitle">Six bookcases. Six eras of verse, image, and struggle — from Reconstruction to Black Lives Matter.</div>
-      <div className="exhibit-instructions">Enter a bookcase to read poems &amp; view the era's artwork · open the Reading Room to browse all 12 poems · visit the Gallery Lounge to compare all 6 artworks · click Welcome to learn your way around</div>
-
-      <FloorPlan onEnterEra={enterEra} onOpenGallery={openGallery} onOpenAbout={() => setShowAbout(true)} onOpenReadingRoom={openReadingRoom} />
+      <PerspectiveView
+        perspScene={perspScene}
+        setPerspScene={setPerspScene}
+        onEnterEra={enterEra}
+        onOpenGallery={openGallery}
+        onOpenReadingRoom={openReadingRoom}
+        onOpenAbout={() => setShowAbout(true)}
+      />
 
       {/* Era overlay */}
       {view === "era" && currentEra !== null && (
